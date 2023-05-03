@@ -6,7 +6,7 @@ export default function Navbar() {
   return (
     <Flex className="navbar">
       <Box>
-        <Link className="navbar-item" href="#">
+        <Link href="#">
           Logo
         </Link>
       </Box>

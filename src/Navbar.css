@@ -1,8 +1,9 @@
 .navbar {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
 }
 
 .navbar-list {
@@ -12,4 +13,5 @@
 
 .navbar-item {
     margin-left: 1rem;
+    padding-right: 1rem;
 }
