@@ -1,13 +1,14 @@
-import './App.css'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from "@chakra-ui/react";
+import "./App.css";
 
-function App() {
-
+export default function App() {
   return (
-    <ChakraProvider>
-    <h1>CONTRATIM</h1>
-    </ChakraProvider>
-  )
+    <div className="#root">
+      <ChakraProvider>
+        <div>
+          <h1>CONTRATIM</h1>
+        </div>
+      </ChakraProvider>
+    </div>
+  );
 }
-
-export default App
