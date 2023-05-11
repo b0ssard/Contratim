@@ -1,9 +1,10 @@
+import { FC } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "./App.css";
 
-export default function App() {
+const App: FC = () => {
   return (
     <div className="#root">
       <ChakraProvider>
@@ -13,4 +14,6 @@ export default function App() {
       </ChakraProvider>
     </div>
   );
-}
+};
+
+export default App;
