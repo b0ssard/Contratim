@@ -2,7 +2,7 @@ import { FC } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import "./App.css";
+import "./App.scss";
 
 const App: FC = () => {
   return (

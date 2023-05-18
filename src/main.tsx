@@ -1,5 +1,5 @@
 import App from "./App.tsx";
-import "./main.css";
+import "./main.scss";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 

@@ -1,6 +1,6 @@
 import { Flex, Link, Text } from "@chakra-ui/react";
 import links from "./FooterData";
-import "./Footer.css"; 
+import "./Footer.scss"; 
 
 export default function Footer() {
   return (
