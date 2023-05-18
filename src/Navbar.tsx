@@ -1,9 +1,8 @@
 import { Box, Flex, Link } from "@chakra-ui/react";
 import "./Navbar.css";
-import Button from "./Button";
-import navbarLinks from "./NavbarData";
+import navbarData from "./NavbarData";
 
-export type NavbarLink = {
+export type NavbarData = {
   id: number;
   label: string;
   href: string;
@@ -12,16 +11,16 @@ export type NavbarLink = {
 export default function Navbar(): JSX.Element {
   return (
     <Flex className="navbar">
-      <Box>Logo</Box>
+      <Box>Contratim</Box>
       <Box className="navbar-list">
-        <Button onClick={() => alert("Botão clicado!")}>
-          Clique aqui
-        </Button>
-        {/* {navbarLinks.map((link: NavbarLink) => (
+        <Link as="button" onClick={() => alert("Botão clicado!")}>
+          Entrar
+        </Link>
+        {navbarData.map((link: NavbarData) => (
           <Link key={link.id} className="navbar-item" href={link.href}>
             {link.label}
           </Link>
-        ))} */}
+        ))}
       </Box>
     </Flex>
   );

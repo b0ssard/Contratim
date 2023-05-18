@@ -1,9 +1,9 @@
-import { NavbarLink } from "./Navbar";
+import { NavbarData } from "./Navbar";
 
-const navbarLinks: NavbarLink[] = [
+const navbarData: NavbarData[] = [
   {
     id: 1,
-    label: "Link 1",
+    label: "Entrar",
     href: "#",
   },
   {
@@ -18,4 +18,4 @@ const navbarLinks: NavbarLink[] = [
   },
 ];
 
-export default navbarLinks;
+export default navbarData;
