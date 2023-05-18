@@ -1,25 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:wght@700&family=Old+Standard+TT&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans:wght@700&family=Old+Standard+TT&display=swap");
 
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+
+  &-logo {
+    font-family: "Fira Sans", sans-serif;
+    font-size: 30px;
+  }
+
+  &-list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-
-    &-logo {
-        font-family: 'Fira Sans', sans-serif;
-        font-size: 35px;
-    }
-
-    &-list {
-        display: flex;
-        list-style: none;
-
-        .navbar-item {
-            font-family: 'Bebas Neue', sans-serif;
-            margin: 12px;
-            padding-left: 1rem;
-        }
-    }
+  }
+  &-item {
+    font-family: "Bebas Neue", sans-serif;
+    margin: 12px;
+    padding-left: 1rem;
+  }
 }

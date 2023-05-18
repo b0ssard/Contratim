@@ -3,7 +3,7 @@ import { NavbarData } from "./Navbar";
 const navbarData: NavbarData[] = [
   {
     id: 1,
-    label: "Cadastrar",
+    label: "Cadastre-se",
     onClick: () => alert("Link clicado!"),
   },
   {
