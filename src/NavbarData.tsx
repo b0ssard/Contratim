@@ -1,6 +1,6 @@
 import { NavbarData } from "./Navbar";
 
-const navbarData: NavbarData[] = [
+export const NavbarProps: NavbarData[] = [
   {
     id: 1,
     label: "Cadastre-se",
@@ -12,5 +12,3 @@ const navbarData: NavbarData[] = [
     onClick: () => alert("Link clicado!"),
   },
 ];
-
-export default navbarData;

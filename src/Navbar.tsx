@@ -1,7 +1,7 @@
 import { Box, Flex, Link } from "@chakra-ui/react";
 import Button from "./Button";
 import "./Navbar.scss";
-import navbarData from "./NavbarData";
+import { NavbarProps } from "./NavbarData";
 
 export type NavbarData = {
   id: number;
@@ -16,7 +16,7 @@ export default function Navbar(): JSX.Element {
       <Box className="navbar-logo">CONTRATIM</Box>
       <Box className="navbar-list">
         <Button onClick={() => alert("Botão clicado!")}>Entrar</Button>
-        {navbarData.map((link: NavbarData) => (
+        {NavbarProps.map((link: NavbarData) => (
           <Link key={link.id} className="navbar-item" onClick={link.onClick}>
             {link.label}
           </Link>

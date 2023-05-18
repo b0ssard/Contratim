@@ -4,7 +4,7 @@ import githubImage from './assets/github.png';
 import emailImage from './assets/email.png';
 import whatsappImage from './assets/whatsapp.png';
 
-const links = [
+export const Links = [
   {
     label: <Box as="img" src={linkedinImage} alt="LinkedIn" />,
     href: 'https://www.linkedin.com/in/victorbossard/',
@@ -22,5 +22,3 @@ const links = [
     href: 'https://wa.me/5585988812838',
   },
 ];
-
-export default links

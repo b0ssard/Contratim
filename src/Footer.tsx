@@ -1,5 +1,5 @@
 import { Flex, Link, Text } from "@chakra-ui/react";
-import links from "./FooterData";
+import { Links } from "./FooterData";
 import "./Footer.scss"; 
 
 export default function Footer() {
@@ -13,7 +13,7 @@ export default function Footer() {
         Por Victor Bossard © {new Date().getFullYear()}.
       </Text>
       <Flex as="ul" className="footer__links">
-        {links.map((link) => (
+        {Links.map((link) => (
           <Link
             key={link.href}
             className="footer__links-item" 
