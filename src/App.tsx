@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CTA from "./CTA";
 import "./App.scss";
-import CTAData from "./CTAData";
 import AboutUs from "./AboutUs";
 
 const App: FC = () => {
@@ -13,9 +12,7 @@ const App: FC = () => {
       <ChakraProvider>
         <Navbar />
         <AboutUs />
-        {CTAData.map((cta) => (
-          <CTA key={cta.heading} {...cta} />
-        ))}
+        <CTA />
         <Footer />
       </ChakraProvider>
     </div>
