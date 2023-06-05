@@ -1,15 +1,7 @@
 import React from "react";
-import { Box, Flex, Card, Heading, Text, Image } from "@chakra-ui/react";
-import Button from "./Button";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import CTAData from "./CTAData";
-
-export type CTAProps = {
-  heading: string;
-  text: string;
-  imageUrl: string;
-  buttonText: string;
-  buttonOnClick: () => void;
-};
+import Card from "./Card";
 
 const CTA: React.FC = () => {
   return (
@@ -17,16 +9,9 @@ const CTA: React.FC = () => {
       <Heading as="h2" size="lg" mb={2}>
         CALL TO ACTION
       </Heading>
-      <Flex>
+      <Flex justifyContent="center">
         {CTAData.map((card, index) => (
-          <Card key={index} flex="1" mr={4}>
-            <Heading as="h3" size="md" my={2}>
-              {card.heading}
-            </Heading>
-            <Text>{card.text}</Text>
-            <Image src={card.imageUrl} alt="Card Image" />
-            <Button onClick={card.buttonOnClick}>{card.buttonText}</Button>
-          </Card>
+          <Card key={index} {...card} />
         ))}
       </Flex>
     </Box>

@@ -1,6 +1,6 @@
-import { CTAProps } from "./CTA";
+import { CardProps } from "./Card";
 
-const CTAData: CTAProps[] = [
+const CTAData: CardProps[] = [
   {
     heading: "Card 1",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
