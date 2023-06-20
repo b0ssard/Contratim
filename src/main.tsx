@@ -1,3 +1,4 @@
+import "./Firebase";
 import App from "./App.tsx";
 import "./main.scss";
 import * as React from "react";

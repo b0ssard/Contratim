@@ -19,11 +19,11 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <Box p={4} bg="gray.100" maxW="300px">
-      <Image src={imageUrl} alt={heading} mb={4} />
       <Heading as="h2" size="lg" mb={2}>
         {heading}
       </Heading>
       <Text mb={4}>{text}</Text>
+      <Image src={imageUrl} alt={heading} mb={4} />
       <Button onClick={buttonOnClick}>{buttonText}</Button>
     </Box>
   );

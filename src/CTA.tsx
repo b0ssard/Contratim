@@ -9,7 +9,7 @@ const CTA: React.FC = () => {
       <Heading as="h2" size="lg" mb={2}>
         CALL TO ACTION
       </Heading>
-      <Flex justifyContent="center">
+      <Flex justifyContent="space-evenly">
         {CTAData.map((card, index) => (
           <Card key={index} {...card} />
         ))}
