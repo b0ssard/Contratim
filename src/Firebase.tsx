@@ -1,8 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDZqN_38zhLDK_lfqpYst_N1weXY-q5SA8",
   authDomain: "contratim-live.firebaseapp.com",
   projectId: "contratim-live",
