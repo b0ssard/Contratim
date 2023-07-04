@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Box, Input } from "@chakra-ui/react";
+import Button from "./Button";
+import { Box, Input, Text } from "@chakra-ui/react";
 import { auth } from "./Firebase";
 import "./Form.scss";
 
@@ -29,10 +30,10 @@ export function Form({
   return (
     <div>
       {user ? (
-        <div>
-          <p>Logged in as: {user.email}</p>
-          <button onClick={() => auth.signOut()}>Sign Out</button>
-        </div>
+        <Box mt={4}>
+          <Text>Logged in as: {user.email}</Text>
+          <Button onClick={() => auth.signOut()}>Sign Out</Button>
+        </Box>
       ) : (
         <Box className="register-container">
           <Input

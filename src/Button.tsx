@@ -7,7 +7,7 @@ import {
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & ChakraButtonProps;
 
 const Button: React.FC<ButtonProps> = ({ children, ...rest }) => (
-  <ChakraButton colorScheme="purple" {...rest}>
+  <ChakraButton colorScheme="purple" marginBottom="10px" {...rest}>
     {children}
   </ChakraButton>
 );
