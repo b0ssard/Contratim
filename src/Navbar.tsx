@@ -1,27 +1,35 @@
-import { Box, Flex, Link } from "@chakra-ui/react";
+import { Box, Flex, Link, LinkProps } from "@chakra-ui/react";
 import Button from "./Button";
 import "./Navbar.scss";
-import { NavbarProps } from "./NavbarData";
 
-export type NavbarData = {
-  id: number;
+interface NavbarLinkProps extends LinkProps {
   label: string;
-  onClick: React.MouseEventHandler<HTMLAnchorElement>;
-};
+  onClick: () => void;
+}
 
+const NavbarLink: React.FC<NavbarLinkProps> = ({ label, onClick, ...rest }) => (
+  <Link className="navbar-item" onClick={onClick} {...rest}>
+    {label}
+  </Link>
+);
 
-export default function Navbar(): JSX.Element {
+const Navbar: React.FC = () => {
   return (
     <Flex className="navbar">
       <Box className="navbar-logo">CONTRATIM</Box>
       <Box className="navbar-list">
         <Button onClick={() => alert("Botão clicado!")}>Entrar</Button>
-        {NavbarProps.map((link: NavbarData) => (
-          <Link key={link.id} className="navbar-item" onClick={link.onClick}>
-            {link.label}
-          </Link>
-        ))}
+        <NavbarLink
+          label="Cadastre-se"
+          onClick={() => alert("Link Cadastre-se clicado!")}
+        />
+        <NavbarLink
+          label="Sobre"
+          onClick={() => alert("Link Sobre clicado!")}
+        />
       </Box>
     </Flex>
   );
-}
+};
+
+export default Navbar;

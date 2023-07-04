@@ -31,7 +31,7 @@ export function Form({
     <div>
       {user ? (
         <Box mt={4}>
-          <Text>Logged in as: {user.email}</Text>
+          <Text margin="10px">Logged in as: {user.email}</Text>
           <Button onClick={() => auth.signOut()}>Sign Out</Button>
         </Box>
       ) : (
