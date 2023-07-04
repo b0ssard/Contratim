@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
-import { Box, Input, Text } from "@chakra-ui/react";
+import { Box, Input, Text, Flex } from "@chakra-ui/react";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase";
 import "./Form.scss";
 
+export interface User {
+  email?: string | undefined;
+}
 interface FormProps {
   credentials: {
     email: string;
@@ -25,14 +29,28 @@ export function Form({
   googleButtonText,
 }: FormProps): JSX.Element {
   const { email, password } = credentials;
-  const user = auth.currentUser;
+  const [user, setUser] = useState<{ email?: string }>({});
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({ email: user.email || undefined });
+      } else {
+        setUser({ email: undefined });
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div>
-      {user ? (
-        <Box mt={4}>
-          <Text margin="10px">Logged in as: {user.email}</Text>
-          <Button onClick={() => auth.signOut()}>Sign Out</Button>
+      {user.email !== undefined ? (
+        <Box className="cadeia">
+          <Flex direction="row" justifyContent="center">
+            <Text className="logged">Logged in as: {user.email}</Text>
+            <Button onClick={() => auth.signOut()}>Sign Out</Button>
+          </Flex>
         </Box>
       ) : (
         <Box className="register-container">
