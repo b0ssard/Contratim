@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Form } from "./Form";
 import { auth } from "./Firebase";
 import {
-  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
 
-const Register: React.FC = () => {
+const SignIn: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,26 +19,26 @@ const Register: React.FC = () => {
     }));
   };
 
-  const register = async () => {
+  const signIn = async () => {
     try {
-      await createUserWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         credentials.email,
         credentials.password
       );
-      console.log("User registration successful!");
+      console.log("SignIn successful!");
     } catch (error) {
-      console.error("User registration error:", error);
+      console.error("SignIn error:", error);
     }
   };
 
-  const loginWithGoogle = async () => {
+  const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      console.log("Google login successful!");
+      console.log("Google SignIn successful!");
     } catch (error) {
-      console.error("Google login error:", error);
+      console.error("Google SignIn error:", error);
     }
   };
 
@@ -60,12 +60,12 @@ const Register: React.FC = () => {
     <Form
       credentials={credentials}
       handleInputChange={handleInputChange}
-      submitAction={register}
-      googleLoginAction={loginWithGoogle}
-      submitButtonText="Registrar"
-      googleButtonText="Registrar com o Google"
+      submitAction={signIn}
+      googleLoginAction={signInWithGoogle}
+      submitButtonText="Entrar"
+      googleButtonText="Entrar com o Google"
     />
   );
 };
 
-export default Register;
+export default SignIn;
