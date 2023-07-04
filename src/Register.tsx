@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import Button from "./Button";
+import { Form } from "./Form";
 import { auth } from "./Firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Box, Input } from "@chakra-ui/react";
-import "@chakra-ui/react";
-import "./Register.scss";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Register: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  const register = async () => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
+  };
+
+  const login = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
       console.log("Login successful!");
     } catch (error) {
       console.error("Login error:", error);
@@ -20,27 +28,12 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Box className="register-container">
-      <Input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        autoComplete="username"
-        mb={4}
-      />
-
-      <Input
-        type="password"
-        placeholder="Senha"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        autoComplete="current-password"
-        mb={4}
-      />
-
-      <Button onClick={register}>Entrar</Button>
-    </Box>
+    <Form
+      credentials={credentials}
+      handleInputChange={handleInputChange}
+      submitAction={login}
+      submitButtonText="Entrar"
+    />
   );
 };
 
