@@ -6,6 +6,7 @@ import Button from "./Button";
 import OpenModal from "./Modal";
 import Register from "./Register";
 import "./Navbar.scss";
+import SignIn from "./SignIn";
 
 export interface User {
   email?: string | null;
@@ -13,7 +14,7 @@ export interface User {
 
 interface NavbarLinkProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const NavbarLink: React.FC<NavbarLinkProps> = ({ label, onClick }) => (
@@ -56,10 +57,17 @@ const Navbar: React.FC = () => {
           </Box>
         ) : (
           <>
-            <OpenModal content={<Register />} title="Faça Seu login." buttontext="Entrar" />
-            <NavbarLink
+            <OpenModal
+              content={<SignIn />}
+              title="Faça seu login."
+              component={Button}
+              label="Entrar"
+            />
+            <OpenModal
+              content={<Register />}
+              title="Faça seu cadastro"
+              component={NavbarLink}
               label="Cadastre-se"
-              onClick={() => alert("Link Cadastre-se clicado!")}
             />
             <NavbarLink
               label="Sobre"

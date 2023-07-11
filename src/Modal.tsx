@@ -8,18 +8,19 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import Button from "./Button";
 
 export interface OpenModalProps {
   content: JSX.Element;
-  buttontext: string;
   title: string;
+  component: React.ElementType;
+  label: string;
 }
 
 export default function OpenModal({
   content,
   title,
-  buttontext,
+  component: Component,
+  label,
 }: OpenModalProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -33,7 +34,7 @@ export default function OpenModal({
 
   return (
     <>
-      <Button onClick={handleOpenModal}>{buttontext}</Button>
+      <Component onClick={handleOpenModal}>{label}</Component>
 
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <ModalOverlay />
@@ -42,7 +43,7 @@ export default function OpenModal({
           <ModalCloseButton />
           <ModalBody>{content}</ModalBody>
           <ModalFooter>
-            <Button onClick={handleCloseModal}>Fechar</Button>
+            <Component onClick={handleCloseModal}>Fechar</Component>
           </ModalFooter>
         </ModalContent>
       </Modal>
