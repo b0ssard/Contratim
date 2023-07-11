@@ -1,21 +1,23 @@
-import { Box, Flex, Link, LinkProps, Text } from "@chakra-ui/react";
-import Button from "./Button";
-import { auth } from "./Firebase";
+import React, { useEffect, useState } from "react";
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { auth } from "./Firebase";
+import Button from "./Button";
+import OpenModal from "./Modal";
+import Register from "./Register";
 import "./Navbar.scss";
 
 export interface User {
   email?: string | null;
 }
 
-interface NavbarLinkProps extends LinkProps {
+interface NavbarLinkProps {
   label: string;
   onClick: () => void;
 }
 
-const NavbarLink: React.FC<NavbarLinkProps> = ({ label, onClick, ...rest }) => (
-  <Link className="navbar-item" onClick={onClick} {...rest}>
+const NavbarLink: React.FC<NavbarLinkProps> = ({ label, onClick }) => (
+  <Link className="navbar-item" onClick={onClick}>
     {label}
   </Link>
 );
@@ -35,6 +37,10 @@ const Navbar: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleSignOut = () => {
+    auth.signOut();
+  };
+
   return (
     <Flex className="navbar">
       <Box className="navbar-logo">CONTRATIM</Box>
@@ -45,12 +51,12 @@ const Navbar: React.FC = () => {
               <Text className="navbar-item" marginRight="10px">
                 Logged in as: {user.email}
               </Text>
-              <Button onClick={() => auth.signOut()}>Sign Out</Button>
+              <Button onClick={handleSignOut}>Sign Out</Button>
             </Flex>
           </Box>
         ) : (
           <>
-            <Button onClick={() => alert("Botão clicado!")}>Entrar</Button>
+            <OpenModal content={<Register />} title="Faça Seu login." buttontext="Entrar" />
             <NavbarLink
               label="Cadastre-se"
               onClick={() => alert("Link Cadastre-se clicado!")}
