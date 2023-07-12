@@ -12,7 +12,7 @@ import {
 export interface OpenModalProps {
   content: JSX.Element;
   title: string;
-  component: React.ElementType;
+  component: React.FC<{ children: React.ReactNode; onClick: () => void }>;
   label: string;
 }
 
