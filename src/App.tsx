@@ -6,7 +6,6 @@ import CTA from "./CTA";
 import Register from "./Register";
 import "./App.scss";
 import AboutUs from "./AboutUs";
-import SignIn from "./SignIn";
 
 const App: FC = () => {
   return (
@@ -14,7 +13,6 @@ const App: FC = () => {
       <ChakraProvider>
         <Navbar />
         <AboutUs />
-        <SignIn />
         <CTA />
         <Register />
         <Footer />
