@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase";
 import Button from "./Button";
 import OpenModal from "./Modal";
 import Register from "./Register";
+import NavbarLink from "./NavbarLink";
 import "./Navbar.scss";
 import SignIn from "./SignIn";
 
 export interface User {
   email?: string | null;
 }
-
-interface NavbarLinkProps {
-  label: string;
-  onClick?: () => void;
-}
-
-const NavbarLink: React.FC<NavbarLinkProps> = ({ label, onClick }) => (
-  <Link className="navbar-item" onClick={onClick}>
-    {label}
-  </Link>
-);
 
 const Navbar: React.FC = () => {
   const [user, setUser] = useState<User>({});
@@ -60,13 +50,17 @@ const Navbar: React.FC = () => {
             <OpenModal
               content={<SignIn />}
               title="Faça seu login."
-              component={Button}
+              component={({ onClick }) => (
+                <Button onClick={onClick}>Entrar</Button>
+              )}
               label="Entrar"
             />
             <OpenModal
               content={<Register />}
               title="Faça seu cadastro"
-              component={NavbarLink}
+              component={({ onClick }) => (
+                <NavbarLink label="Cadastre-se" onClick={onClick} />
+              )}
               label="Cadastre-se"
             />
             <NavbarLink
