@@ -16,11 +16,11 @@ export interface OpenModalProps {
   label: string;
 }
 
-export default function OpenModal({
+const OpenModal: React.FC<OpenModalProps> = ({
   content,
   title,
   component: Component,
-}: OpenModalProps): JSX.Element {
+}: OpenModalProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpenModal = (): void => {
@@ -33,7 +33,7 @@ export default function OpenModal({
 
   return (
     <>
-      <Component onClick={handleOpenModal} />{" "}
+      <Component onClick={handleOpenModal} />
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <ModalOverlay />
         <ModalContent>
@@ -41,10 +41,12 @@ export default function OpenModal({
           <ModalCloseButton />
           <ModalBody>{content}</ModalBody>
           <ModalFooter>
-            <Component onClick={handleCloseModal} />{" "}
+            <Component onClick={handleCloseModal} />
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
   );
-}
+};
+
+export default OpenModal;

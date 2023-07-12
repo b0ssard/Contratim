@@ -1,14 +1,10 @@
 import { Flex, Link, Text } from "@chakra-ui/react";
 import { Links } from "./FooterData";
-import "./Footer.scss"; 
+import "./Footer.scss";
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <Flex
-      as="footer"
-      className="footer"
-      justify="space-between"
-    >
+    <Flex as="footer" className="footer" justify="space-between">
       <Text className="footer__text" fontWeight="semibold">
         Por Victor Bossard © {new Date().getFullYear()}.
       </Text>
@@ -16,7 +12,7 @@ export default function Footer() {
         {Links.map((link) => (
           <Link
             key={link.href}
-            className="footer__links-item" 
+            className="footer__links-item"
             href={link.href}
             target="_blank"
             rel="noreferrer"
@@ -27,4 +23,6 @@ export default function Footer() {
       </Flex>
     </Flex>
   );
-}
+};
+
+export default Footer;

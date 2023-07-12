@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import  Form  from "./Form";
+import Form from "./Form";
 import { auth } from "./Firebase";
 import {
   signInWithEmailAndPassword,
@@ -26,9 +26,9 @@ const SignIn: React.FC = () => {
         credentials.email,
         credentials.password
       );
-      console.log("SignIn successful!");
+      console.log("Sign-in successful!");
     } catch (error) {
-      console.error("SignIn error:", error);
+      console.error("Sign-in error:", error);
     }
   };
 
@@ -36,9 +36,9 @@ const SignIn: React.FC = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      console.log("Google SignIn successful!");
+      console.log("Google sign-in successful!");
     } catch (error) {
-      console.error("Google SignIn error:", error);
+      console.error("Google sign-in error:", error);
     }
   };
 

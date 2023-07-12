@@ -6,8 +6,8 @@ import Button from "./Button";
 import OpenModal from "./Modal";
 import Register from "./Register";
 import NavbarLink from "./NavbarLink";
-import "./Navbar.scss";
 import SignIn from "./SignIn";
+import "./Navbar.scss";
 
 export interface User {
   email?: string | null;
@@ -32,43 +32,46 @@ const Navbar: React.FC = () => {
     auth.signOut();
   };
 
+  const { email } = user;
+
+  const renderLoggedInContent = () => (
+    <Box>
+      <Flex direction="row" alignItems="center">
+        <Text className="navbar-item" marginRight="10px">
+          Logged in as: {email}
+        </Text>
+        <Button onClick={handleSignOut}>Sign Out</Button>
+      </Flex>
+    </Box>
+  );
+
+  const renderLoggedOutContent = () => (
+    <>
+      <OpenModal
+        content={<SignIn />}
+        title="Faça seu login."
+        component={({ onClick }) => <Button onClick={onClick}>Entrar</Button>}
+        label="Entrar"
+      />
+      <OpenModal
+        content={<Register />}
+        title="Faça seu cadastro"
+        component={({ onClick }) => (
+          <NavbarLink label="Cadastre-se" onClick={onClick} />
+        )}
+        label="Cadastre-se"
+      />
+      <NavbarLink label="Sobre" onClick={() => alert("Link Sobre clicado!")} />
+    </>
+  );
+
   return (
     <Flex className="navbar">
       <Box className="navbar-logo">CONTRATIM</Box>
       <Box className="navbar-list">
-        {user.email !== undefined ? (
-          <Box>
-            <Flex direction="row" alignItems="center">
-              <Text className="navbar-item" marginRight="10px">
-                Logged in as: {user.email}
-              </Text>
-              <Button onClick={handleSignOut}>Sign Out</Button>
-            </Flex>
-          </Box>
-        ) : (
-          <>
-            <OpenModal
-              content={<SignIn />}
-              title="Faça seu login."
-              component={({ onClick }) => (
-                <Button onClick={onClick}>Entrar</Button>
-              )}
-              label="Entrar"
-            />
-            <OpenModal
-              content={<Register />}
-              title="Faça seu cadastro"
-              component={({ onClick }) => (
-                <NavbarLink label="Cadastre-se" onClick={onClick} />
-              )}
-              label="Cadastre-se"
-            />
-            <NavbarLink
-              label="Sobre"
-              onClick={() => alert("Link Sobre clicado!")}
-            />
-          </>
-        )}
+        {email !== undefined
+          ? renderLoggedInContent()
+          : renderLoggedOutContent()}
       </Box>
     </Flex>
   );

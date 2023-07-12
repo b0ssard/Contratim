@@ -4,20 +4,20 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CTA from "./CTA";
 import Register from "./Register";
-import "./App.scss";
 import AboutUs from "./AboutUs";
+import "./App.scss";
 
 const App: FC = () => {
   return (
-    <div className="#root">
-      <ChakraProvider>
+    <ChakraProvider>
+      <div className="app">
         <Navbar />
         <AboutUs />
         <CTA />
         <Register />
         <Footer />
-      </ChakraProvider>
-    </div>
+      </div>
+    </ChakraProvider>
   );
 };
 

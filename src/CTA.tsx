@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import CTAData from "./CTAData";
-import Card from "./Card";
+import  CTAData  from "./CTAData";
+import Card, { CardProps } from "./Card";
 
 const CTA: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const CTA: React.FC = () => {
         CALL TO ACTION
       </Heading>
       <Flex justifyContent="space-evenly">
-        {CTAData.map((card, index) => (
+        {CTAData.map((card: CardProps, index: number) => (
           <Card key={index} {...card} />
         ))}
       </Flex>

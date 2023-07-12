@@ -4,9 +4,9 @@ import {
   ButtonProps as ChakraButtonProps,
 } from "@chakra-ui/react";
 
-type ButtonProps = ChakraButtonProps & {
+type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
-};
+} & ChakraButtonProps;
 
 const Button: React.FC<ButtonProps> = ({ children, ...rest }) => (
   <ChakraButton colorScheme="purple" marginBottom="10px" {...rest}>

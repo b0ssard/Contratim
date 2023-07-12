@@ -6,7 +6,7 @@ import { auth } from "./Firebase";
 import "./Form.scss";
 
 export interface User {
-  email?: string | undefined;
+  email?: string;
 }
 
 interface FormProps {
@@ -30,14 +30,14 @@ export default function Form({
   googleButtonText,
 }: FormProps): JSX.Element {
   const { email, password } = credentials;
-  const [user, setUser] = useState<User>({});
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser({ email: user.email || undefined });
+        setUser({ email: user.email || "" });
       } else {
-        setUser({});
+        setUser(null);
       }
     });
 
@@ -50,7 +50,7 @@ export default function Form({
 
   return (
     <div>
-      {user.email !== undefined ? (
+      {user ? (
         <Box className="form">
           <Flex direction="row" justifyContent="center">
             <Box className="logged">Logged in as: {user.email}</Box>
