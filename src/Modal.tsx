@@ -12,7 +12,7 @@ import {
 export interface OpenModalProps {
   content: JSX.Element;
   title: string;
-  component: React.FC<{ children: React.ReactNode; onClick: () => void }>;
+  component: React.FC<{ onClick: () => void }>;
   label: string;
 }
 
@@ -20,7 +20,6 @@ export default function OpenModal({
   content,
   title,
   component: Component,
-  label,
 }: OpenModalProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -34,8 +33,7 @@ export default function OpenModal({
 
   return (
     <>
-      <Component onClick={handleOpenModal}>{label}</Component>
-
+      <Component onClick={handleOpenModal} />{" "}
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <ModalOverlay />
         <ModalContent>
@@ -43,7 +41,7 @@ export default function OpenModal({
           <ModalCloseButton />
           <ModalBody>{content}</ModalBody>
           <ModalFooter>
-            <Component onClick={handleCloseModal}>Fechar</Component>
+            <Component onClick={handleCloseModal} />{" "}
           </ModalFooter>
         </ModalContent>
       </Modal>

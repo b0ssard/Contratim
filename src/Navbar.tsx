@@ -50,13 +50,17 @@ const Navbar: React.FC = () => {
             <OpenModal
               content={<SignIn />}
               title="Faça seu login."
-              component={() => <Button>Entrar</Button>}
+              component={({ onClick }) => (
+                <Button onClick={onClick}>Entrar</Button>
+              )}
               label="Entrar"
             />
             <OpenModal
               content={<Register />}
               title="Faça seu cadastro"
-              component={() => <NavbarLink label="Cadastre-se" />}
+              component={({ onClick }) => (
+                <NavbarLink label="Cadastre-se" onClick={onClick} />
+              )}
               label="Cadastre-se"
             />
             <NavbarLink
