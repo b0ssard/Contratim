@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase";
 import Button from "./Button";
 import OpenModal from "./Modal";
-import Register from "./Register";
+import RegisterForm from "./RegisterForm";
 import NavbarLink from "./NavbarLink";
 import SignIn from "./SignIn";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
 import "./Navbar.scss";
 
 export interface User {
@@ -15,6 +20,7 @@ export interface User {
 
 const Navbar: React.FC = () => {
   const [user, setUser] = useState<User>({});
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -27,6 +33,37 @@ const Navbar: React.FC = () => {
 
     return () => unsubscribe();
   }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
+  };
+
+  const register = async () => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      console.log("User registration successful!");
+    } catch (error) {
+      console.error("User registration error:", error);
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      console.log("Google login successful!");
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
 
   const handleSignOut = () => {
     auth.signOut();
@@ -41,6 +78,10 @@ const Navbar: React.FC = () => {
           Logged in as: {email}
         </Text>
         <Button onClick={handleSignOut}>Sign Out</Button>
+        <NavbarLink
+          label="Sobre"
+          onClick={() => alert("Link Sobre clicado!")}
+        />
       </Flex>
     </Box>
   );
@@ -54,7 +95,14 @@ const Navbar: React.FC = () => {
         label="Entrar"
       />
       <OpenModal
-        content={<Register />}
+        content={
+          <RegisterForm
+            credentials={credentials}
+            handleInputChange={handleInputChange}
+            register={register}
+            loginWithGoogle={loginWithGoogle}
+          />
+        }
         title="Faça seu cadastro"
         component={({ onClick }) => (
           <NavbarLink label="Cadastre-se" onClick={onClick} />

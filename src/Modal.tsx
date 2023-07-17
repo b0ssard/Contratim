@@ -4,7 +4,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
@@ -34,15 +33,12 @@ const OpenModal: React.FC<OpenModalProps> = ({
   return (
     <>
       <Component onClick={handleOpenModal} />
-      <Modal isOpen={isOpen} onClose={handleCloseModal}>
+      <Modal isOpen={isOpen} onClose={handleCloseModal} size="sm">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>{content}</ModalBody>
-          <ModalFooter>
-            <Component onClick={handleCloseModal} />
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
