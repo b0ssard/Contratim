@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const AboutUs: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const AboutUs: React.FC = () => {
         dapibus turpis sit amet massa commodo fringilla. Aliquam tincidunt
         ullamcorper dui, vitae auctor lorem convallis sed.
       </Text>
+      <Link to="/Contratos">Go to Contratos Page</Link>
     </Box>
   );
 };
