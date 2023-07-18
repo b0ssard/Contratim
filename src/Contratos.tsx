@@ -1,20 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Heading, Text, UnorderedList, ListItem } from "@chakra-ui/react";
 import "./Contratos.scss";
 
 const Contratos: React.FC = () => {
+  const [fields, setFields] = useState([
+    { label: "Nome do Proprietário", value: "" },
+    { label: "Endereço do Proprietário", value: "" },
+    { label: "Nome do Locatário", value: "" },
+    { label: "Endereço do Locatário", value: "" },
+    { label: "Endereço do Imóvel", value: "" },
+    { label: "Descrição do Imóvel", value: "" },
+    { label: "Data de Início", value: "" },
+    { label: "Duração do Contrato", value: "" },
+    { label: "Valor do Aluguel", value: "" },
+    { label: "Meio de Pagamento", value: "" },
+    { label: "Informações da Conta Bancária", value: "" },
+    { label: "Valor da Caução", value: "" },
+    { label: "Prazo de Devolução da Caução", value: "" },
+    { label: "Prazo de Aviso Prévio", value: "" },
+    { label: "País/Estado", value: "" },
+    { label: "Data da Assinatura", value: "" },
+  ]);
+
+  const handleFieldChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const updatedFields = [...fields];
+    updatedFields[index].value = event.target.value;
+    setFields(updatedFields);
+  };
+
+  const renderInputs = () => {
+    return fields.map((field, index) => (
+      <input
+        key={index}
+        type="text"
+        value={field.value}
+        onChange={(event) => handleFieldChange(index, event)}
+        placeholder={field.label}
+      />
+    ));
+  };
+
   return (
     <Box className="custom-container">
+      {renderInputs()}
       <Box as="body">
         <h1>CONTRATO DE ALUGUEL</h1>
 
         <Text fontSize="xl">
           Este Contrato de Aluguel ("Contrato") é celebrado entre o
-          proprietário, [NOME DO PROPRIETÁRIO], residente em [ENDEREÇO DO
-          PROPRIETÁRIO], adiante denominado "Proprietário", e o locatário, [NOME
-          DO LOCATÁRIO], residente em [ENDEREÇO DO LOCATÁRIO], adiante
-          denominado "Locatário".
+          proprietário, {fields[0].value}, residente em {fields[1].value},
+          adiante denominado "Proprietário", e o locatário, {fields[2].value},
+          residente em {fields[3].value}, adiante denominado "Locatário".
         </Text>
 
         <Heading as="h2" fontSize="lg" mt={4}>
@@ -22,9 +62,9 @@ const Contratos: React.FC = () => {
         </Heading>
 
         <Text>
-          O Proprietário concorda em alugar a propriedade localizada em
-          [ENDEREÇO DO IMÓVEL] ("Imóvel"), que consiste em [DESCRIÇÃO DO IMÓVEL]
-          para o Locatário, com a finalidade exclusiva de uso residencial.
+          O Proprietário concorda em alugar a propriedade localizada em{" "}
+          {fields[4].value} ("Imóvel"), que consiste em {fields[5].value} para o
+          Locatário, com a finalidade exclusiva de uso residencial.
         </Text>
 
         <Heading as="h2" fontSize="lg" mt={4}>
@@ -32,8 +72,8 @@ const Contratos: React.FC = () => {
         </Heading>
 
         <Text>
-          O contrato de aluguel terá início em [DATA DE INÍCIO] e terá duração
-          de [DURAÇÃO DO CONTRATO] meses, a contar da data de início.
+          O contrato de aluguel terá início em {fields[6].value} e terá duração
+          de {fields[7].value} meses, a contar da data de início.
         </Text>
 
         <Heading as="h2" fontSize="lg" mt={4}>
@@ -41,11 +81,10 @@ const Contratos: React.FC = () => {
         </Heading>
 
         <Text>
-          O Locatário concorda em pagar ao Proprietário um aluguel mensal de
-          [VALOR DO ALUGUEL] até o quinto dia útil de cada mês. O pagamento
-          deverá ser feito por meio de [MEIO DE PAGAMENTO], na conta bancária do
-          Proprietário com os detalhes a seguir: [INFORMAÇÕES DA CONTA
-          BANCÁRIA].
+          O Locatário concorda em pagar ao Proprietário um aluguel mensal de{" "}
+          {fields[8].value} até o quinto dia útil de cada mês. O pagamento
+          deverá ser feito por meio de {fields[9].value}, na conta bancária do
+          Proprietário com os detalhes a seguir: {fields[10].value}.
         </Text>
 
         <Heading as="h2" fontSize="lg" mt={4}>
@@ -53,12 +92,12 @@ const Contratos: React.FC = () => {
         </Heading>
 
         <Text>
-          O Locatário concorda em pagar uma caução no valor de [VALOR DA CAUÇÃO]
-          no ato da assinatura deste contrato. A caução será utilizada para
-          cobrir eventuais danos ou despesas devidas pelo Locatário ao Imóvel
-          durante o período de locação. Caso não haja nenhum dano ou despesa
-          pendente, a caução será devolvida ao Locatário no prazo máximo de
-          [PRAZO DE DEVOLUÇÃO DA CAUÇÃO] após o término do contrato.
+          O Locatário concorda em pagar uma caução no valor de{" "}
+          {fields[11].value} no ato da assinatura deste contrato. A caução será
+          utilizada para cobrir eventuais danos ou despesas devidas pelo
+          Locatário ao Imóvel durante o período de locação. Caso não haja nenhum
+          dano ou despesa pendente, a caução será devolvida ao Locatário no
+          prazo máximo de {fields[12].value} após o término do contrato.
         </Text>
 
         <Heading as="h2" fontSize="lg" mt={4}>
@@ -113,7 +152,7 @@ const Contratos: React.FC = () => {
         <Text>
           Em caso de rescisão antecipada deste contrato por qualquer uma das
           partes, deverá ser fornecido um aviso prévio por escrito com
-          antecedência mínima de [PRAZO DE AVISO PRÉVIO] dias.
+          antecedência mínima de {fields[13].value} dias.
         </Text>
 
         <Heading as="h2" fontSize="lg" mt={4}>
@@ -127,7 +166,7 @@ const Contratos: React.FC = () => {
           b) Qualquer modificação a este contrato deverá ser feita por escrito e
           assinada por ambas as partes;
           <br />
-          c) Este contrato é regido pelas leis do [NOME DO PAÍS/ESTADO];
+          c) Este contrato é regido pelas leis do {fields[14].value};
           <br />
           d) Caso qualquer disposição deste contrato seja considerada inválida
           ou inexequível, as demais disposições permanecerão em pleno vigor e
@@ -140,20 +179,21 @@ const Contratos: React.FC = () => {
         </Text>
 
         <Text>
-          [NOME DO PROPRIETÁRIO]
+          {fields[0].value}
           <br />
           Proprietário
         </Text>
 
         <Text>
-          [NOME DO LOCATÁRIO]
+          {fields[2].value}
           <br />
           Locatário
         </Text>
 
-        <Text>Data: [DATA DA ASSINATURA]</Text>
+        <Text>Data: {fields[15].value}</Text>
+
+        <Link to="/">Voltar</Link>
       </Box>
-      <Link to="/">Voltar</Link>
     </Box>
   );
 };
