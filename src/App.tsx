@@ -7,6 +7,7 @@ import Contratos from "./Contratos";
 import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
+// import Inputs from "./Inputs";
 
 import "./App.scss";
 
@@ -17,22 +18,32 @@ const App: React.FC = () => {
         <div className="app">
           <Navbar />
           <Routes>
-            <Route
-              path="/"
-              element={
-                <div>
-                  <AboutUs />
-                  <CTA />
-                  <Register />
-                </div>
-              }
-            />
-            <Route path="/contratos" element={<Contratos />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/contratos" element={<ContratosPage />} />
           </Routes>
           <Footer />
         </div>
       </ChakraProvider>
     </Router>
+  );
+};
+
+const Home: React.FC = () => {
+  return (
+    <div>
+      <AboutUs />
+      <CTA />
+      <Register />
+    </div>
+  );
+};
+
+const ContratosPage: React.FC = () => {
+  return (
+    <div>
+      {/* <Inputs /> */}
+      <Contratos />
+    </div>
   );
 };
 

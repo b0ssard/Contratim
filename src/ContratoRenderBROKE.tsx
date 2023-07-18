@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-// import InputFields from "./InputFields";
+// import Inputs from "./Inputs";
 // import Contratos from "./Contratos";
 
 // const ContratoRender: React.FC = () => {
@@ -7,7 +7,7 @@
 
 //   return (
 //     <>
-//       <InputFields setFields={setFields} />
+//       <Inputs setFields={setFields} />
 //       <Contratos fields={fields} />
 //     </>
 //   );

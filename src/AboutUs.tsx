@@ -14,7 +14,7 @@ const AboutUs: React.FC = () => {
         dapibus turpis sit amet massa commodo fringilla. Aliquam tincidunt
         ullamcorper dui, vitae auctor lorem convallis sed.
       </Text>
-      <Link to="/Contratos">Go to Contratos Page</Link>
+      <Link to="/contratos">Go to Contratos Page</Link>
     </Box>
   );
 };

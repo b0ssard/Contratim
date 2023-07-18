@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Contratos: React.FC = () => {
+const Inputs: React.FC<Record<string, never>> = () => {
   const [fields, setFields] = useState([
     { label: "Nome do Proprietário", value: "" },
     { label: "Endereço do Proprietário", value: "" },
@@ -29,26 +29,22 @@ const Contratos: React.FC = () => {
     setFields(updatedFields);
   };
 
-  const renderInputs = () => {
-    return fields.map((field, index) => (
-      <input
-        key={index}
-        type="text"
-        value={field.value}
-        onChange={(event) => handleFieldChange(index, event)}
-        placeholder={field.label}
-      />
-    ));
-  };
-
   return (
-    <div>
-      {renderInputs()}
-     </div>
+    <>
+      {fields.map((field, index) => (
+        <input
+          key={index}
+          type="text"
+          value={field.value}
+          onChange={(event) => handleFieldChange(index, event)}
+          placeholder={field.label}
+        />
+      ))}
+    </>
   );
 };
 
-export default Contratos;
+export default Inputs;
 
 // import React, { useState } from "react";
 
@@ -101,4 +97,3 @@ export default Contratos;
 // };
 
 // export default InputFields;
-
