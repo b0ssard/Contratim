@@ -7,7 +7,7 @@ interface ContractContentProps {
 
 const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
   return (
-    <Box as="body">
+    <Box>
       <h1>CONTRATO DE ALUGUEL</h1>
 
       <Text fontSize="xl">

@@ -1,4 +1,3 @@
-// Register.tsx
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { auth } from "./Firebase";

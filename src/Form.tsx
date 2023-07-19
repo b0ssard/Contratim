@@ -21,6 +21,8 @@ interface FormProps {
   googleButtonText: string;
 }
 
+// ... (imports and other code)
+
 export default function Form({
   credentials,
   handleInputChange,
@@ -48,6 +50,11 @@ export default function Form({
     auth.signOut();
   };
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    submitAction();
+  };
+
   return (
     <div>
       {user ? (
@@ -60,32 +67,34 @@ export default function Form({
       ) : (
         <Box className="register-container">
           <Flex direction="column" align="center">
-            <Input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={handleInputChange}
-              name="email"
-              autoComplete="username"
-              mb={4}
-            />
+            <form onSubmit={handleFormSubmit}> {/* Wrap the fields in a form */}
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={handleInputChange}
+                name="email"
+                autoComplete="username"
+                mb={4}
+              />
 
-            <Input
-              type="password"
-              placeholder="Senha"
-              value={password}
-              onChange={handleInputChange}
-              name="password"
-              autoComplete="current-password"
-              mb={4}
-            />
+              <Input
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={handleInputChange}
+                name="password"
+                autoComplete="current-password"
+                mb={4}
+              />
 
-            <Flex>
-              <Button onClick={submitAction} mr={2}>
-                {submitButtonText}
-              </Button>
-              <Button onClick={googleLoginAction}>{googleButtonText}</Button>
-            </Flex>
+              <Flex>
+                <Button type="submit" mr={2}>
+                  {submitButtonText}
+                </Button>
+                <Button onClick={googleLoginAction}>{googleButtonText}</Button>
+              </Flex>
+            </form>
           </Flex>
         </Box>
       )}

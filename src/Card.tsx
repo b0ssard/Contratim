@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text, Image } from "@chakra-ui/react";
+import { Box, Heading, Text} from "@chakra-ui/react";
 import Button from "./Button";
 
 export type CardProps = {
@@ -13,7 +13,7 @@ export type CardProps = {
 const Card: React.FC<CardProps> = ({
   heading,
   text,
-  imageUrl,
+  // imageUrl,
   buttonText,
   buttonOnClick,
 }) => {
@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({
         {heading}
       </Heading>
       <Text mb={4}>{text}</Text>
-      <Image src={imageUrl} alt={heading} mb={4} />
+      {/* <Image src={imageUrl} alt={heading} mb={4} /> */}
       <Button onClick={buttonOnClick}>{buttonText}</Button>
     </Box>
   );
