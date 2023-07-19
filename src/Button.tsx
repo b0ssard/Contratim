@@ -6,7 +6,7 @@ import {
 
 type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  to?: string; // Include the 'to' prop in the ButtonProps type
+  to?: string;
 } & ChakraButtonProps;
 
 const Button: React.FC<ButtonProps> = ({ children, ...rest }) => (

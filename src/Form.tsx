@@ -21,8 +21,6 @@ interface FormProps {
   googleButtonText: string;
 }
 
-// ... (imports and other code)
-
 export default function Form({
   credentials,
   handleInputChange,
@@ -51,7 +49,7 @@ export default function Form({
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
     submitAction();
   };
 
@@ -67,7 +65,7 @@ export default function Form({
       ) : (
         <Box className="register-container">
           <Flex direction="column" align="center">
-            <form onSubmit={handleFormSubmit}> {/* Wrap the fields in a form */}
+            <form onSubmit={handleFormSubmit}>
               <Input
                 type="email"
                 placeholder="Email"

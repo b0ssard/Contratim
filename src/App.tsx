@@ -7,8 +7,6 @@ import Contratos from "./Contratos";
 import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
-// import Inputs from "./Inputs";
-
 import "./App.scss";
 
 const App: React.FC = () => {
@@ -41,7 +39,6 @@ const Home: React.FC = () => {
 const ContratosPage: React.FC = () => {
   return (
     <div>
-      {/* <Inputs /> */}
       <Contratos />
     </div>
   );
