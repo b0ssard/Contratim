@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Button from "./Button";
 import "./Contratos.scss";
 import ContractInputs from "./Inputs";
@@ -42,20 +42,6 @@ const Contratos: React.FC = () => {
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
       <ContractContent fields={fields} />
-
-      <Text>
-        {fields[0].value}
-        <br />
-        Proprietário
-      </Text>
-
-      <Text>
-        {fields[2].value}
-        <br />
-        Locatário
-      </Text>
-
-      <Text>Data: {fields[15].value}</Text>
 
       <Button as={Link} to="/">
         Voltar

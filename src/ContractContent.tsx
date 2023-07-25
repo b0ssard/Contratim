@@ -5,6 +5,10 @@ interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
 }
 
+const renderLabel = (label: string, value: string) => {
+  return value !== "" ? value : <i>{label}</i>;
+};
+
 const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
   return (
     <Box>
@@ -12,9 +16,12 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
 
       <Text fontSize="xl">
         Este Contrato de Aluguel ("Contrato") é celebrado entre o proprietário,{" "}
-        {fields[0].value}, residente em {fields[1].value}, adiante denominado
-        "Proprietário", e o locatário, {fields[2].value}, residente em{" "}
-        {fields[3].value}, adiante denominado "Locatário".
+        {renderLabel(fields[0].label, fields[0].value)}, residente em{" "}
+        {renderLabel(fields[1].label, fields[1].value)}, adiante denominado
+        "Proprietário", e o locatário,{" "}
+        {renderLabel(fields[2].label, fields[2].value)}, residente em{" "}
+        {renderLabel(fields[3].label, fields[3].value)}, adiante denominado
+        "Locatário".
       </Text>
 
       <Heading as="h2" fontSize="lg" mt={4}>
@@ -23,8 +30,9 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
 
       <Text>
         O Proprietário concorda em alugar a propriedade localizada em{" "}
-        {fields[4].value} ("Imóvel"), que consiste em {fields[5].value} para o
-        Locatário, com a finalidade exclusiva de uso residencial.
+        {renderLabel(fields[4].label, fields[4].value)} ("Imóvel"), que consiste
+        em {renderLabel(fields[5].label, fields[5].value)} para o Locatário, com
+        a finalidade exclusiva de uso residencial.
       </Text>
 
       <Heading as="h2" fontSize="lg" mt={4}>
@@ -32,8 +40,10 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
       </Heading>
 
       <Text>
-        O contrato de aluguel terá início em {fields[6].value} e terá duração de{" "}
-        {fields[7].value} meses, a contar da data de início.
+        O contrato de aluguel terá início em{" "}
+        {renderLabel(fields[6].label, fields[6].value)} e terá duração de{" "}
+        {renderLabel(fields[7].label, fields[7].value)} meses, a contar da data
+        de início.
       </Text>
 
       <Heading as="h2" fontSize="lg" mt={4}>
@@ -42,9 +52,11 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
 
       <Text>
         O Locatário concorda em pagar ao Proprietário um aluguel mensal de{" "}
-        {fields[8].value} até o quinto dia útil de cada mês. O pagamento deverá
-        ser feito por meio de {fields[9].value}, na conta bancária do
-        Proprietário com os detalhes a seguir: {fields[10].value}.
+        {renderLabel(fields[8].label, fields[8].value)} até o quinto dia útil de
+        cada mês. O pagamento deverá ser feito por meio de{" "}
+        {renderLabel(fields[9].label, fields[9].value)}, na conta bancária do
+        Proprietário com os detalhes a seguir:{" "}
+        {renderLabel(fields[10].label, fields[10].value)}.
       </Text>
 
       <Heading as="h2" fontSize="lg" mt={4}>
@@ -52,12 +64,14 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
       </Heading>
 
       <Text>
-        O Locatário concorda em pagar uma caução no valor de {fields[11].value}{" "}
-        no ato da assinatura deste contrato. A caução será utilizada para cobrir
-        eventuais danos ou despesas devidas pelo Locatário ao Imóvel durante o
-        período de locação. Caso não haja nenhum dano ou despesa pendente, a
-        caução será devolvida ao Locatário no prazo máximo de {fields[12].value}{" "}
-        após o término do contrato.
+        O Locatário concorda em pagar uma caução no valor de{" "}
+        {renderLabel(fields[11].label, fields[11].value)} no ato11 da assinatura
+        deste contrato. A caução será utilizada para cobrir eventuais danos ou
+        despesas devidas pelo Locatário ao Imóvel durante o período de locação.
+        Caso não haja nenhum dano ou despesa pendente, a caução será devolvida
+        ao Locatário no prazo máximo de{" "}
+        {renderLabel(fields[12].label, fields[12].value)} após o término do
+        contrato.
       </Text>
 
       <Heading as="h2" fontSize="lg" mt={4}>
@@ -112,7 +126,8 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
       <Text>
         Em caso de rescisão antecipada deste contrato por qualquer uma das
         partes, deverá ser fornecido um aviso prévio por escrito com
-        antecedência mínima de {fields[13].value} dias.
+        antecedência mínima de {renderLabel(fields[13].label, fields[13].value)}{" "}
+        dias.
       </Text>
 
       <Heading as="h2" fontSize="lg" mt={4}>
@@ -126,7 +141,8 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
         b) Qualquer modificação a este contrato deverá ser feita por escrito e
         assinada por ambas as partes;
         <br />
-        c) Este contrato é regido pelas leis do {fields[14].value};
+        c) Este contrato é regido pelas leis do{" "}
+        {renderLabel(fields[14].label, fields[14].value)};
         <br />
         d) Caso qualquer disposição deste contrato seja considerada inválida ou
         inexequível, as demais disposições permanecerão em pleno vigor e efeito.
@@ -138,18 +154,18 @@ const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
       </Text>
 
       <Text>
-        {fields[0].value}
+        {renderLabel(fields[0].label, fields[0].value)}
         <br />
         Proprietário
       </Text>
 
       <Text>
-        {fields[2].value}
+        {renderLabel(fields[2].label, fields[2].value)}
         <br />
         Locatário
       </Text>
 
-      <Text>Data: {fields[15].value}</Text>
+      <Text>Data: {renderLabel(fields[15].label, fields[15].value)}</Text>
     </Box>
   );
 };
