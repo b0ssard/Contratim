@@ -8,6 +8,7 @@ import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
 import "./App.scss";
+import MainComponent from "./MainComponent";
 
 const App: React.FC = () => {
   return (
@@ -39,7 +40,7 @@ const Home: React.FC = () => {
 const ContratosPage: React.FC = () => {
   return (
     <div>
-      <Contratos />
+      <MainComponent />
     </div>
   );
 };
