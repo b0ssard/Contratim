@@ -1,0 +1,22 @@
+{
+  "contracts": [
+    {
+      "contractType": "rental",
+      "inputFields": [
+        { "label": "Nome do Proprietário", "name": "proprietario" },
+        { "label": "Endereço do Proprietário", "name": "enderecoProprietario" },
+        { "label": "Nome do Locatário", "name": "locatario" },
+        { "label": "Endereço do Locatário", "name": "enderecoLocatario" }
+      ]
+    },
+    {
+      "contractType": "sale",
+      "inputFields": [
+        { "label": "Nome do Vendedor", "name": "vendedor" },
+        { "label": "Endereço do Vendedor", "name": "enderecoVendedor" },
+        { "label": "Nome do Comprador", "name": "comprador" },
+        { "label": "Endereço do Comprador", "name": "enderecoComprador" }
+      ]
+    }
+  ]
+}

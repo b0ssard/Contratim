@@ -1,0 +1,48 @@
+{
+  "contracts": [
+    {
+      "contractType": "rental",
+      "contractTitle": "CONTRATO DE ALUGUEL",
+      "sections": [
+        {
+          "title": "Section 1",
+          "content": "Content for section 1"
+        },
+        {
+          "title": "Section 2",
+          "content": "Content for section 2"
+        }
+      ],
+      "responsibilitiesTenant": [
+        "Responsibility 1 for tenant",
+        "Responsibility 2 for tenant"
+      ],
+      "responsibilitiesOwner": [
+        "Responsibility 1 for owner",
+        "Responsibility 2 for owner"
+      ]
+    },
+    {
+      "contractType": "sale",
+      "contractTitle": "CONTRATO DE VENDA",
+      "sections": [
+        {
+          "title": "Section 1",
+          "content": "Content for section 1"
+        },
+        {
+          "title": "Section 2",
+          "content": "Content for section 2"
+        }
+      ],
+      "responsibilitiesBuyer": [
+        "Responsibility 1 for buyer",
+        "Responsibility 2 for buyer"
+      ],
+      "responsibilitiesSeller": [
+        "Responsibility 1 for seller",
+        "Responsibility 2 for seller"
+      ]
+    }
+  ]
+}
