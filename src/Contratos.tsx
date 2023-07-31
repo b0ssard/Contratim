@@ -5,28 +5,28 @@ import Button from "./Button";
 import "./Contratos.scss";
 import ContractInputs from "./Inputs";
 import ContractContent from "./ContractContent";
+import contractInputs from "./contractInputs.json";
 
 const Contratos: React.FC = () => {
-  const initialFields = [
-    { label: "Nome do Proprietário", value: "" },
-    { label: "Endereço do Proprietário", value: "" },
-    { label: "Nome do Locatário", value: "" },
-    { label: "Endereço do Locatário", value: "" },
-    { label: "Endereço do Imóvel", value: "" },
-    { label: "Descrição do Imóvel", value: "" },
-    { label: "Data de Início", value: "" },
-    { label: "Duração do Contrato", value: "" },
-    { label: "Valor do Aluguel", value: "" },
-    { label: "Meio de Pagamento", value: "" },
-    { label: "Informações da Conta Bancária", value: "" },
-    { label: "Valor da Caução", value: "" },
-    { label: "Prazo de Devolução da Caução", value: "" },
-    { label: "Prazo de Aviso Prévio", value: "" },
-    { label: "País/Estado", value: "" },
-    { label: "Data da Assinatura", value: "" },
-  ];
+    const [selectedContractType, setSelectedContractType] = useState(
+    contractInputs.contracts[0].contractType
+  );
 
-  const [fields, setFields] = useState(initialFields);
+  const selectedContract = contractInputs.contracts.find(
+    (contract) => contract.contractType === selectedContractType
+  );
+
+  const [fields, setFields] = useState(selectedContract?.inputFields || []);
+
+  const handleContractTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedContractType(event.target.value);
+    const newSelectedContract = contractInputs.contracts.find(
+      (contract) => contract.contractType === event.target.value
+    );
+    setFields(newSelectedContract?.inputFields || []);
+  };
 
   const handleFieldChange = (
     index: number,
@@ -39,9 +39,31 @@ const Contratos: React.FC = () => {
 
   return (
     <Box className="custom-container">
+      <div>
+        <label htmlFor="contractType">Choose Contract Type: </label>
+        <select
+          id="contractType"
+          value={selectedContractType}
+          onChange={handleContractTypeChange}
+        >
+          {contractInputs.contracts.map((contract) => (
+            <option key={contract.contractType} value={contract.contractType}>
+              {contract.contractType}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-      <ContractContent fields={fields} />
+      {selectedContractType === "rental" ? (
+        <ContractContent fields={fields} />
+      ) : (
+        // PROVISÓRIO PARA NÃO TER CRASH
+        <div>
+          <p>Custom content for the "sale" contract type.</p>
+        </div>
+      )}
 
       <Button as={Link} to="/">
         Voltar
