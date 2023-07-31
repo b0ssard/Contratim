@@ -13,17 +13,19 @@ const replacePlaceholders = (
   let replacedContent = content;
   fields.forEach((field, index) => {
     const placeholder = `{field-${index}}`;
-    replacedContent = replacedContent.replace(placeholder, field.value);
+    const replacement = field.value !== "" ? field.value : field.label;
+    replacedContent = replacedContent.replace(placeholder, replacement);
   });
   return replacedContent;
 };
 
 const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
+  const firstContract = contractData.contracts[0]; // Assuming you want to access the first contract.
   return (
     <Box>
-      <h1>{contractData.header}</h1>
+      <h1>{firstContract.header}</h1>
 
-      {contractData.sections.map((section, index) => (
+      {firstContract.sections.map((section, index) => (
         <React.Fragment key={index}>
           {section.title && (
             <Heading as="h2" fontSize="lg" mt={4}>
