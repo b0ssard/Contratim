@@ -8,7 +8,7 @@ import ContractContent from "./ContractContent";
 import contractInputs from "./contractInputs.json";
 
 const Contratos: React.FC = () => {
-    const [selectedContractType, setSelectedContractType] = useState(
+  const [selectedContractType, setSelectedContractType] = useState(
     contractInputs.contracts[0].contractType
   );
 
@@ -56,13 +56,10 @@ const Contratos: React.FC = () => {
 
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-      {selectedContractType === "rental" ? (
-        <ContractContent fields={fields} />
-      ) : (
-        // PROVISÓRIO PARA NÃO TER CRASH
-        <div>
-          <p>Custom content for the "sale" contract type.</p>
-        </div>
+      {selectedContractType === "rental" && (
+        <React.Fragment>
+          <ContractContent fields={fields} />
+        </React.Fragment>
       )}
 
       <Button as={Link} to="/">
