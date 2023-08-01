@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Box, Flex, Input } from "@chakra-ui/react";
 import Button from "./Button";
-import { Box, Input, Flex } from "@chakra-ui/react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase";
 import "./Form.scss";
 
-export interface User {
-  email?: string;
+interface User {
+  email: string;
 }
 
 interface FormProps {
@@ -21,24 +21,20 @@ interface FormProps {
   googleButtonText: string;
 }
 
-export default function Form({
+const Form: React.FC<FormProps> = ({
   credentials,
   handleInputChange,
   submitAction,
   googleLoginAction,
   submitButtonText,
   googleButtonText,
-}: FormProps): JSX.Element {
+}) => {
   const { email, password } = credentials;
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({ email: user.email || "" });
-      } else {
-        setUser(null);
-      }
+      setUser(user ? { email: user.email || "" } : null);
     });
 
     return () => unsubscribe();
@@ -98,4 +94,6 @@ export default function Form({
       )}
     </div>
   );
-}
+};
+
+export default Form;

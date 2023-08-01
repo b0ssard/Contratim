@@ -4,6 +4,7 @@ import contractData from "./contractData.json";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
+  selectedContractType: string;
 }
 
 const replacePlaceholders = (
@@ -19,13 +20,23 @@ const replacePlaceholders = (
   return replacedContent;
 };
 
-const ContractContent: React.FC<ContractContentProps> = ({ fields }) => {
-  const firstContract = contractData.contracts[0]; // Assuming you want to access the first contract.
+const ContractContent: React.FC<ContractContentProps> = ({
+  fields,
+  selectedContractType,
+}) => {
+  const selectedContract = contractData.contracts.find(
+    (contract) => contract.contractType === selectedContractType
+  );
+
+  if (!selectedContract) {
+    return <div>Selected contract not found.</div>;
+  }
+
   return (
     <Box>
-      <h1>{firstContract.header}</h1>
+      <h1>{selectedContract.header}</h1>
 
-      {firstContract.sections.map((section, index) => (
+      {selectedContract.sections.map((section, index) => (
         <React.Fragment key={index}>
           {section.title && (
             <Heading as="h2" fontSize="lg" mt={4}>

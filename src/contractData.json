@@ -1,6 +1,7 @@
 {
   "contracts": [
     {
+      "contractType": "rental",
       "header": "CONTRATO DE ALUGUEL",
       "sections": [
         {
@@ -42,6 +43,7 @@
       ]
     },
     {
+      "contractType": "sale",
       "header": "CONTRATO DE COMPRA",
       "sections": [
         {

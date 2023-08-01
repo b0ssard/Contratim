@@ -56,10 +56,16 @@ const Contratos: React.FC = () => {
 
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-      {selectedContractType === "rental" && (
-        <React.Fragment>
-          <ContractContent fields={fields} />
-        </React.Fragment>
+      {contractInputs.contracts.map(
+        (contract) =>
+          selectedContractType === contract.contractType && (
+            <React.Fragment key={contract.contractType}>
+              <ContractContent
+                fields={fields}
+                selectedContractType={selectedContractType}
+              />
+            </React.Fragment>
+          )
       )}
 
       <Button as={Link} to="/">

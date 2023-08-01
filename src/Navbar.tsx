@@ -15,11 +15,11 @@ import {
 import "./Navbar.scss";
 
 export interface User {
-  email?: string | null;
+  email: string | null;
 }
 
 const Navbar: React.FC = () => {
-  const [user, setUser] = useState<User>({});
+  const [user, setUser] = useState<User>({ email: null });
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
       if (user) {
         setUser({ email: user.email });
       } else {
-        setUser({});
+        setUser({ email: null });
       }
     });
 
@@ -42,40 +42,15 @@ const Navbar: React.FC = () => {
     }));
   };
 
-  const register = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        credentials.email,
-        credentials.password
-      );
-      console.log("User registration successful!");
-    } catch (error) {
-      console.error("User registration error:", error);
-    }
-  };
-
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      console.log("Google login successful!");
-    } catch (error) {
-      console.error("Google login error:", error);
-    }
-  };
-
   const handleSignOut = () => {
     auth.signOut();
   };
-
-  const { email } = user;
 
   const renderLoggedInContent = () => (
     <Box>
       <Flex direction="row" alignItems="center">
         <Text className="navbar-item" marginRight="10px">
-          Logged in as: {email}
+          Logged in as: {user.email}
         </Text>
         <Button onClick={handleSignOut}>Sign Out</Button>
         <NavbarLink
@@ -113,11 +88,34 @@ const Navbar: React.FC = () => {
     </>
   );
 
+  const register = async () => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      console.log("User registration successful!");
+    } catch (error) {
+      console.error("User registration error:", error);
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      console.log("Google login successful!");
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
+
   return (
     <Flex className="navbar">
       <Box className="navbar-logo">CONTRATIM</Box>
       <Box className="navbar-list">
-        {email !== undefined
+        {user.email !== null
           ? renderLoggedInContent()
           : renderLoggedOutContent()}
       </Box>

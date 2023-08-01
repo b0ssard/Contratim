@@ -8,7 +8,6 @@ import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
 import "./App.scss";
-// import MainComponent from "./MainComponent";
 
 const App: React.FC = () => {
   return (
