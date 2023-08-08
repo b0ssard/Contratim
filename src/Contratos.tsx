@@ -4,15 +4,14 @@ import { Box } from "@chakra-ui/react";
 import Button from "./Button";
 import "./Contratos.scss";
 import ContractInputs from "./Inputs";
-import ContractContent from "./ContractContent";
-import contractInputs from "./contractInputs.json";
+import contractData from "./contractData.json";
 
 const Contratos: React.FC = () => {
   const [selectedContractType, setSelectedContractType] = useState(
-    contractInputs.contracts[0].contractType
+    contractData.contracts[0].contractType
   );
 
-  const selectedContract = contractInputs.contracts.find(
+  const selectedContract = contractData.contracts.find(
     (contract) => contract.contractType === selectedContractType
   );
 
@@ -21,9 +20,10 @@ const Contratos: React.FC = () => {
   const handleContractTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedContractType(event.target.value);
-    const newSelectedContract = contractInputs.contracts.find(
-      (contract) => contract.contractType === event.target.value
+    const newContractType = event.target.value;
+    setSelectedContractType(newContractType);
+    const newSelectedContract = contractData.contracts.find(
+      (contract) => contract.contractType === newContractType
     );
     setFields(newSelectedContract?.inputFields || []);
   };
@@ -46,7 +46,7 @@ const Contratos: React.FC = () => {
           value={selectedContractType}
           onChange={handleContractTypeChange}
         >
-          {contractInputs.contracts.map((contract) => (
+          {contractData.contracts.map((contract) => (
             <option key={contract.contractType} value={contract.contractType}>
               {contract.contractType}
             </option>
@@ -56,17 +56,21 @@ const Contratos: React.FC = () => {
 
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-      {contractInputs.contracts.map(
-        (contract) =>
-          selectedContractType === contract.contractType && (
-            <React.Fragment key={contract.contractType}>
-              <ContractContent
-                fields={fields}
-                selectedContractType={selectedContractType}
-              />
-            </React.Fragment>
-          )
-      )}
+      {selectedContract &&
+        selectedContract.sections.map((section, index) => (
+          <React.Fragment key={index}>
+            {section.title && <h2>{section.title}</h2>}
+            <p>
+              {section.content.replace(
+                /{inputFields\[(\d+)\].value}/g,
+                (_, i) =>
+                  fields[parseInt(i)].value !== ""
+                    ? fields[parseInt(i)].value
+                    : fields[parseInt(i)].label
+              )}
+            </p>
+          </React.Fragment>
+        ))}
 
       <Button as={Link} to="/">
         Voltar
