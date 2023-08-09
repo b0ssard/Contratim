@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, FormControl, FormLabel, Select } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Button from "./Button";
 import ContractInputs from "./Inputs";
 import ContractContent from "./ContractContent";
-import contractData from "./contractData.json";
+import contractsData from "./contractsData.json";
+import ContractTypeSelector from "./ContractTypeSelector";
 
 const Contracts: React.FC = () => {
   const [selectedContractType, setSelectedContractType] = useState(
-    contractData.contracts[0].contractType
+    contractsData.contracts[0].contractType
   );
 
-  const selectedContract = contractData.contracts.find(
+  const selectedContract = contractsData.contracts.find(
     (contract) => contract.contractType === selectedContractType
   );
 
@@ -23,7 +24,7 @@ const Contracts: React.FC = () => {
     const newSelectedContractType = event.target.value;
     setSelectedContractType(newSelectedContractType);
 
-    const newSelectedContract = contractData.contracts.find(
+    const newSelectedContract = contractsData.contracts.find(
       (contract) => contract.contractType === newSelectedContractType
     );
 
@@ -41,22 +42,11 @@ const Contracts: React.FC = () => {
 
   return (
     <Box p={[2, 4, 6]} className="custom-container">
-      <FormControl>
-        <FormLabel htmlFor="contractType">Choose Contract Type:</FormLabel>
-        <Select
-          id="contractType"
-          value={selectedContractType}
-          onChange={handleContractTypeChange}
-          size="md"
-          variant="filled"
-        >
-          {contractData.contracts.map((contract) => (
-            <option key={contract.contractType} value={contract.contractType}>
-              {contract.contractType}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
+      <ContractTypeSelector
+        selectedContractType={selectedContractType}
+        handleContractTypeChange={handleContractTypeChange}
+        contracts={contractsData.contracts}
+      />
 
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
@@ -67,7 +57,7 @@ const Contracts: React.FC = () => {
         />
       )}
 
-      <Button as={Link} to="/" mt={4} colorScheme="blue">
+      <Button as={Link} to="/" mt={4}>
         Voltar
       </Button>
     </Box>

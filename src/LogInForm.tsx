@@ -21,7 +21,7 @@ interface FormProps {
   googleButtonText: string;
 }
 
-const Form: React.FC<FormProps> = ({
+const LogInForm: React.FC<FormProps> = ({
   credentials,
   handleInputChange,
   submitAction,
@@ -96,4 +96,4 @@ const Form: React.FC<FormProps> = ({
   );
 };
 
-export default Form;
+export default LogInForm;

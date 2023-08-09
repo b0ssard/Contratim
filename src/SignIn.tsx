@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Form from "./Form";
+import LogInForm from "./LogInForm";
 import { auth } from "./Firebase";
 import {
   signInWithEmailAndPassword,
@@ -57,7 +57,7 @@ const SignIn: React.FC = () => {
   }, []);
 
   return (
-    <Form
+    <LogInForm
       credentials={credentials}
       handleInputChange={handleInputChange}
       submitAction={signIn}

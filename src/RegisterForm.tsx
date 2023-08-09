@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import Form from "./Form";
+import LogInForm from "./LogInForm";
 
 interface RegisterFormProps {
   credentials: { email: string; password: string };
@@ -17,7 +17,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 }) => {
   return (
     <Box p={4} flex={1}>
-      <Form
+      <LogInForm
         credentials={credentials}
         handleInputChange={handleInputChange}
         submitAction={register}

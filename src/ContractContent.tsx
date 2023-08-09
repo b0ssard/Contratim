@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import contractData from "./contractData.json";
+import contractsData from "./contractsData.json";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
@@ -22,7 +22,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
   fields,
   selectedContractType,
 }) => {
-  const selectedContract = contractData.contracts.find(
+  const selectedContract = contractsData.contracts.find(
     (contract) => contract.contractType === selectedContractType
   );
 
