@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Select } from "@chakra-ui/react";
 import Button from "./Button";
-import "./Contratos.scss";
 import ContractInputs from "./Inputs";
 import ContractContent from "./ContractContent";
 import contractData from "./contractData.json";
@@ -21,10 +20,13 @@ const Contracts: React.FC = () => {
   const handleContractTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedContractType(event.target.value);
+    const newSelectedContractType = event.target.value;
+    setSelectedContractType(newSelectedContractType);
+
     const newSelectedContract = contractData.contracts.find(
-      (contract) => contract.contractType === event.target.value
+      (contract) => contract.contractType === newSelectedContractType
     );
+
     setFields(newSelectedContract?.inputFields || []);
   };
 
@@ -38,36 +40,34 @@ const Contracts: React.FC = () => {
   };
 
   return (
-    <Box className="custom-container">
-      <div>
-        <label htmlFor="contractType">Choose Contract Type: </label>
-        <select
+    <Box p={[2, 4, 6]} className="custom-container">
+      <FormControl>
+        <FormLabel htmlFor="contractType">Choose Contract Type:</FormLabel>
+        <Select
           id="contractType"
           value={selectedContractType}
           onChange={handleContractTypeChange}
+          size="md"
+          variant="filled"
         >
           {contractData.contracts.map((contract) => (
             <option key={contract.contractType} value={contract.contractType}>
               {contract.contractType}
             </option>
           ))}
-        </select>
-      </div>
+        </Select>
+      </FormControl>
+
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-      {contractData.contracts.map(
-        (contract) =>
-          selectedContractType === contract.contractType && (
-            <React.Fragment key={contract.contractType}>
-              <ContractContent
-                fields={fields}
-                selectedContractType={selectedContractType}
-              />
-            </React.Fragment>
-          )
+      {selectedContract && (
+        <ContractContent
+          fields={fields}
+          selectedContractType={selectedContractType}
+        />
       )}
 
-      <Button as={Link} to="/">
+      <Button as={Link} to="/" mt={4} colorScheme="blue">
         Voltar
       </Button>
     </Box>
