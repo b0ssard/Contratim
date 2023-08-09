@@ -4,9 +4,10 @@ import { Box } from "@chakra-ui/react";
 import Button from "./Button";
 import "./Contratos.scss";
 import ContractInputs from "./Inputs";
+import ContractContent from "./ContractContent";
 import contractData from "./contractData.json";
 
-const Contratos: React.FC = () => {
+const Contracts: React.FC = () => {
   const [selectedContractType, setSelectedContractType] = useState(
     contractData.contracts[0].contractType
   );
@@ -20,10 +21,9 @@ const Contratos: React.FC = () => {
   const handleContractTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    const newContractType = event.target.value;
-    setSelectedContractType(newContractType);
+    setSelectedContractType(event.target.value);
     const newSelectedContract = contractData.contracts.find(
-      (contract) => contract.contractType === newContractType
+      (contract) => contract.contractType === event.target.value
     );
     setFields(newSelectedContract?.inputFields || []);
   };
@@ -53,24 +53,19 @@ const Contratos: React.FC = () => {
           ))}
         </select>
       </div>
-
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-      {selectedContract &&
-        selectedContract.sections.map((section, index) => (
-          <React.Fragment key={index}>
-            {section.title && <h2>{section.title}</h2>}
-            <p>
-              {section.content.replace(
-                /{inputFields\[(\d+)\].value}/g,
-                (_, i) =>
-                  fields[parseInt(i)].value !== ""
-                    ? fields[parseInt(i)].value
-                    : fields[parseInt(i)].label
-              )}
-            </p>
-          </React.Fragment>
-        ))}
+      {contractData.contracts.map(
+        (contract) =>
+          selectedContractType === contract.contractType && (
+            <React.Fragment key={contract.contractType}>
+              <ContractContent
+                fields={fields}
+                selectedContractType={selectedContractType}
+              />
+            </React.Fragment>
+          )
+      )}
 
       <Button as={Link} to="/">
         Voltar
@@ -79,4 +74,4 @@ const Contratos: React.FC = () => {
   );
 };
 
-export default Contratos;
+export default Contracts;

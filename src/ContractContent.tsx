@@ -2,23 +2,25 @@ import React from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import contractData from "./contractData.json";
 
-interface ContractContentProps {
-  fields: Array<{ label: string; value: string }>;
-  selectedContractType: string;
-}
-
 const replacePlaceholders = (
   content: string,
   fields: Array<{ label: string; value: string }>
 ) => {
   let replacedContent = content;
   fields.forEach((field, index) => {
-    const placeholder = `{field-${index}}`;
+    const placeholder = `{inputFields[${index}].value}`;
     const replacement = field.value !== "" ? field.value : field.label;
     replacedContent = replacedContent.replace(placeholder, replacement);
   });
   return replacedContent;
 };
+
+
+interface ContractContentProps {
+  fields: Array<{ label: string; value: string }>;
+  selectedContractType: string;
+}
+
 
 const ContractContent: React.FC<ContractContentProps> = ({
   fields,
@@ -29,7 +31,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
   );
 
   if (!selectedContract) {
-    return <div>Selected contract not found.</div>;
+    return null;
   }
 
   return (

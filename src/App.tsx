@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Contratos from "./Contratos";
+import Contracts from "./Contracts";
 import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 const ContratosPage: React.FC = () => {
   return (
     <div>
-      <Contratos />
+      <Contracts />
     </div>
   );
 };
