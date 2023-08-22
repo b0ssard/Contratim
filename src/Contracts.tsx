@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 import Button from "./Button";
 import ContractInputs from "./Inputs";
 import ContractContent from "./ContractContent";
-import contractsData from "./contractsData.json";
 import ContractTypeSelector from "./ContractTypeSelector";
+import { db } from "./Firebase";
+import { getDocs, collection } from "firebase/firestore";
+import { Contract, InputField } from "./Utils"
 
 const Contracts: React.FC = () => {
-  const [selectedContractType, setSelectedContractType] = useState(
-    contractsData.contracts[0].contractType
-  );
+  const [selectedContractType, setSelectedContractType] = useState<string>("");
+  const [fields, setFields] = useState<InputField[]>([]);
+  const [contracts, setContracts] = useState<Contract[]>([]);
 
-  const selectedContract = contractsData.contracts.find(
-    (contract) => contract.contractType === selectedContractType
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const contractsCollection = await getDocs(collection(db, "contracts"));
+        const contractsData = contractsCollection.docs.map(
+          (doc) => doc.data() as Contract
+        );
+        setContracts(contractsData);
+        setSelectedContractType(contractsData[0]?.contractType || "");
+        setFields(contractsData[0]?.inputFields || []);
+      } catch (error) {
+        console.error("Error fetching contracts:", error);
+      }
+    };
 
-  const [fields, setFields] = useState(selectedContract?.inputFields || []);
+    fetchData();
+  }, []);
 
   const handleContractTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -24,7 +38,7 @@ const Contracts: React.FC = () => {
     const newSelectedContractType = event.target.value;
     setSelectedContractType(newSelectedContractType);
 
-    const newSelectedContract = contractsData.contracts.find(
+    const newSelectedContract = contracts.find(
       (contract) => contract.contractType === newSelectedContractType
     );
 
@@ -45,12 +59,12 @@ const Contracts: React.FC = () => {
       <ContractTypeSelector
         selectedContractType={selectedContractType}
         handleContractTypeChange={handleContractTypeChange}
-        contracts={contractsData.contracts}
+        contracts={contracts}
       />
 
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-      {selectedContract && (
+      {selectedContractType && (
         <ContractContent
           fields={fields}
           selectedContractType={selectedContractType}

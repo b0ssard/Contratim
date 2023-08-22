@@ -14,6 +14,9 @@ const ContractTypeSelector: React.FC<ContractTypeSelectorProps> = ({
   handleContractTypeChange,
   contracts,
 }) => {
+  console.log("Contracts:", contracts);
+  console.log("Selected Contract Type:", selectedContractType);
+
   return (
     <FormControl>
       <FormLabel htmlFor="contractType">Choose Contract Type:</FormLabel>
@@ -24,14 +27,18 @@ const ContractTypeSelector: React.FC<ContractTypeSelectorProps> = ({
         size="md"
         variant="filled"
       >
-        {contracts.map((contract) => (
-          <option key={contract.contractType} value={contract.contractType}>
-            {contract.contractType}
-          </option>
-        ))}
+        {contracts.map((contract, index) => {
+          console.log("Mapping Contract:", contract);
+          return (
+            <option key={index} value={contract.contractType}>
+              {contract.contractType}
+            </option>
+          );
+        })}
       </Select>
     </FormControl>
   );
 };
+
 
 export default ContractTypeSelector;

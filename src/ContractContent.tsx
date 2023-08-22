@@ -32,7 +32,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
 
   return (
     <Box p={4}>
-      <Heading as="h1" fontSize={["xl", "2xl", "3xl"]} color="blue.500" mb={4}>
+      <Heading as="h1" fontSize={["xl", "2xl", "3xl"]} mb={4}>
         {selectedContract.header}
       </Heading>
 
@@ -43,7 +43,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
               {section.title}
             </Heading>
           )}
-          <Text fontSize="md" mt={2}>
+          <Text fontSize="md" mt={2} textAlign="justify">
             {replacePlaceholders(section.content, fields)}
           </Text>
         </React.Fragment>
