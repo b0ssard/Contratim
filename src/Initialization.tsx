@@ -7,8 +7,7 @@ const Initialization = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!contractsAdded) {
-      // Adicione os contratos ao Firestore apenas se ainda não tiverem sido adicionados
-      addContractToFirestore(contractsData.contracts[0]) // Por exemplo, aqui estamos adicionando o primeiro contrato da lista
+      addContractToFirestore(contractsData.contracts[0])
         .then(() => {
           setContractsAdded(true);
         })
