@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import contractsData from "./contractsData.json";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+
+interface ContractSection {
+  title: string | null;
+  content: string;
+}
+
+interface FirebaseContract {
+  contractType: string;
+  header: string;
+  sections: ContractSection[];
+}
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
@@ -12,9 +23,13 @@ const replacePlaceholders = (
   fields: Array<{ label: string; value: string }>
 ) => {
   return content.replace(/{inputFields\[(\d+)\]\.value}/g, (_, index) => {
-    const fieldValue = fields[Number(index)].value;
-    const fieldLabel = fields[Number(index)].label;
-    return fieldValue !== "" ? fieldValue : fieldLabel;
+    if (fields && fields[index] && fields[index].value) {
+      const fieldValue = fields[index].value;
+      const fieldLabel = fields[index].label;
+      return fieldValue !== "" ? fieldValue : fieldLabel;
+    }
+
+    return "";
   });
 };
 
@@ -22,9 +37,29 @@ const ContractContent: React.FC<ContractContentProps> = ({
   fields,
   selectedContractType,
 }) => {
-  const selectedContract = contractsData.contracts.find(
-    (contract) => contract.contractType === selectedContractType
-  );
+  const [selectedContract, setSelectedContract] =
+    useState<FirebaseContract | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const db = getFirestore();
+        const contractsCollection = collection(db, "contracts");
+        const contractsSnapshot = await getDocs(contractsCollection);
+
+        contractsSnapshot.forEach((doc) => {
+          const contractData = doc.data() as FirebaseContract;
+          if (contractData.contractType === selectedContractType) {
+            setSelectedContract(contractData);
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching contract data:", error);
+      }
+    };
+
+    fetchData();
+  }, [selectedContractType]);
 
   if (!selectedContract) {
     return null;
@@ -36,18 +71,20 @@ const ContractContent: React.FC<ContractContentProps> = ({
         {selectedContract.header}
       </Heading>
 
-      {selectedContract.sections.map((section, index) => (
-        <React.Fragment key={index}>
-          {section.title && (
-            <Heading as="h2" fontSize="lg" mt={4} textAlign="center">
-              {section.title}
-            </Heading>
-          )}
-          <Text fontSize="md" mt={2} textAlign="justify">
-            {replacePlaceholders(section.content, fields)}
-          </Text>
-        </React.Fragment>
-      ))}
+      {selectedContract.sections.map(
+        (section: ContractSection, index: number) => (
+          <React.Fragment key={index}>
+            {section.title && (
+              <Heading as="h2" fontSize="lg" mt={4} textAlign="center">
+                {section.title}
+              </Heading>
+            )}
+            <Text fontSize="md" mt={2} textAlign="justify">
+              {replacePlaceholders(section.content, fields)}
+            </Text>
+          </React.Fragment>
+        )
+      )}
     </Box>
   );
 };
