@@ -8,24 +8,31 @@ import {
 import { contractsData } from "./contractsData";
 
 const updateContracts = async () => {
-  try {
-    const snapshot = await getDocs(collection(getFirestore(), "contracts"));
-    console.log("Total contratos:", snapshot.size);
-    const ids = snapshot.docs.map((doc) => doc.id);
-    console.log(ids);
+  const firestore = getFirestore();
+  const contractsCollection = collection(firestore, "contracts");
 
-    await contractsData.contracts.reduce(async (p, value) => {
-      await p;
-      if (!ids.includes(value.contractType)) {
-        console.log(`${value.contractType} não está; adicionado...`);
-        const contractRef = doc(getFirestore(), "contracts", value.contractType);
-        await setDoc(contractRef, value);
-      } else {
-        console.log("pulando...");
-      }
-    }, Promise.resolve());
+  try {
+    const snapshot = await getDocs(contractsCollection);
+    const existingContractIds = snapshot.docs.map((doc) => doc.id);
+
+    console.log("Total de contratos:", snapshot.size);
+    console.log("IDs de contratos existentes:", existingContractIds);
+
+    await Promise.all(
+      contractsData.contracts.map(async (contract) => {
+        if (!existingContractIds.includes(contract.contractType)) {
+          console.log(`${contract.contractType} não está adicionado...`);
+          const contractRef = doc(contractsCollection, contract.contractType);
+          await setDoc(contractRef, contract);
+        } else {
+          console.log("Pulando...", contract.contractType);
+        }
+      })
+    );
+
+    console.log("Conclusão: Contratos atualizados com sucesso.");
   } catch (error) {
-    console.error(error);
+    console.error("Erro ao atualizar contratos:", error);
   }
 };
 
