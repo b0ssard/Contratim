@@ -1,6 +1,3 @@
-import { db } from "./Firebase";
-import { doc, setDoc } from "firebase/firestore";
-
 export interface Contract {
   contractType: string;
   header: string;
@@ -18,16 +15,3 @@ export interface InputField {
   value: string;
 }
 
-export const addContractToFirestore = async (
-  contract: Contract
-): Promise<void> => {
-  try {
-    const docRef = doc(db, "contracts", "contract1");
-    await setDoc(docRef, contract);
-
-    console.log("Contrato adicionado ao Firestore com sucesso!");
-  } catch (error) {
-    console.error("Erro ao adicionar contrato ao Firestore:", error);
-    throw error;
-  }
-};

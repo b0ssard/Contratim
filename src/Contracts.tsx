@@ -7,7 +7,20 @@ import ContractContent from "./ContractContent";
 import ContractTypeSelector from "./ContractTypeSelector";
 import { db } from "./Firebase";
 import { getDocs, collection } from "firebase/firestore";
-import { Contract, InputField } from "./Utils"
+interface Contract {
+  contractType: string;
+  header: string;
+  sections: Section[];
+  inputFields: InputField[];
+}
+interface Section {
+  title: string | null;
+  content: string;
+}
+interface InputField {
+  label: string;
+  value: string;
+}
 
 const Contracts: React.FC = () => {
   const [selectedContractType, setSelectedContractType] = useState<string>("");

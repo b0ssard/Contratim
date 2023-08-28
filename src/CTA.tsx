@@ -5,8 +5,8 @@ import Card, { CardProps } from "./Card";
 
 const CTA: React.FC = () => {
   return (
-    <Box p={4} bg="gray.100">
-      <Heading as="h2" size="lg" mb={2}>
+    <Box p={4} bg="gray.100" >
+      <Heading as="h2" size="lg" mb={2} >
         CALL TO ACTION
       </Heading>
       <Flex justifyContent="space-evenly">
