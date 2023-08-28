@@ -5,7 +5,7 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore";
-import { contractsData } from "./contractsData";
+import { contractsData } from "./contracts-data";
 
 const updateContracts = async () => {
   const firestore = getFirestore();

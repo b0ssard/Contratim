@@ -5,7 +5,7 @@ import Button from "./Button";
 import ContractInputs from "./Inputs";
 import ContractContent from "./ContractContent";
 import ContractTypeSelector from "./ContractTypeSelector";
-import { db } from "./Firebase";
+import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 interface Contract {
   contractType: string;

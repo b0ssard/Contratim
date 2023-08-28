@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { auth } from "./Firebase";
+import { auth } from "./firebase-config";
 import Button from "./Button";
 import OpenModal from "./Modal";
 import RegisterForm from "./RegisterForm";

@@ -7,6 +7,7 @@ import Contracts from "./Contracts";
 import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
+import "./App.scss";
 
 const App: React.FC = () => {
   return (
