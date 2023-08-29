@@ -61,25 +61,60 @@ export const contractsData = {
       ]
     },
     {
-      "contractType": "Venda",
-      "header": "CONTRATO DE COMPRA",
-      "sections": [
-        {
-          "title": null,
-          "content": "Este Contrato de Compra (\"Contrato\") é celebrado entre o vendedor, {inputFields[0].value}, residente em {inputFields[1].value}, adiante denominado \"Vendedor\", e o comprador, {inputFields[2].value}, residente em {inputFields[3].value}, adiante denominado \"Comprador\"."
-        },
-        {
-          "title": "8. DISPOSIÇÕES GERAIS",
-          "content": "a) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\n\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\n\nc) Este contrato é regido pelas leis do {inputFields[4].value};\n\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito."
-        }
-      ],
-      "inputFields": [
-        { "label": "Nome do Vendedor", "value": "" },
-        { "label": "Endereço do Vendedor", "value": "" },
-        { "label": "Nome do Comprador", "value": "" },
-        { "label": "Endereço do Comprador", "value": "" },
-        { "label": "País/Estado", "value": "" }
-      ]
+  "contractType": "Compra",
+  "header": "CONTRATO DE COMPRA",
+  "sections": [
+    {
+      "title": null,
+      "content": "Este Contrato de Compra (\"Contrato\") é celebrado entre o vendedor, {inputFields[0].value}, residente em {inputFields[1].value}, adiante denominado \"Vendedor\", e o comprador, {inputFields[2].value}, residente em {inputFields[3].value}, adiante denominado \"Comprador\"."
+    },
+    {
+      "title": "1. OBJETO DO CONTRATO",
+      "content": "O Vendedor concorda em vender ao Comprador o seguinte item: {inputFields[4].value} (\"Item\") conforme descrito neste contrato."
+    },
+    {
+      "title": "2. PRAZO DO CONTRATO",
+      "content": "Este contrato de compra terá início em {inputFields[5].value} e continuará em vigor até que ambas as partes concordem com sua conclusão ou rescisão."
+    },
+    {
+      "title": "3. PREÇO DE COMPRA",
+      "content": "O Comprador concorda em pagar ao Vendedor o preço total de compra de {inputFields[6].value} pelo Item. O pagamento será efetuado da seguinte maneira: {inputFields[7].value}."
+    },
+    {
+      "title": "4. ENTREGA E TRANSFERÊNCIA DE POSSE",
+      "content": "O Vendedor entregará o Item ao Comprador na data acordada, em condições aceitáveis e sem danos. A posse e a propriedade do Item serão transferidas para o Comprador no momento da entrega."
+    },
+    {
+      "title": "5. RESPONSABILIDADES DO COMPRADOR",
+      "content": "O Comprador concorda em:\n\n- Aceitar o Item em sua condição atual;\n- Pagar quaisquer impostos ou taxas associados à compra;\n- Informar ao Vendedor imediatamente sobre quaisquer problemas ou defeitos no Item."
+    },
+    {
+      "title": "6. RESPONSABILIDADES DO VENDEDOR",
+      "content": "O Vendedor concorda em:\n\n- Entregar o Item conforme acordado;\n- Manter a documentação necessária para a transferência de propriedade;\n- Informar o Comprador sobre quaisquer obrigações pendentes."
+    },
+    {
+      "title": "7. RESCISÃO ANTICIPADA",
+      "content": "Em caso de rescisão antecipada deste contrato por qualquer uma das partes, deverá ser fornecido um aviso prévio por escrito com antecedência mínima de {inputFields[8].value} dias."
+    },
+    {
+      "title": "8. DISPOSIÇÕES GERAIS",
+      "content": "a) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\n\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\n\nc) Este contrato é regido pelas leis do {inputFields[9].value};\n\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito."
     }
+  ],
+  "inputFields": [
+    { "label": "Nome do Vendedor", "value": "" },
+    { "label": "Endereço do Vendedor", "value": "" },
+    { "label": "Nome do Comprador", "value": "" },
+    { "label": "Endereço do Comprador", "value": "" },
+    { "label": "Descrição do Item", "value": "" },
+    { "label": "Data de Início", "value": "" },
+    { "label": "Preço Total de Compra", "value": "" },
+    { "label": "Método de Pagamento", "value": "" },
+    { "label": "Prazo de Entrega", "value": "" },
+    { "label": "Leis Aplicáveis", "value": "" },
+    { "label": "Prazo de Aviso Prévio", "value": "" }
+  ]
+}
+
   ]
 }

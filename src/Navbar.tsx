@@ -84,7 +84,6 @@ const Navbar: React.FC = () => {
         )}
         label="Cadastre-se"
       />
-      <NavbarLink label="Sobre" onClick={() => alert("Link Sobre clicado!")} />
     </>
   );
 
