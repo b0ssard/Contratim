@@ -11,6 +11,7 @@ import RegisterForm from "./RegisterForm";
 
 const Register: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,8 +47,10 @@ const Register: React.FC = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        setIsLoggedIn(true);
         console.log("User is signed in:", user);
       } else {
+        setIsLoggedIn(false);
         console.log("User is signed out");
       }
     });
@@ -57,14 +60,18 @@ const Register: React.FC = () => {
     };
   }, []);
 
+  const marginTop = isLoggedIn ? "90px" : "20px";
+
   return (
     <Flex>
-      <RegisterForm
-        credentials={credentials}
-        handleInputChange={handleInputChange}
-        register={register}
-        loginWithGoogle={loginWithGoogle}
-      />
+      <Box style={{ marginTop }}>
+        <RegisterForm
+          credentials={credentials}
+          handleInputChange={handleInputChange}
+          register={register}
+          loginWithGoogle={loginWithGoogle}
+        />
+      </Box>
       <Box p={4} flex={1} padding={20}>
         <Heading as="h2" size="lg" mb={2} textAlign="left">
           Registre-se Agora!

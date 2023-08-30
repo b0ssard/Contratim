@@ -3,6 +3,7 @@ import { Box, Flex, Input } from "@chakra-ui/react";
 import Button from "./Button";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase-config";
+import { LoggedIn }  from "./LoggedIn";
 import "./LoginForm.scss";
 
 interface User {
@@ -52,12 +53,7 @@ const LogInForm: React.FC<FormProps> = ({
   return (
     <div>
       {user ? (
-        <Box className="form">
-          <Flex direction="row" justifyContent="center">
-            <Box className="logged">Logged in as: {user.email}</Box>
-            <Button onClick={handleSignOut}>Sign Out</Button>
-          </Flex>
-        </Box>
+        <LoggedIn userEmail={user.email} handleSignOut={handleSignOut} />
       ) : (
         <Box className="register-container">
           <Flex direction="column" align="center">

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { auth } from "./firebase-config";
 import Button from "./Button";
 import OpenModal from "./Modal";
 import RegisterForm from "./RegisterForm";
 import NavbarLink from "./NavbarLink";
 import SignIn from "./SignIn";
+import { LoggedIn } from "./LoggedIn";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -24,14 +25,10 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({ email: user.email });
-      } else {
-        setUser({ email: null });
-      }
+      setUser(user ? { email: user.email } : { email: null });
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,22 +43,34 @@ const Navbar: React.FC = () => {
     auth.signOut();
   };
 
-  const renderLoggedInContent = () => (
-    <Box>
-      <Flex direction="row" alignItems="center">
-        <Text className="navbar-item" marginRight="10px">
-          Logged in as: {user.email}
-        </Text>
-        <Button onClick={handleSignOut}>Sign Out</Button>
-        <NavbarLink
-          label="Sobre"
-          onClick={() => alert("Link Sobre clicado!")}
-        />
-      </Flex>
-    </Box>
+  const register = async () => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      console.log("User registration successful!");
+    } catch (error) {
+      console.error("User registration error:", error);
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      console.log("Google login successful!");
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
+
+  const loggedInContent = (
+    <LoggedIn userEmail={user.email} handleSignOut={handleSignOut} />
   );
 
-  const renderLoggedOutContent = () => (
+  const loggedOutContent = (
     <>
       <OpenModal
         content={<SignIn />}
@@ -87,36 +96,11 @@ const Navbar: React.FC = () => {
     </>
   );
 
-  const register = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        credentials.email,
-        credentials.password
-      );
-      console.log("User registration successful!");
-    } catch (error) {
-      console.error("User registration error:", error);
-    }
-  };
-
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      console.log("Google login successful!");
-    } catch (error) {
-      console.error("Google login error:", error);
-    }
-  };
-
   return (
     <Flex className="navbar">
       <Box className="navbar-logo">CONTRATIM</Box>
       <Box className="navbar-list">
-        {user.email !== null
-          ? renderLoggedInContent()
-          : renderLoggedOutContent()}
+        {user.email !== null ? loggedInContent : loggedOutContent}
       </Box>
     </Flex>
   );
