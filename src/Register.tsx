@@ -46,13 +46,7 @@ const Register: React.FC = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsLoggedIn(true);
-        console.log("User is signed in:", user);
-      } else {
-        setIsLoggedIn(false);
-        console.log("User is signed out");
-      }
+      setIsLoggedIn(!!user);
     });
 
     return () => {
@@ -60,11 +54,11 @@ const Register: React.FC = () => {
     };
   }, []);
 
-  const marginTop = isLoggedIn ? "90px" : "20px";
+  const margin = isLoggedIn ? "90px" : "40px";
 
   return (
     <Flex>
-      <Box style={{ marginTop }}>
+      <Box style={{ margin }}>
         <RegisterForm
           credentials={credentials}
           handleInputChange={handleInputChange}

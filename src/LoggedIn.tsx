@@ -15,8 +15,8 @@ export const LoggedIn: React.FC<LoggedInWindowProps> = ({
   return (
     <Box className="form">
       <Flex direction="row" justifyContent="center">
-        <Box className="logged">BEM VINDO, {userEmail}!</Box>{" "}
-        <Button onClick={handleSignOut}>Sign Out</Button>
+        <Box className="logged">BEM VINDO, {userEmail}!</Box>
+        <Button onClick={handleSignOut}>Sair</Button>
       </Flex>
     </Box>
   );
