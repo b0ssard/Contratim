@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
+import "dotenv/config";
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyDZqN_38zhLDK_lfqpYst_N1weXY-q5SA8",
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_CONFIG,
   authDomain: "contratim-live.firebaseapp.com",
   projectId: "contratim-live",
   storageBucket: "contratim-live.appspot.com",

@@ -1,9 +1,10 @@
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import "dotenv/config";
 import contractsData from "./contracts-data.json" assert { type: "json" };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDZqN_38zhLDK_lfqpYst_N1weXY-q5SA8",
+  apiKey: process.env.FIREBASE_API_CONFIG,
   authDomain: "contratim-live.firebaseapp.com",
   projectId: "contratim-live",
   storageBucket: "contratim-live.appspot.com",
