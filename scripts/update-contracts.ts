@@ -1,10 +1,11 @@
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import "dotenv/config";
 
 // npx ts-node --esm ./scripts/update-contracts.ts
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDZqN_38zhLDK_lfqpYst_N1weXY-q5SA8",
+  apiKey: process.env.FIREBASE_API_CONFIG,
   authDomain: "contratim-live.firebaseapp.com",
   projectId: "contratim-live",
   storageBucket: "contratim-live.appspot.com",
