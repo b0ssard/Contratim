@@ -9,7 +9,7 @@ const AboutUs: React.FC = () => {
       <Heading as="h2" size="lg" mb={2}>
         About Us
       </Heading>
-      <Text textAlign="justify">
+      <Text textAlign="justify" margin="15px">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed
         sagittis tellus. Sed nec elit sit amet arcu maximus aliquet. Fusce
         dapibus turpis sit amet massa commodo fringilla. Aliquam tincidunt
