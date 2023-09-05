@@ -1,0 +1,262 @@
+[33mcommit ceba0fcef46629180b11072dc1376f1eb7d9e4ce[m[33m ([m[1;36mHEAD -> [m[1;32mscript[m[33m, [m[1;31morigin/script[m[33m)[m
+Merge: db45de2 f590f35
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Fri Sep 1 17:58:12 2023 -0300
+
+    Merging
+
+[33mcommit db45de23dc93e5ec3163534516e6c9531008b4e3[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Fri Sep 1 17:41:17 2023 -0300
+
+    New update-contracts script.
+
+[33mcommit f590f35caa86236f702061976ee7e1ac125b9a6c[m[33m ([m[1;32mmerging[m[33m)[m
+Author: Pedro Andrade <pdandradeb@gmail.com>
+Date:   Fri Sep 1 17:35:27 2023 -0300
+
+    Removing .env
+
+[33mcommit ebefb7db89a3bd8149eee2f1e8ec8d59d4c0903b[m
+Author: Pedro Andrade <pdandradeb@gmail.com>
+Date:   Fri Sep 1 17:34:29 2023 -0300
+
+    Using dotenv
+
+[33mcommit 011c2eb894986b14622091ad7647ca9aab905634[m
+Author: Pedro Andrade <pdandradeb@gmail.com>
+Date:   Fri Sep 1 11:51:53 2023 -0300
+
+    Running tsc
+
+[33mcommit c84f1cb2122b5c9ebe4a88ca191cdee6e2e5d8ea[m
+Author: Pedro Andrade <pdandradeb@gmail.com>
+Date:   Fri Aug 25 12:49:04 2023 -0300
+
+    Atualizando contratos
+
+[33mcommit 6380b0c5fba7b76ed1771d66166b370fb5e9092b[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Aug 22 18:44:31 2023 -0300
+
+    Updated some minor changes.
+
+[33mcommit c3a88654ed254610577373da6254fe9f14169fb8[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Aug 22 18:40:18 2023 -0300
+
+    Integrated the data with Firebase. Need to adjust the contractTypeSelector rendering.
+
+[33mcommit ffd9048f2efd77f38bc4a30340d4ea4d411e1ea1[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Aug 9 14:20:30 2023 -0300
+
+    Split the ContractTypeSelector as a new component.
+
+[33mcommit 719114186b8bb9b90d6176c7081d694116c30a55[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Aug 9 12:11:56 2023 -0300
+
+    Refactored and improved the UI
+
+[33mcommit 59763beac69200abc4a3000ab3338a361f015160[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Aug 9 11:50:56 2023 -0300
+
+    Fixed the bugs, using ContractContets again.
+
+[33mcommit 3c656869acabf1e917df727c392c1039a786530a[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Aug 8 17:01:49 2023 -0300
+
+    merged the json
+
+[33mcommit d0a11e60e1a10182e17bcee5ea20cb6b2332a459[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Aug 1 15:56:23 2023 -0300
+
+    The new interchangeble contracts plataform is working with the json.
+
+[33mcommit 10c6af484c1a497172d4cfbfbac1cbf67a6f3078[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Mon Jul 31 19:14:18 2023 -0300
+
+    Still fixing the change of type.
+
+[33mcommit bae705306a17443d721cfcedb5864150c115cc3d[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Mon Jul 31 17:46:45 2023 -0300
+
+    Improved the contractData.json
+
+[33mcommit 3e84eb97bb1a1c99de7152c2d8865d1a270211c9[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Mon Jul 31 16:55:24 2023 -0300
+
+    First attempts of the json are just fine.
+
+[33mcommit e7c980a17cdb07a61a390b0d52304810e4a6ed44[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Mon Jul 31 16:12:38 2023 -0300
+
+    Starting the json tests.
+
+[33mcommit f0ae92b2be92923bd64ffcb9fa269b5b272fe311[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Thu Jul 27 17:32:33 2023 -0300
+
+    Uploading some templates.
+
+[33mcommit 5e1893c506309c04dbbc72331a49a48ee355660b[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 25 15:28:40 2023 -0300
+
+    Changed the renderinf od Contratos.
+
+[33mcommit 153eb988e0f0069b9a9ee311a9ea21c45e741b58[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 19 16:48:28 2023 -0300
+
+    Just small refactorings.
+
+[33mcommit 2c2dba8147da13e73df048d83de37b488be200dc[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 19 16:40:15 2023 -0300
+
+    Fixed some minor bugs and improved the UX a tiny tiny bit.
+
+[33mcommit 470312c32c00eabb27fbea0f7970c741be383246[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 19 10:59:24 2023 -0300
+
+    Separated the contract fields in 3 files.
+
+[33mcommit 2cd5a806410ea1f44fa47978719617d47546589f[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 18 18:20:23 2023 -0300
+
+    Refactored the App file.
+
+[33mcommit 3ad82fc248bc54c99a36899794c2cb026f75eff0[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 18 17:51:48 2023 -0300
+
+    Still experimenting the Contratos. Trying to clean the code more.
+
+[33mcommit 732a3984482d8ed178f8cc547bc4e6cf1b74fd10[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 18 16:39:02 2023 -0300
+
+    First prototype of the inputs.
+
+[33mcommit 72d61a685f62d382aa5b75a4a86e37ceb89bfc49[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 18 15:13:50 2023 -0300
+
+    First example of contract.
+
+[33mcommit 56abdfc9fe85349931488f1cf7205594ea949f3f[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Mon Jul 17 17:31:55 2023 -0300
+
+    Added the Routes and the new Contratos page.
+
+[33mcommit 374633d186a1a2ecc1827e50ad642b355fc24732[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Mon Jul 17 15:16:13 2023 -0300
+
+    Updated some features
+
+[33mcommit 9288ad04bdfabe41a11825fbde606336ea3cf3aa[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 12 19:12:03 2023 -0300
+
+    Made simple code refactorings.
+
+[33mcommit 6e5a14fcdaff4f0576da25d7f7876af86d55829e[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 12 18:49:35 2023 -0300
+
+    Updating the frontpage.
+
+[33mcommit 883849673d8e1089f54f758c0139127ff6f44102[m
+Merge: b04c4eb 58a687d
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 12 18:48:17 2023 -0300
+
+    Merge branch 'master' of https://github.com/b0ssard/Contratim
+
+[33mcommit b04c4eba6918adf70c0ab314a315077e39b0a413[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 12 18:48:03 2023 -0300
+
+    Updating the branch
+
+[33mcommit 58a687dabc65a5c43fa795a88a5709f8f23ed08e[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 12 18:15:25 2023 -0300
+
+    test!
+
+[33mcommit 4ea782e3ac54435e83af4e64b0c827b790d28f3e[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 12 18:06:17 2023 -0300
+
+    Navbar is rendering and the bugs are all fixed.
+
+[33mcommit dc813f4dcc380bf3c2c09c160c1af145234dd69c[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jul 12 17:44:21 2023 -0300
+
+    Rendering of the navbar elements are fixed
+
+[33mcommit 68ec5a08558e1c008b6825f89095b076c2f41118[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 11 18:22:40 2023 -0300
+
+    Upgrading the Modal.
+
+[33mcommit c1382801022b286514ec5f57b09ba1758a2b13bd[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 11 18:03:16 2023 -0300
+
+    Updating the modal
+
+[33mcommit e71aef6aab92ed4d0e05155aa5cb60c02d8ae681[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 4 18:37:10 2023 -0300
+
+    OnAuth running good.
+
+[33mcommit 493c82e800c857c35c5665e4fb64f60a3e9bd371[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 4 17:31:19 2023 -0300
+
+    Refatorada a navbar não utilizando mais o mapeamento.
+
+[33mcommit c77965fe2d5163e6c941bc6a2e05a2e6a85c19aa[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 4 16:50:38 2023 -0300
+
+    Minor updates
+
+[33mcommit 18f6af41a453eea2e328ccc1f0244fd84a261616[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 4 15:57:41 2023 -0300
+
+    Updating register and signin.
+
+[33mcommit f92ab948965e69f96d180710430ff7c480a347fb[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Tue Jul 4 10:41:27 2023 -0300
+
+    Improved the Register into a reusable form.
+
+[33mcommit 178d42d5502b686f04f30c7b32ead6f8454afdc1[m
+Author: Victor Quinderé <victorquindere@gmail.com>
+Date:   Wed Jun 28 17:41:01 2023 -0300
+
+    Register is functional!
+
+[33mcommit b86e31694d1925d52f91173a6adc401fd9834219[m
+Author: Vic

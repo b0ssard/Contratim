@@ -8,6 +8,7 @@ import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
 import Initialization from "./Initialization";
+import "./App.scss"
 
 const App: React.FC = () => {
   return (
