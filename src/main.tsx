@@ -1,4 +1,4 @@
-import "./Firebase";
+import "./firebase-config.ts";
 import App from "./App.tsx";
 import "./main.scss";
 import * as React from "react";

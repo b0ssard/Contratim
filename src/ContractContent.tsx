@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import contractsData from "./contractsData.json";
+import { db } from "./firebase-config";
+import { getDocs, collection } from "firebase/firestore";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
   selectedContractType: string;
+}
+
+interface Section {
+  title: string | null;
+  content: string;
+}
+
+interface ContractData {
+  contractType: string;
+  header: string;
+  sections: Section[];
+  inputFields: Array<{ label: string; value: string }>;
 }
 
 const replacePlaceholders = (
@@ -22,9 +35,31 @@ const ContractContent: React.FC<ContractContentProps> = ({
   fields,
   selectedContractType,
 }) => {
-  const selectedContract = contractsData.contracts.find(
-    (contract) => contract.contractType === selectedContractType
+  const [selectedContract, setSelectedContract] = useState<ContractData | null>(
+    null
   );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const contractsCollection = await getDocs(collection(db, "contracts"));
+
+        const contractsData: ContractData[] = contractsCollection.docs.map(
+          (doc) => doc.data() as ContractData
+        );
+
+        const contract = contractsData.find(
+          (contract) => contract.contractType === selectedContractType
+        );
+
+        setSelectedContract(contract || null);
+      } catch (error) {
+        console.error("Error fetching contracts:", error);
+      }
+    };
+
+    fetchData();
+  }, [selectedContractType]);
 
   if (!selectedContract) {
     return null;

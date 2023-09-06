@@ -19,6 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/cta-data.ts"],
+  "include": ["src", "src/cta-data.ts", "scripts/contracts-data.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

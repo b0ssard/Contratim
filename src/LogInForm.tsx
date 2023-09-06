@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Flex, Input } from "@chakra-ui/react";
 import Button from "./Button";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./Firebase";
+import { auth } from "./firebase-config";
 import "./Form.scss";
 
 interface User {

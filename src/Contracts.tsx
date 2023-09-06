@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 import Button from "./Button";
-import ContractInputs from "./Inputs";
+import ContractInputs from "./ContractInputs";
 import ContractContent from "./ContractContent";
 import ContractTypeSelector from "./ContractTypeSelector";
-import { db } from "./Firebase";
+import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 
 const Contracts: React.FC = () => {
