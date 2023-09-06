@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import CTAData from "./CTAData";
+import CTAData from "./cta-data";
 import Card, { CardProps } from "./Card";
 
 const CTA: React.FC = () => {
