@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
-import { Box, Heading, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 
@@ -57,8 +56,8 @@ const AboutUs: React.FC = () => {
         <Button
           key={index}
           as={Link}
-          to={`/contract/${contract.contractType}`} // Você pode definir a rota adequada aqui
-          mt={2} // Define a margem superior para espaçar os botões
+          to={`/contracts/${contract.contractType}`} // Include contractType in the URL
+          mt={2}
         >
           {contract.header}
         </Button>

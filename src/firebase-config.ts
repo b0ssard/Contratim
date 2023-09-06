@@ -1,10 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {getFirestore} from "firebase/firestore";
-
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: import.meta.env.VITE_FIREBASE_API_CONFIG,
   authDomain: "contratim-live.firebaseapp.com",
   projectId: "contratim-live",
   storageBucket: "contratim-live.appspot.com",
