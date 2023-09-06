@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex } from "@chakra-ui/react";
-import { auth } from "./firebase-config";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import { auth } from "./Firebase";
 import Button from "./Button";
 import OpenModal from "./Modal";
 import RegisterForm from "./RegisterForm";
 import NavbarLink from "./NavbarLink";
 import SignIn from "./SignIn";
-import { LoggedIn } from "./LoggedIn";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -25,10 +24,14 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user ? { email: user.email } : { email: null });
+      if (user) {
+        setUser({ email: user.email });
+      } else {
+        setUser({ email: null });
+      }
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +45,48 @@ const Navbar: React.FC = () => {
   const handleSignOut = () => {
     auth.signOut();
   };
+
+  const renderLoggedInContent = () => (
+    <Box>
+      <Flex direction="row" alignItems="center">
+        <Text className="navbar-item" marginRight="10px">
+          Logged in as: {user.email}
+        </Text>
+        <Button onClick={handleSignOut}>Sign Out</Button>
+        <NavbarLink
+          label="Sobre"
+          onClick={() => alert("Link Sobre clicado!")}
+        />
+      </Flex>
+    </Box>
+  );
+
+  const renderLoggedOutContent = () => (
+    <>
+      <OpenModal
+        content={<SignIn />}
+        title="Faça seu login."
+        component={({ onClick }) => <Button onClick={onClick}>Entrar</Button>}
+        label="Entrar"
+      />
+      <OpenModal
+        content={
+          <RegisterForm
+            credentials={credentials}
+            handleInputChange={handleInputChange}
+            register={register}
+            loginWithGoogle={loginWithGoogle}
+          />
+        }
+        title="Faça seu cadastro"
+        component={({ onClick }) => (
+          <NavbarLink label="Cadastre-se" onClick={onClick} />
+        )}
+        label="Cadastre-se"
+      />
+      <NavbarLink label="Sobre" onClick={() => alert("Link Sobre clicado!")} />
+    </>
+  );
 
   const register = async () => {
     try {
@@ -66,41 +111,13 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const loggedInContent = (
-    <LoggedIn userEmail={user.email} handleSignOut={handleSignOut} />
-  );
-
-  const loggedOutContent = (
-    <>
-      <OpenModal
-        content={<SignIn />}
-        title="Faça seu login."
-        component={({ onClick }) => <Button onClick={onClick}>Entrar</Button>}
-        label="Entrar"
-      />
-      <OpenModal
-        content={
-          <RegisterForm
-            credentials={credentials}
-            handleInputChange={handleInputChange}
-            register={register}
-            loginWithGoogle={loginWithGoogle}
-          />
-        }
-        title="Faça seu cadastro"
-        component={({ onClick }) => (
-          <NavbarLink label="Cadastre-se" onClick={onClick} />
-        )}
-        label="Cadastre-se"
-      />
-    </>
-  );
-
   return (
     <Flex className="navbar">
       <Box className="navbar-logo">CONTRATIM</Box>
       <Box className="navbar-list">
-        {user.email !== null ? loggedInContent : loggedOutContent}
+        {user.email !== null
+          ? renderLoggedInContent()
+          : renderLoggedOutContent()}
       </Box>
     </Flex>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LogInForm from "./LogInForm";
-import { auth } from "./firebase-config";
+import { auth } from "./Firebase";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,

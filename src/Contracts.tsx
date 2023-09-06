@@ -4,29 +4,15 @@ import { Box } from "@chakra-ui/react";
 import Button from "./Button";
 import ContractInputs from "./Inputs";
 import ContractContent from "./ContractContent";
-import { db } from "./firebase-config";
+import ContractTypeSelector from "./ContractTypeSelector";
+import { db } from "./Firebase";
 import { getDocs, collection } from "firebase/firestore";
-
-interface Contract {
-  contractType: string;
-  header: string;
-  sections: Section[];
-  inputFields: InputField[];
-}
-
-interface Section {
-  title: string | null;
-  content: string;
-}
-
-interface InputField {
-  label: string;
-  value: string;
-}
+import { Contract, InputField } from "./Utils"
 
 const Contracts: React.FC = () => {
+  const [selectedContractType, setSelectedContractType] = useState<string>("");
   const [fields, setFields] = useState<InputField[]>([]);
-  const [contract, setContract] = useState<Contract | null>(null);
+  const [contracts, setContracts] = useState<Contract[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +21,9 @@ const Contracts: React.FC = () => {
         const contractsData = contractsCollection.docs.map(
           (doc) => doc.data() as Contract
         );
-        // CONTRATO SELECIONADO DA ARRAY!
-        const selectedContract = contractsData[0];
-        setContract(selectedContract);
-        setFields(selectedContract?.inputFields || []);
+        setContracts(contractsData);
+        setSelectedContractType(contractsData[0]?.contractType || "");
+        setFields(contractsData[0]?.inputFields || []);
       } catch (error) {
         console.error("Error fetching contracts:", error);
       }
@@ -46,6 +31,19 @@ const Contracts: React.FC = () => {
 
     fetchData();
   }, []);
+
+  const handleContractTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const newSelectedContractType = event.target.value;
+    setSelectedContractType(newSelectedContractType);
+
+    const newSelectedContract = contracts.find(
+      (contract) => contract.contractType === newSelectedContractType
+    );
+
+    setFields(newSelectedContract?.inputFields || []);
+  };
 
   const handleFieldChange = (
     index: number,
@@ -58,23 +56,24 @@ const Contracts: React.FC = () => {
 
   return (
     <Box p={[2, 4, 6]} className="custom-container">
-      {contract && (
-        <>
-          <ContractInputs
-            fields={fields}
-            handleFieldChange={handleFieldChange}
-          />
+      <ContractTypeSelector
+        selectedContractType={selectedContractType}
+        handleContractTypeChange={handleContractTypeChange}
+        contracts={contracts}
+      />
 
-          <ContractContent
-            fields={fields}
-            selectedContractType={contract.contractType}
-          />
+      <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
 
-          <Button as={Link} to="/" mt={4}>
-            Voltar
-          </Button>
-        </>
+      {selectedContractType && (
+        <ContractContent
+          fields={fields}
+          selectedContractType={selectedContractType}
+        />
       )}
+
+      <Button as={Link} to="/" mt={4}>
+        Voltar
+      </Button>
     </Box>
   );
 };

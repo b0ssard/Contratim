@@ -1,39 +1,30 @@
-import {
-  collection,
-  doc,
-  getDocs,
-  getFirestore,
-  setDoc,
-} from "firebase/firestore";
-import { contractsData } from "./contracts-data";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import "dotenv/config";
 
-const updateContracts = async () => {
-  const firestore = getFirestore();
-  const contractsCollection = collection(firestore, "contracts");
+// npx ts-node --esm ./scripts/update-contracts.ts
 
-  try {
-    const snapshot = await getDocs(contractsCollection);
-    const existingContractIds = snapshot.docs.map((doc) => doc.id);
-
-    console.log("Total de contratos:", snapshot.size);
-    console.log("IDs de contratos existentes:", existingContractIds);
-
-    await Promise.all(
-      contractsData.contracts.map(async (contract) => {
-        if (!existingContractIds.includes(contract.contractType)) {
-          console.log(`${contract.contractType} não está adicionado...`);
-          const contractRef = doc(contractsCollection, contract.contractType);
-          await setDoc(contractRef, contract);
-        } else {
-          console.log("Pulando...", contract.contractType);
-        }
-      })
-    );
-
-    console.log("Conclusão: Contratos atualizados com sucesso.");
-  } catch (error) {
-    console.error("Erro ao atualizar contratos:", error);
-  }
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_CONFIG,
+  authDomain: "contratim-live.firebaseapp.com",
+  projectId: "contratim-live",
+  storageBucket: "contratim-live.appspot.com",
+  messagingSenderId: "406867580378",
+  appId: "1:406867580378:web:edc1c90a937bf0cc125ce3",
+  measurementId: "G-TRQWE8CY5C",
 };
 
-updateContracts();
+initializeApp(firebaseConfig);
+
+const run = async () => {
+  console.log("rodando...");
+  const snapshot = await getDocs(collection(getFirestore(), "contracts"));
+  console.log("Total contratos:", snapshot.size);
+};
+
+run()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(-1);
+  });

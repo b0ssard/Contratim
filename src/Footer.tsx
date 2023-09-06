@@ -1,10 +1,6 @@
 import { Flex, Link, Text } from "@chakra-ui/react";
-import { Links } from "./footer-data";
+import { Links } from "./FooterData";
 import "./Footer.scss";
-interface LinkItem {
-  href: string;
-  label: string | JSX.Element;
-}
 
 const Footer = () => {
   return (
@@ -13,7 +9,7 @@ const Footer = () => {
         Por Victor Bossard © {new Date().getFullYear()}.
       </Text>
       <Flex as="ul" className="footer__links">
-        {Links.map((link: LinkItem) => (
+        {Links.map((link) => (
           <Link
             key={link.href}
             className="footer__links-item"

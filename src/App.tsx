@@ -7,7 +7,8 @@ import Contracts from "./Contracts";
 import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
-import "./App.scss";
+import Initialization from "./Initialization";
+import "./App.scss"
 
 const App: React.FC = () => {
   return (
@@ -39,7 +40,9 @@ const Home: React.FC = () => {
 const ContratosPage: React.FC = () => {
   return (
     <div>
+      <Initialization>
         <Contracts />
+      </Initialization>
     </div>
   );
 };

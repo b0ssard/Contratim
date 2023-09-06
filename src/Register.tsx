@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import { auth } from "./firebase-config";
+import { auth } from "./Firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -11,7 +11,6 @@ import RegisterForm from "./RegisterForm";
 
 const Register: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,7 +45,11 @@ const Register: React.FC = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsLoggedIn(!!user);
+      if (user) {
+        console.log("User is signed in:", user);
+      } else {
+        console.log("User is signed out");
+      }
     });
 
     return () => {
@@ -54,18 +57,14 @@ const Register: React.FC = () => {
     };
   }, []);
 
-  const margin = isLoggedIn ? "90px" : "40px";
-
   return (
     <Flex>
-      <Box style={{ margin }}>
-        <RegisterForm
-          credentials={credentials}
-          handleInputChange={handleInputChange}
-          register={register}
-          loginWithGoogle={loginWithGoogle}
-        />
-      </Box>
+      <RegisterForm
+        credentials={credentials}
+        handleInputChange={handleInputChange}
+        register={register}
+        loginWithGoogle={loginWithGoogle}
+      />
       <Box p={4} flex={1} padding={20}>
         <Heading as="h2" size="lg" mb={2} textAlign="left">
           Registre-se Agora!
