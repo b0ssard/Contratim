@@ -1,5 +1,3 @@
-// npx ts-node --esm ./scripts/update-contracts.ts
-
 import {
   collection,
   setDoc,
@@ -24,6 +22,8 @@ const firebaseConfig = {
   appId: "1:406867580378:web:edc1c90a937bf0cc125ce3",
   measurementId: "G-TRQWE8CY5C",
 };
+
+// npx ts-node --esm ./scripts/update-contracts.ts
 
 async function main() {
   try {

@@ -3,6 +3,7 @@ export interface Contract {
   header: string;
   sections: Section[];
   inputFields: InputField[];
+  id: string;
 }
 
 export interface Section {

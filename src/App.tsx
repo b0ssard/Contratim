@@ -3,11 +3,13 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Contracts from "./Contracts";
+import ContractsAluguel from "./ContractsAluguel";
+import ContractsServiços from "./ContractsServiços";
+import ContractsVenda from "./ContractsVenda";
 import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
-import "./App.scss"
+import "./App.scss";
 
 const App: React.FC = () => {
   return (
@@ -17,7 +19,9 @@ const App: React.FC = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/contratos" element={<ContratosPage />} />
+            <Route path="/ContractsAluguel" element={<ContractsAluguel />} />
+            <Route path="/ContractsServiços" element={<ContractsServiços />} />
+            <Route path="/ContractsVenda" element={<ContractsVenda />} />
           </Routes>
           <Footer />
         </div>
@@ -32,14 +36,6 @@ const Home: React.FC = () => {
       <AboutUs />
       <CTA />
       <Register />
-    </div>
-  );
-};
-
-const ContratosPage: React.FC = () => {
-  return (
-    <div>
-        <Contracts />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 import Button from "./Button";
+import { Contract } from "./utils";
 
 const AboutUs: React.FC = () => {
   const [contracts, setContracts] = useState<Contract[]>([]);
@@ -15,7 +16,6 @@ const AboutUs: React.FC = () => {
         const contractsData = contractsCollection.docs.map(
           (doc) => doc.data() as Contract
         );
-
         setContracts(contractsData);
       } catch (error) {
         console.error("Error fetching contracts:", error);
@@ -24,23 +24,6 @@ const AboutUs: React.FC = () => {
 
     fetchData();
   }, []);
-
-  interface Contract {
-    contractType: string;
-    header: string;
-    sections: Section[];
-    inputFields: InputField[];
-  }
-
-  interface Section {
-    title: string | null;
-    content: string;
-  }
-
-  interface InputField {
-    label: string;
-    value: string;
-  }
 
   return (
     <Box p={4}>
@@ -57,7 +40,7 @@ const AboutUs: React.FC = () => {
         <Button
           key={index}
           as={Link}
-          to={`/contratos/`} // Include contractType in the URL
+          to={`/Contracts${contract.contractType}`}
           mt={2}
         >
           {contract.header}

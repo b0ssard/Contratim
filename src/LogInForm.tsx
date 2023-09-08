@@ -3,7 +3,7 @@ import { Box, Flex, Input } from "@chakra-ui/react";
 import Button from "./Button";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase-config";
-import "./Form.scss";
+import "./LogInForm.scss";
 
 interface User {
   email: string;

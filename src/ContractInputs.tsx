@@ -1,6 +1,5 @@
 import React from "react";
 import { Input, FormControl, FormLabel } from "@chakra-ui/react";
-
 interface ContractInputsProps {
   fields: Array<{ label: string; value: string }>;
   handleFieldChange: (

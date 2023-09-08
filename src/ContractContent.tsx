@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
+import { Section } from "./utils";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
   selectedContractType: string;
 }
-
-interface Section {
-  title: string | null;
-  content: string;
-}
-
 interface ContractData {
   contractType: string;
   header: string;
@@ -24,10 +19,15 @@ const replacePlaceholders = (
   content: string,
   fields: Array<{ label: string; value: string }>
 ) => {
-  return content.replace(/{inputFields\[(\d+)\]\.value}/g, (_, index) => {
-    const fieldValue = fields[Number(index)].value;
-    const fieldLabel = fields[Number(index)].label;
-    return fieldValue !== "" ? fieldValue : fieldLabel;
+  const regex = /{inputFields\[(\d+)\]\.value}/g;
+  return content.replace(regex, (match, index) => {
+    const fieldIndex = Number(index);
+    if (fieldIndex >= 0 && fieldIndex < fields.length) {
+      const fieldValue = fields[fieldIndex].value;
+      const fieldLabel = fields[fieldIndex].label;
+      return fieldValue !== "" ? fieldValue : fieldLabel;
+    }
+    return match;
   });
 };
 
