@@ -1,10 +1,16 @@
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getFirestore,
+  Firestore,
+} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import { FirebaseApp } from "firebase/app";
 import "dotenv/config";
 import contractsData from "./contracts-data.json" assert { type: "json" };
 
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_CONFIG,
+  apiKey: process.env.VITE_FIREBASE_API_CONFIG as string,
   authDomain: "contratim-live.firebaseapp.com",
   projectId: "contratim-live",
   storageBucket: "contratim-live.appspot.com",
@@ -13,11 +19,9 @@ const firebaseConfig = {
   measurementId: "G-TRQWE8CY5C",
 };
 
-// npx ts-node --esm ./scripts/update-contracts.ts
+const app: FirebaseApp = initializeApp(firebaseConfig);
 
-initializeApp(firebaseConfig);
-
-const db = getFirestore();
+const db: Firestore = getFirestore(app);
 
 const run = async () => {
   console.log("rodando...");
@@ -32,7 +36,7 @@ const run = async () => {
 
 run()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch((error: Error) => {
     console.error(error);
     process.exit(-1);
   });
