@@ -1,3 +1,5 @@
+// npx ts-node --esm ./scripts/update-contracts.ts
+
 import {
   collection,
   setDoc,
@@ -7,13 +9,11 @@ import {
   query,
   getDocs,
   doc,
+  DocumentData,
 } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-import { FirebaseApp } from "firebase/app";
+import { initializeApp, FirebaseApp } from "firebase/app";
 import "dotenv/config";
 import contractsData from "./contracts-data.json" assert { type: "json" };
-
-// npx ts-node --esm ./scripts/update-contracts.ts
 
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_CONFIG as string,
@@ -25,37 +25,50 @@ const firebaseConfig = {
   measurementId: "G-TRQWE8CY5C",
 };
 
-const app: FirebaseApp = initializeApp(firebaseConfig);
+async function main() {
+  try {
+    console.log("rodando...");
 
-const db: Firestore = getFirestore(app);
+    const app: FirebaseApp = initializeApp(firebaseConfig);
+    const db: Firestore = getFirestore(app);
+    const contractsCollectionRef = collection(db, "contracts");
 
-const run = async () => {
-  console.log("rodando...");
+    const contractsQuery = query(contractsCollectionRef);
+    const contractsSnapshot = await getDocs(contractsQuery);
+    const deletePromises: Promise<void>[] = [];
 
-  const contractsCollectionRef = collection(db, "contracts");
-  const contractsQuery = query(contractsCollectionRef);
-  const contractsSnapshot = await getDocs(contractsQuery);
+    contractsSnapshot.forEach((contractDoc) => {
+      deletePromises.push(deleteDoc(contractDoc.ref));
+    });
 
-  contractsSnapshot.forEach(async (doc) => {
-    await deleteDoc(doc.ref);
-    console.log("Document deleted with ID: ", doc.id);
-  });
+    await Promise.all(deletePromises);
+    console.log(
+      "Document deleted with ID: ",
+      contractsSnapshot.docs.map((doc) => doc.id).join(", ")
+    );
 
-  for (const contract of contractsData.contracts) {
-    const { contractType } = contract; 
+    const addPromises: Promise<void>[] = [];
 
-    const contractDocRef = doc(contractsCollectionRef, contractType);
-    await setDoc(contractDocRef, contract);
+    for (const contract of contractsData.contracts) {
+      const { contractType } = contract;
+      const contractDocRef = doc(contractsCollectionRef, contractType);
+      addPromises.push(setDoc(contractDocRef, contract as DocumentData));
+    }
 
-    console.log("Contract added with ID: ", contractType);
-  }
+    await Promise.all(addPromises);
+    console.log(
+      "Contract added with ID: ",
+      contractsData.contracts
+        .map((contract) => contract.contractType)
+        .join(", ")
+    );
 
-  console.log("Upload completed!");
-};
-
-run()
-  .then(() => process.exit(0))
-  .catch((error: Error) => {
+    console.log("Upload completed!");
+    process.exit(0);
+  } catch (error) {
     console.error(error);
     process.exit(-1);
-  });
+  }
+}
+
+main();
