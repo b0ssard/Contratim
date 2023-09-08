@@ -1,40 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Box, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
+import Button from "./Button";
+import ContractInputs from "./ContractInputs";
+import ContractContent from "./ContractContent";
 import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 
 const Contracts: React.FC = () => {
-  const { contractType } = useParams(); // Extract contractType from route parameters
-
   const [fields, setFields] = useState<InputField[]>([]);
   const [contracts, setContracts] = useState<Contract[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const contractsCollection = await getDocs(collection(db, "contracts"));
-        const contractsData = contractsCollection.docs.map(
-          (doc) => doc.data() as Contract
-        );
-
-        // Filter contracts based on contractType
-        const filteredContracts = contractsData.filter(
-          (contract) => contract.contractType === contractType
-        );
-
-        setContracts(filteredContracts);
-
-        if (filteredContracts.length > 0) {
-          setFields(filteredContracts[0].inputFields);
-        }
-      } catch (error) {
-        console.error("Error fetching contracts:", error);
-      }
-    };
-
-    fetchData();
-  }, [contractType]); // Add contractType as a dependency to re-fetch when it changes
 
   interface Contract {
     contractType: string;
@@ -53,10 +28,47 @@ const Contracts: React.FC = () => {
     value: string;
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const contractsCollection = await getDocs(collection(db, "contracts"));
+        const contractsData = contractsCollection.docs.map(
+          (doc) => doc.data() as Contract
+        );
+
+        // Setando os contratos e campos diretamente com os valores do primeiro contrato
+        setContracts(contractsData);
+        if (contractsData.length > 0) {
+          setFields(contractsData[0].inputFields);
+        }
+      } catch (error) {
+        console.error("Error fetching contracts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleFieldChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const updatedFields = [...fields];
+    updatedFields[index].value = event.target.value;
+    setFields(updatedFields);
+  };
+
   return (
     <Box p={[2, 4, 6]} className="custom-container">
-      {/* Render contract data based on the selected contractType */}
-      {/* ... */}
+      <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
+
+      {contracts.length > 0 && (
+        <ContractContent
+          fields={fields}
+          selectedContractType={contracts[0].contractType}
+        />
+      )}
+
       <Button as={Link} to="/" mt={4}>
         Voltar
       </Button>
