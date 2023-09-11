@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { auth } from "./firebase-config";
 import Button from "./Button";
 import OpenModal from "./Modal";
@@ -13,8 +13,9 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import "./Navbar.scss";
+import LoggedInContent from "./LoggedIn";
 
-export interface User {
+interface User {
   email: string | null;
 }
 
@@ -45,21 +46,6 @@ const Navbar: React.FC = () => {
   const handleSignOut = () => {
     auth.signOut();
   };
-
-  const renderLoggedInContent = () => (
-    <Box>
-      <Flex direction="row" alignItems="center">
-        <Text className="navbar-item" marginRight="10px">
-          Logged in as: {user.email}
-        </Text>
-        <Button onClick={handleSignOut}>Sign Out</Button>
-        <NavbarLink
-          label="Sobre"
-          onClick={() => alert("Link Sobre clicado!")}
-        />
-      </Flex>
-    </Box>
-  );
 
   const renderLoggedOutContent = () => (
     <>
@@ -115,9 +101,11 @@ const Navbar: React.FC = () => {
     <Flex className="navbar">
       <Box className="navbar-logo">CONTRATIM</Box>
       <Box className="navbar-list">
-        {user.email !== null
-          ? renderLoggedInContent()
-          : renderLoggedOutContent()}
+        {user.email !== null ? (
+          <LoggedInContent userEmail={user.email} onSignOut={handleSignOut} />
+        ) : (
+          renderLoggedOutContent()
+        )}
       </Box>
     </Flex>
   );

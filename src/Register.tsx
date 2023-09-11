@@ -8,9 +8,15 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import RegisterForm from "./RegisterForm";
+import "./Register.scss";
+
+interface User {
+  email: string | null;
+}
 
 const Register: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [user, setUser] = useState<User | null>(null); // Ajuste a tipagem para User | null
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,8 +53,10 @@ const Register: React.FC = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("User is signed in:", user);
+        setUser({ email: user.email || null }); // Atualize o estado do usuário quando ele estiver logado
       } else {
         console.log("User is signed out");
+        setUser(null); // Defina o estado do usuário como nulo quando ele estiver deslogado
       }
     });
 
@@ -57,6 +65,10 @@ const Register: React.FC = () => {
     };
   }, []);
 
+
+  // Defina classes CSS com base no estado do usuário
+  const formClassName = user ? "logged-in-form" : "";
+
   return (
     <Flex>
       <RegisterForm
@@ -64,6 +76,7 @@ const Register: React.FC = () => {
         handleInputChange={handleInputChange}
         register={register}
         loginWithGoogle={loginWithGoogle}
+        formClassName={formClassName} // Passe a classe CSS como uma propriedade para RegisterForm
       />
       <Box p={4} flex={1} padding={20}>
         <Heading as="h2" size="lg" mb={2} textAlign="left">

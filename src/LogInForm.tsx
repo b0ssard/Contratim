@@ -4,6 +4,7 @@ import Button from "./Button";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase-config";
 import "./LogInForm.scss";
+import LoggedInContent from "./LoggedIn";
 
 interface User {
   email: string;
@@ -52,12 +53,7 @@ const LogInForm: React.FC<FormProps> = ({
   return (
     <div>
       {user ? (
-        <Box className="form">
-          <Flex direction="row" justifyContent="center">
-            <Box className="logged">Logged in as: {user.email}</Box>
-            <Button onClick={handleSignOut}>Sign Out</Button>
-          </Flex>
-        </Box>
+        <LoggedInContent userEmail={user.email} onSignOut={handleSignOut} />
       ) : (
         <Box className="register-container">
           <Flex direction="column" align="center">
