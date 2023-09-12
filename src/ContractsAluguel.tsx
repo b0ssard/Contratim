@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Grid } from "@chakra-ui/react";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "./firebase-config";
 import Button from "./Button";
+import { Contract, InputField } from "./utils";
 import ContractInputs from "./ContractInputs";
 import ContractContent from "./ContractContent";
-import { db } from "./firebase-config";
-import { getDocs, collection } from "firebase/firestore";
-import { Contract, InputField } from "./utils";
 
 const ContractsAluguel: React.FC = () => {
   const [fields, setFields] = useState<InputField[]>([]);
@@ -20,10 +20,11 @@ const ContractsAluguel: React.FC = () => {
           (doc) => doc.data() as Contract
         );
 
-       setContracts(contractsData);
         if (contractsData.length > 0) {
           setFields(contractsData[0].inputFields);
         }
+
+        setContracts(contractsData);
       } catch (error) {
         console.error("Error fetching contracts:", error);
       }
@@ -41,26 +42,34 @@ const ContractsAluguel: React.FC = () => {
     setFields(updatedFields);
   };
 
-return (
-  <Grid templateColumns="1fr 1fr" className="custom-container">
-    <Box p={[2, 4, 6]}>
-      <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
-    </Box>
-
-    <Box p={[2, 4, 6]}>
-      {contracts.length > 0 && (
+  const renderContractContent = () => {
+    if (contracts.length > 0) {
+      return (
         <ContractContent
           fields={fields}
           selectedContractType={contracts[0].contractType}
         />
-      )}
+      );
+    }
 
-      <Button as={Link} to="/" mt={4}>
-        Voltar
-      </Button>
-    </Box>
-  </Grid>
-);
+    return null;
+  };
+
+  return (
+    <Grid templateColumns="1fr 1fr" className="custom-container">
+      <Box p={[2, 4, 6]}>
+        <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
+      </Box>
+
+      <Box p={[2, 4, 6]}>
+        {renderContractContent()}
+
+        <Button as={Link} to="/" mt={4}>
+          Voltar
+        </Button>
+      </Box>
+    </Grid>
+  );
 };
 
 export default ContractsAluguel;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import CTAData from "./cta-data.json";
 import Card, { CardProps } from "./Card";
+import CTAData from "./cta-data.json";
 
 const CTA: React.FC = () => {
   const data: CardProps[] = CTAData.map((item) => ({

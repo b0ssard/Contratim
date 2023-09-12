@@ -7,7 +7,7 @@ interface RegisterFormProps {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   register: () => Promise<void>;
   loginWithGoogle: () => Promise<void>;
-  formClassName: string; // Receba a classe CSS como uma propriedade
+  formClassName?: string;
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({
@@ -15,12 +15,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
   handleInputChange,
   register,
   loginWithGoogle,
-  formClassName, // Receba a classe CSS
+  formClassName,
 }) => {
   return (
     <Box p={4} flex={1} className={formClassName}>
-      {" "}
-      {/* Use a classe CSS recebida na propriedade */}
       <LogInForm
         credentials={credentials}
         handleInputChange={handleInputChange}

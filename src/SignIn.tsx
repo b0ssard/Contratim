@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import LogInForm from "./LogInForm";
-import { auth } from "./firebase-config";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
+import { auth } from "./firebase-config";
+import LogInForm from "./LogInForm";
 
 const SignIn: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });

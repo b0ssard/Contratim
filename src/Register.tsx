@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import { auth } from "./firebase-config";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
+import { auth } from "./firebase-config";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import RegisterForm from "./RegisterForm";
 import "./Register.scss";
 
@@ -16,7 +16,23 @@ interface User {
 
 const Register: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [user, setUser] = useState<User | null>(null); // Ajuste a tipagem para User | null
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("User is signed in:", user);
+        setUser({ email: user.email || null });
+      } else {
+        console.log("User is signed out");
+        setUser(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,24 +65,6 @@ const Register: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("User is signed in:", user);
-        setUser({ email: user.email || null }); // Atualize o estado do usuário quando ele estiver logado
-      } else {
-        console.log("User is signed out");
-        setUser(null); // Defina o estado do usuário como nulo quando ele estiver deslogado
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-
-  // Defina classes CSS com base no estado do usuário
   const formClassName = user ? "logged-in-form" : "";
 
   return (
@@ -76,7 +74,7 @@ const Register: React.FC = () => {
         handleInputChange={handleInputChange}
         register={register}
         loginWithGoogle={loginWithGoogle}
-        formClassName={formClassName} // Passe a classe CSS como uma propriedade para RegisterForm
+        formClassName={formClassName}
       />
       <Box p={4} flex={1} padding={20}>
         <Heading as="h2" size="lg" mb={2} textAlign="left">

@@ -16,7 +16,7 @@ const LoggedInContent: React.FC<LoggedInContentProps> = ({
       <Text className="navbar-item" marginRight="10px">
         Bem vindo, {userEmail}!
       </Text>
-      <Button onClick={onSignOut}>Sign Out</Button>
+      <Button onClick={onSignOut}>Sair</Button>
     </Flex>
   </Box>
 );

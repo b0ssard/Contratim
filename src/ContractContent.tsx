@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
-import { Section } from "./utils";
 import ReactMarkdown from "react-markdown";
+import { Section } from "./utils";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
   selectedContractType: string;
+  // onContractRender: (contract: string) => void;
 }
 
 interface ContractData {
@@ -65,12 +66,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
 
   return (
     <Box p={4} textAlign="justify">
-      <Heading
-        as="h1"
-        fontSize={["xl", "2xl", "3xl"]}
-        mb={4}
-        textAlign="center"
-      >
+      <Heading fontSize={["3xl"]} mb={7} textAlign="center">
         {selectedContract.header}
       </Heading>
 

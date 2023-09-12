@@ -1,8 +1,8 @@
 import {
-  collection,
-  setDoc,
   getFirestore,
   Firestore,
+  collection,
+  setDoc,
   deleteDoc,
   query,
   getDocs,
@@ -12,6 +12,8 @@ import {
 import { initializeApp, FirebaseApp } from "firebase/app";
 import "dotenv/config";
 import contractsData from "./contracts-data.json" assert { type: "json" };
+
+// npx ts-node --esm ./scripts/update-contracts.ts
 
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_CONFIG as string,
@@ -23,16 +25,11 @@ const firebaseConfig = {
   measurementId: "G-TRQWE8CY5C",
 };
 
-// npx ts-node --esm ./scripts/update-contracts.ts
-
 async function main() {
   try {
-    console.log("rodando...");
-
     const app: FirebaseApp = initializeApp(firebaseConfig);
     const db: Firestore = getFirestore(app);
     const contractsCollectionRef = collection(db, "contracts");
-
     const contractsQuery = query(contractsCollectionRef);
     const contractsSnapshot = await getDocs(contractsQuery);
     const deletePromises: Promise<void>[] = [];
@@ -43,7 +40,7 @@ async function main() {
 
     await Promise.all(deletePromises);
     console.log(
-      "Document deleted with ID: ",
+      "Documentos excluídos com IDs:",
       contractsSnapshot.docs.map((doc) => doc.id).join(", ")
     );
 
@@ -57,13 +54,13 @@ async function main() {
 
     await Promise.all(addPromises);
     console.log(
-      "Contract added with ID: ",
+      "Contratos adicionados com IDs:",
       contractsData.contracts
         .map((contract) => contract.contractType)
         .join(", ")
     );
 
-    console.log("Upload completed!");
+    console.log("Upload concluído!");
     process.exit(0);
   } catch (error) {
     console.error(error);

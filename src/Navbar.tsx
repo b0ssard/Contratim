@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import { auth } from "./firebase-config";
-import Button from "./Button";
-import OpenModal from "./Modal";
-import RegisterForm from "./RegisterForm";
-import NavbarLink from "./NavbarLink";
-import SignIn from "./SignIn";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
-import "./Navbar.scss";
+import { auth } from "./firebase-config";
+import Button from "./Button";
+import OpenModal from "./Modal";
+import RegisterForm from "./RegisterForm";
+import NavbarLink from "./NavbarLink";
+import SignIn from "./SignIn";
 import LoggedInContent from "./LoggedIn";
+import "./Navbar.scss";
 
 interface User {
   email: string | null;
@@ -47,6 +47,29 @@ const Navbar: React.FC = () => {
     auth.signOut();
   };
 
+  const register = async () => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      console.log("User registration successful!");
+    } catch (error) {
+      console.error("User registration error:", error);
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      console.log("Google login successful!");
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
+
   const renderLoggedOutContent = () => (
     <>
       <OpenModal
@@ -73,29 +96,6 @@ const Navbar: React.FC = () => {
       <NavbarLink label="Sobre" onClick={() => alert("Link Sobre clicado!")} />
     </>
   );
-
-  const register = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        credentials.email,
-        credentials.password
-      );
-      console.log("User registration successful!");
-    } catch (error) {
-      console.error("User registration error:", error);
-    }
-  };
-
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      console.log("Google login successful!");
-    } catch (error) {
-      console.error("Google login error:", error);
-    }
-  };
 
   return (
     <Flex className="navbar">

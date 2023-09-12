@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
-import Button from "./Button";
 import { Contract } from "./utils";
+import Button from "./Button";
 
 const AboutUs: React.FC = () => {
   const [contracts, setContracts] = useState<Contract[]>([]);
