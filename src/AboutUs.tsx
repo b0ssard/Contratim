@@ -42,6 +42,7 @@ const AboutUs: React.FC = () => {
           as={Link}
           to={`/Contracts${contract.contractType}`}
           mt={2}
+          margin="5px"
         >
           {contract.header}
         </Button>
