@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/react";
 import Button from "./Button";
 import ContractInputs from "./ContractInputs";
 import ContractContent from "./ContractContent";
@@ -41,10 +41,13 @@ const ContractsAluguel: React.FC = () => {
     setFields(updatedFields);
   };
 
-  return (
-    <Box p={[2, 4, 6]} className="custom-container">
+return (
+  <Grid templateColumns="1fr 1fr" className="custom-container">
+    <Box p={[2, 4, 6]}>
       <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
+    </Box>
 
+    <Box p={[2, 4, 6]}>
       {contracts.length > 0 && (
         <ContractContent
           fields={fields}
@@ -56,7 +59,8 @@ const ContractsAluguel: React.FC = () => {
         Voltar
       </Button>
     </Box>
-  );
+  </Grid>
+);
 };
 
 export default ContractsAluguel;

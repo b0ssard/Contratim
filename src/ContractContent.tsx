@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { db } from "./firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 import { Section } from "./utils";
+import ReactMarkdown from "react-markdown";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
   selectedContractType: string;
 }
+
 interface ContractData {
   contractType: string;
   header: string;
   sections: Section[];
   inputFields: Array<{ label: string; value: string }>;
 }
-
-const replacePlaceholders = (
-  content: string,
-  fields: Array<{ label: string; value: string }>
-) => {
-  const regex = /{inputFields\[(\d+)\]\.value}/g;
-  return content.replace(regex, (match, index) => {
-    const fieldIndex = Number(index);
-    if (fieldIndex >= 0 && fieldIndex < fields.length) {
-      const fieldValue = fields[fieldIndex].value;
-      const fieldLabel = fields[fieldIndex].label;
-      return fieldValue !== "" ? fieldValue : fieldLabel;
-    }
-    return match;
-  });
-};
 
 const ContractContent: React.FC<ContractContentProps> = ({
   fields,
@@ -61,13 +47,30 @@ const ContractContent: React.FC<ContractContentProps> = ({
     fetchData();
   }, [selectedContractType]);
 
+  const processContent = (content: string) => {
+    return content.replace(/{inputFields\[(\d+)\]\.value}/g, (match, index) => {
+      const fieldIndex = Number(index);
+      if (fieldIndex >= 0 && fieldIndex < fields.length) {
+        const fieldValue = fields[fieldIndex].value;
+        const fieldLabel = fields[fieldIndex].label;
+        return fieldValue !== "" ? fieldValue : fieldLabel;
+      }
+      return match;
+    });
+  };
+
   if (!selectedContract) {
     return null;
   }
 
   return (
-    <Box p={4}>
-      <Heading as="h1" fontSize={["xl", "2xl", "3xl"]} mb={4}>
+    <Box p={4} textAlign="justify">
+      <Heading
+        as="h1"
+        fontSize={["xl", "2xl", "3xl"]}
+        mb={4}
+        textAlign="center"
+      >
         {selectedContract.header}
       </Heading>
 
@@ -78,9 +81,8 @@ const ContractContent: React.FC<ContractContentProps> = ({
               {section.title}
             </Heading>
           )}
-          <Text fontSize="md" mt={2} textAlign="justify">
-            {replacePlaceholders(section.content, fields)}
-          </Text>
+
+          <ReactMarkdown>{processContent(section.content)}</ReactMarkdown>
         </React.Fragment>
       ))}
     </Box>
