@@ -1,46 +1,9 @@
 {
- "contracts": [
+  "contracts": [
     {
       "contractType": "Aluguel",
       "header": "CONTRATO DE ALUGUEL",
-      "sections": [
-        {
-          "title": null,
-          "content": "Este Contrato de Aluguel (\"Contrato\") é celebrado entre o proprietário, **{inputFields[0].value}**, residente em **{inputFields[1].value}**, adiante denominado \"Proprietário\", e o locatário, **{inputFields[2].value}**, residente em **{inputFields[3].value}**, adiante denominado \"Locatário\"."
-        },
-        {
-          "title": "1. OBJETO DO CONTRATO",
-          "content": "O Proprietário concorda em alugar a propriedade localizada em **{inputFields[4].value}** (\"Imóvel\"), que consiste em **{inputFields[5].value}** para o Locatário, com a finalidade exclusiva de uso residencial."
-        },
-        {
-          "title": "2. PRAZO DO CONTRATO",
-          "content": "O contrato de aluguel terá início em **{inputFields[6].value}** e terá duração de **{inputFields[7].value}** meses, a contar da data de início."
-        },
-        {
-          "title": "3. ALUGUEL",
-          "content": "O Locatário concorda em pagar ao Proprietário um aluguel mensal de **{inputFields[8].value}** até o quinto dia útil de cada mês. O pagamento deverá ser feito por meio de **{inputFields[9].value}**, na conta bancária do Proprietário com os detalhes a seguir: **{inputFields[10].value}**."
-        },
-        {
-          "title": "4. CAUÇÃO",
-          "content": "O Locatário concorda em pagar uma caução no valor de **{inputFields[11].value}** no ato da assinatura deste contrato. A caução será utilizada para cobrir eventuais danos ou despesas devidas pelo Locatário ao Imóvel durante o período de locação. Caso não haja nenhum dano ou despesa pendente, a caução será devolvida ao Locatário no prazo máximo de **{inputFields[12].value}** após o término do contrato."
-        },
-        {
-          "title": "5. RESPONSABILIDADES DO LOCATÁRIO",
-          "content": "O Locatário concorda em:\n- Zelar pelo Imóvel e mantê-lo em bom estado de conservação;\n- Pagar todas as contas e despesas relacionadas ao consumo de água, eletricidade, gás e outros serviços públicos;\n- Informar ao Proprietário imediatamente sobre quaisquer danos ou problemas no Imóvel;\n- Não realizar qualquer modificação estrutural no Imóvel sem o consentimento prévio por escrito do Proprietário;\n- Não sublocar, ceder ou transferir o Imóvel para terceiros sem o consentimento prévio por escrito do Proprietário."
-        },
-        {
-          "title": "6. RESPONSABILIDADES DO PROPRIETÁRIO",
-          "content": "O Proprietário concorda em:\n- Manter o Imóvel em bom estado de conservação, realizando as devidas manutenções necessárias;\n- Respeitar o direito do Locatário à privacidade e tranquilidade durante o período de locação;\n- Informar ao Locatário sobre qualquer alteração relevante nas condições do Imóvel com antecedência."
-        },
-        {
-          "title": "7. RESCISÃO ANTICIPADA",
-          "content": "Em caso de rescisão antecipada deste contrato por qualquer uma das partes, deverá ser fornecido um aviso prévio por escrito com antecedência mínima de **{inputFields[13].value}** dias."
-        },
-        {
-          "title": "8. DISPOSIÇÕES GERAIS",
-          "content": "a) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\nc) Este contrato é regido pelas leis do **{inputFields[14].value}**;\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito."
-        }
-      ],
+      "content": "Este Contrato de Aluguel (\"Contrato\") é celebrado entre o proprietário, **{inputFields[0].value}**, residente em **{inputFields[1].value}**, adiante denominado \"Proprietário\", e o locatário, **{inputFields[2].value}**, residente em **{inputFields[3].value}**, adiante denominado \"Locatário\".\n\n## 1. OBJETO DO CONTRATO\n\nO Proprietário concorda em alugar a propriedade localizada em **{inputFields[4].value}** (\"Imóvel\"), que consiste em **{inputFields[5].value}** para o Locatário, com a finalidade exclusiva de uso residencial.\n\n## 2. PRAZO DO CONTRATO\n\nO contrato de aluguel terá início em **{inputFields[6].value}** e terá duração de **{inputFields[7].value}** meses, a contar da data de início.\n\n## 3. ALUGUEL\n\nO Locatário concorda em pagar ao Proprietário um aluguel mensal de **{inputFields[8].value}** até o quinto dia útil de cada mês. O pagamento deverá ser feito por meio de **{inputFields[9].value}**, na conta bancária do Proprietário com os detalhes a seguir: **{inputFields[10].value}**.\n\n## 4. CAUÇÃO\n\nO Locatário concorda em pagar uma caução no valor de **{inputFields[11].value}** no ato da assinatura deste contrato. A caução será utilizada para cobrir eventuais danos ou despesas devidas pelo Locatário ao Imóvel durante o período de locação. Caso não haja nenhum dano ou despesa pendente, a caução será devolvida ao Locatário no prazo máximo de **{inputFields[12].value}** após o término do contrato.\n\n## 5. RESPONSABILIDADES DO LOCATÁRIO\n\nO Locatário concorda em:\n- Zelar pelo Imóvel e mantê-lo em bom estado de conservação;\n- Pagar todas as contas e despesas relacionadas ao consumo de água, eletricidade, gás e outros serviços públicos;\n- Informar ao Proprietário imediatamente sobre quaisquer danos ou problemas no Imóvel;\n- Não realizar qualquer modificação estrutural no Imóvel sem o consentimento prévio por escrito do Proprietário;\n- Não sublocar, ceder ou transferir o Imóvel para terceiros sem o consentimento prévio por escrito do Proprietário.\n\n## 6. RESPONSABILIDADES DO PROPRIETÁRIO\n\nO Proprietário concorda em:\n- Manter o Imóvel em bom estado de conservação, realizando as devidas manutenções necessárias;\n- Respeitar o direito do Locatário à privacidade e tranquilidade durante o período de locação;\n- Informar ao Locatário sobre qualquer alteração relevante nas condições do Imóvel com antecedência.\n\n## 7. RESCISÃO ANTICIPADA\n\nEm caso de rescisão antecipada deste contrato por qualquer uma das partes, deverá ser fornecido um aviso prévio por escrito com antecedência mínima de **{inputFields[13].value}** dias.\n\n## 8. DISPOSIÇÕES GERAIS\na) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\nc) Este contrato é regido pelas leis do **{inputFields[14].value}**;\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito.",
       "inputFields": [
         { "label": "Nome do Proprietário", "value": "" },
         { "label": "Endereço do Proprietário", "value": "" },
@@ -61,43 +24,10 @@
       ]
     },
     {
-  "contractType": "Venda",
-  "header": "CONTRATO DE COMPRA E VENDA",
-  "sections": [
-    {
-      "title": null,
-      "content": "Este Contrato de Compra e Venda (\"Contrato\") é celebrado entre o vendedor, {inputFields[0].value}, residente em {inputFields[1].value}, adiante denominado \"Vendedor\", e o comprador, {inputFields[2].value}, residente em {inputFields[3].value}, adiante denominado \"Comprador\"."
-    },
-    {
-      "title": "1. OBJETO DO CONTRATO",
-      "content": "O Vendedor concorda em vender ao Comprador o seguinte bem: {inputFields[4].value} (\"Bem\"), descrito como {inputFields[5].value}, com todas as suas características e acessórios, em conformidade com a documentação legal pertinente."
-    },
-    {
-      "title": "2. PREÇO DE COMPRA",
-      "content": "O preço de compra acordado para o Bem é de {inputFields[6].value}. O pagamento será efetuado da seguinte forma: {inputFields[7].value}. O Comprador concorda em pagar o preço total na data da assinatura deste contrato."
-    },
-    {
-      "title": "3. POSSE E TRANSFERÊNCIA DE PROPRIEDADE",
-      "content": "A posse do Bem será transferida para o Comprador no ato da assinatura deste contrato. A transferência formal de propriedade será realizada de acordo com as leis e regulamentos vigentes em {inputFields[14].value}."
-    },
-    {
-      "title": "4. RESPONSABILIDADES DO VENDEDOR",
-      "content": "O Vendedor concorda em: \n\n- Entregar o Bem em bom estado e livre de ônus ou pendências;\n- Fornecer ao Comprador toda a documentação necessária para a transferência de propriedade;\n- Respeitar o direito do Comprador à posse tranquila do Bem durante o período de transferência."
-    },
-    {
-      "title": "5. RESPONSABILIDADES DO COMPRADOR",
-      "content": "O Comprador concorda em: \n\n- Pagar o preço de compra conforme acordado;\n- Arcar com todas as despesas relacionadas à transferência de propriedade, incluindo taxas e impostos;\n- Zelar pelo Bem a partir do momento da posse."
-    },
-    {
-      "title": "6. RESCISÃO DO CONTRATO",
-      "content": "Em caso de rescisão deste contrato por qualquer uma das partes, as partes concordam em seguir as disposições legais aplicáveis em {inputFields[14].value}."
-    },
-    {
-      "title": "7. DISPOSIÇÕES GERAIS",
-      "content": "a) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\n\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\n\nc) Este contrato é regido pelas leis do {inputFields[14].value};\n\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito."
-    }
-  ],
-  "inputFields": [
+      "contractType": "Venda",
+      "header": "CONTRATO DE COMPRA E VENDA",
+      "content": "Este Contrato de Aluguel (\"Contrato\") é celebrado entre o proprietário, **{inputFields[0].value}**, residente em **{inputFields[1].value}**, adiante denominado \"Proprietário\", e o locatário, **{inputFields[2].value}**, residente em **{inputFields[3].value}**, adiante denominado \"Locatário\".\n\n## 1. OBJETO DO CONTRATO\n\nO Proprietário concorda em alugar a propriedade localizada em **{inputFields[4].value}** (\"Imóvel\"), que consiste em **{inputFields[5].value}** para o Locatário, com a finalidade exclusiva de uso residencial.\n\n## 2. PRAZO DO CONTRATO\n\nO contrato de aluguel terá início em **{inputFields[6].value}** e terá duração de **{inputFields[7].value}** meses, a contar da data de início.\n\n## 3. ALUGUEL\n\nO Locatário concorda em pagar ao Proprietário um aluguel mensal de **{inputFields[8].value}** até o quinto dia útil de cada mês. O pagamento deverá ser feito por meio de **{inputFields[9].value}**, na conta bancária do Proprietário com os detalhes a seguir: **{inputFields[10].value}**.\n\n## 4. CAUÇÃO\n\nO Locatário concorda em pagar uma caução no valor de **{inputFields[11].value}** no ato da assinatura deste contrato. A caução será utilizada para cobrir eventuais danos ou despesas devidas pelo Locatário ao Imóvel durante o período de locação. Caso não haja nenhum dano ou despesa pendente, a caução será devolvida ao Locatário no prazo máximo de **{inputFields[12].value}** após o término do contrato.\n\n## 5. RESPONSABILIDADES DO LOCATÁRIO\n\nO Locatário concorda em:\n- Zelar pelo Imóvel e mantê-lo em bom estado de conservação;\n- Pagar todas as contas e despesas relacionadas ao consumo de água, eletricidade, gás e outros serviços públicos;\n- Informar ao Proprietário imediatamente sobre quaisquer danos ou problemas no Imóvel;\n- Não realizar qualquer modificação estrutural no Imóvel sem o consentimento prévio por escrito do Proprietário;\n- Não sublocar, ceder ou transferir o Imóvel para terceiros sem o consentimento prévio por escrito do Proprietário.\n\n## 6. RESPONSABILIDADES DO PROPRIETÁRIO\n\nO Proprietário concorda em:\n- Manter o Imóvel em bom estado de conservação, realizando as devidas manutenções necessárias;\n- Respeitar o direito do Locatário à privacidade e tranquilidade durante o período de locação;\n- Informar ao Locatário sobre qualquer alteração relevante nas condições do Imóvel com antecedência.\n\n## 7. RESCISÃO ANTICIPADA\n\nEm caso de rescisão antecipada deste contrato por qualquer uma das partes, deverá ser fornecido um aviso prévio por escrito com antecedência mínima de **{inputFields[13].value}** dias.\n\n## 8. DISPOSIÇÕES GERAIS\na) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\nc) Este contrato é regido pelas leis do **{inputFields[14].value}**;\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito.",
+      "inputFields": [
     { "label": "Nome do Vendedor", "value": "" },
     { "label": "Endereço do Vendedor", "value": "" },
     { "label": "Nome do Comprador", "value": "" },
@@ -109,41 +39,12 @@
     { "label": "País/Estado", "value": "" },
     { "label": "Data da Assinatura", "value": "" }
   ]
-},
-{
-  "contractType": "Serviços",
-  "header": "CONTRATO DE PRESTAÇÃO DE SERVIÇOS",
-  "sections": [
-    {
-      "title": null,
-      "content": "Este Contrato de Prestação de Serviços (\"Contrato\") é celebrado entre o prestador de serviços, {inputFields[0].value}, residente em {inputFields[1].value}, adiante denominado \"Prestador\", e o cliente, {inputFields[2].value}, residente em {inputFields[3].value}, adiante denominado \"Cliente\"."
     },
     {
-      "title": "1. OBJETO DO CONTRATO",
-      "content": "O Prestador concorda em prestar os seguintes serviços: {inputFields[4].value}, em conformidade com as especificações detalhadas no Anexo A (se aplicável)."
-    },
-    {
-      "title": "2. CONDIÇÕES DE PAGAMENTO",
-      "content": "O Cliente concorda em pagar ao Prestador pela prestação dos serviços de acordo com as seguintes condições: \n\n- Valor total acordado: {inputFields[5].value};\n- Forma de pagamento: {inputFields[6].value};\n- Prazo de pagamento: {inputFields[7].value}."
-    },
-    {
-      "title": "3. RESPONSABILIDADES DO PRESTADOR",
-      "content": "O Prestador concorda em: \n\n- Realizar os serviços de acordo com os padrões profissionais e em conformidade com as especificações acordadas;\n- Cumprir os prazos estabelecidos para a conclusão dos serviços;\n- Manter a confidencialidade de informações sensíveis do Cliente, quando aplicável."
-    },
-    {
-      "title": "4. RESPONSABILIDADES DO CLIENTE",
-      "content": "O Cliente concorda em: \n\n- Fornecer ao Prestador todas as informações e recursos necessários para a realização dos serviços;\n- Pagar o valor acordado nas condições estabelecidas;\n- Cumprir com as obrigações e prazos acordados neste contrato."
-    },
-    {
-      "title": "5. RESCISÃO DO CONTRATO",
-      "content": "Em caso de rescisão deste contrato por qualquer uma das partes, as partes concordam em seguir as disposições legais aplicáveis em {inputFields[8].value}."
-    },
-    {
-      "title": "6. DISPOSIÇÕES GERAIS",
-      "content": "a) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\n\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\n\nc) Este contrato é regido pelas leis do {inputFields[8].value};\n\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito."
-    }
-  ],
-  "inputFields": [
+      "contractType": "Serviços",
+      "header": "CONTRATO DE PRESTAÇÃO DE SERVIÇOS",
+      "content": "CONTRATO DE PRESTAÇÃO DE SERVIÇOS\n\n### 1. OBJETO DO CONTRATO\nO Prestador concorda em prestar os seguintes serviços: {inputFields[4].value}, em conformidade com as especificações detalhadas no Anexo A (se aplicável).\n\n### 2. CONDIÇÕES DE PAGAMENTO\nO Cliente concorda em pagar ao Prestador pela prestação dos serviços de acordo com as seguintes condições:\n\n- Valor total acordado: {inputFields[5].value};\n- Forma de pagamento: {inputFields[6].value};\n- Prazo de pagamento: {inputFields[7].value}.\n\n### 3. RESPONSABILIDADES DO PRESTADOR\nO Prestador concorda em:\n\n- Realizar os serviços de acordo com os padrões profissionais e em conformidade com as especificações acordadas;\n- Cumprir os prazos estabelecidos para a conclusão dos serviços;\n- Manter a confidencialidade de informações sensíveis do Cliente, quando aplicável.\n\n### 4. RESPONSABILIDADES DO CLIENTE\nO Cliente concorda em:\n\n- Fornecer ao Prestador todas as informações e recursos necessários para a realização dos serviços;\n- Pagar o valor acordado nas condições estabelecidas;\n- Cumprir com as obrigações e prazos acordados neste contrato.\n\n### 5. RESCISÃO DO CONTRATO\nEm caso de rescisão deste contrato por qualquer uma das partes, as partes concordam em seguir as disposições legais aplicáveis em {inputFields[8].value}.\n\n### 6. DISPOSIÇÕES GERAIS\na) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\nc) Este contrato é regido pelas leis do {inputFields[8].value};\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito.",
+      "inputFields": [
     { "label": "Nome do Prestador", "value": "" },
     { "label": "Endereço do Prestador", "value": "" },
     { "label": "Nome do Cliente", "value": "" },
@@ -154,6 +55,6 @@
     { "label": "Prazo de Pagamento", "value": "" },
     { "label": "País/Estado", "value": "" }
   ]
-}
-]
+    }
+  ]
 }

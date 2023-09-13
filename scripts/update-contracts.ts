@@ -1,16 +1,15 @@
 import {
-  getFirestore,
   Firestore,
   collection,
-  setDoc,
   deleteDoc,
-  query,
-  getDocs,
   doc,
   DocumentData,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
 } from "firebase/firestore";
 import { initializeApp, FirebaseApp } from "firebase/app";
-import "dotenv/config";
 import contractsData from "./contracts-data.json" assert { type: "json" };
 
 // npx ts-node --esm ./scripts/update-contracts.ts
@@ -33,6 +32,8 @@ async function main() {
     const contractsQuery = query(contractsCollectionRef);
     const contractsSnapshot = await getDocs(contractsQuery);
     const deletePromises: Promise<void>[] = [];
+
+    console.log("Rodando...");
 
     contractsSnapshot.forEach((contractDoc) => {
       deletePromises.push(deleteDoc(contractDoc.ref));
