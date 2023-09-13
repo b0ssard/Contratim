@@ -8,7 +8,6 @@ import { Section } from "./utils";
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
   selectedContractType: string;
-  // onContractRender: (contract: string) => void;
 }
 
 interface ContractData {
@@ -53,8 +52,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
       const fieldIndex = Number(index);
       if (fieldIndex >= 0 && fieldIndex < fields.length) {
         const fieldValue = fields[fieldIndex].value;
-        const fieldLabel = fields[fieldIndex].label;
-        return fieldValue !== "" ? fieldValue : fieldLabel;
+        return fieldValue !== "" ? fieldValue : fields[fieldIndex].label;
       }
       return match;
     });
@@ -64,13 +62,15 @@ const ContractContent: React.FC<ContractContentProps> = ({
     return null;
   }
 
-  return (
-    <Box p={4} textAlign="justify">
-      <Heading fontSize={["3xl"]} mb={7} textAlign="center">
-        {selectedContract.header}
-      </Heading>
+return (
+  <Box p={4} textAlign="justify">
+    <Heading fontSize={["3xl"]} mb={7} textAlign="center">
+      {selectedContract?.header}
+    </Heading>
 
-      {selectedContract.sections.map((section, index) => (
+    {selectedContract &&
+      Array.isArray(selectedContract.sections) &&
+      selectedContract.sections.map((section, index) => (
         <React.Fragment key={index}>
           {section.title && (
             <Heading as="h2" fontSize="lg" mt={4} textAlign="center">
@@ -81,8 +81,8 @@ const ContractContent: React.FC<ContractContentProps> = ({
           <ReactMarkdown>{processContent(section.content)}</ReactMarkdown>
         </React.Fragment>
       ))}
-    </Box>
-  );
+  </Box>
+);
 };
 
 export default ContractContent;
