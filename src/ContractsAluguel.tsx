@@ -2,15 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Grid } from "@chakra-ui/react";
 import { getDocs, collection } from "firebase/firestore";
-import { db } from "./firebase-config";
-import Button from "./Button";
-import { Contract, InputField } from "./utils";
+import { db, auth } from "./firebase-config";
 import ContractInputs from "./ContractInputs";
 import ContractContent from "./ContractContent";
+import Button from "./Button";
+import { Contract, InputField } from "./utils";
+
+interface UserInfo {
+  id: string;
+  name: string;
+  email: string;
+}
 
 const ContractsAluguel: React.FC = () => {
   const [fields, setFields] = useState<InputField[]>([]);
   const [contracts, setContracts] = useState<Contract[]>([]);
+  const [user, setUser] = useState<UserInfo | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +38,19 @@ const ContractsAluguel: React.FC = () => {
     };
 
     fetchData();
+
+    auth.onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+        const userInfo: UserInfo = {
+          id: firebaseUser.uid,
+          name: firebaseUser.displayName || "",
+          email: firebaseUser.email || "",
+        };
+        setUser(userInfo); 
+      } else {
+        setUser(null);
+      }
+    });
   }, []);
 
   const handleFieldChange = (
@@ -42,12 +62,16 @@ const ContractsAluguel: React.FC = () => {
     setFields(updatedFields);
   };
 
+  const selectedContractType = "Aluguel";
+
   const renderContractContent = () => {
     if (contracts.length > 0) {
       return (
         <ContractContent
           fields={fields}
-          selectedContractType={contracts[0].contractType}
+          selectedContractType={selectedContractType}
+          user={user}
+          userEmail={user?.email || ""} 
         />
       );
     }
