@@ -6,6 +6,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import { db } from "./firebase-config";
 import Button from "./Button";
 import { Section } from "./utils";
+import ContractPDF from "./ContractPDF";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
@@ -99,7 +100,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
     console.log("Values sent to filledContracts successfully!");
   };
 
-  const processContent = (content: string) => {
+  function processContent(content: string) {
     return content.replace(/{inputFields\[(\d+)\]\.value}/g, (match, index) => {
       const fieldIndex = Number(index);
       if (fieldIndex >= 0 && fieldIndex < fields.length) {
@@ -108,7 +109,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
       }
       return match;
     });
-  };
+  }
 
   const generatePDF = () => {
     const doc = new jsPDF();
@@ -155,6 +156,9 @@ const ContractContent: React.FC<ContractContentProps> = ({
       {renderSections()}
       <Button onClick={sendValuesToFilledContracts}>Send Values</Button>
       <Button onClick={generatePDF}>Generate PDF</Button>
+      {selectedContract && (
+        <ContractPDF selectedContract={selectedContract} fields={fields} />
+      )}
     </Box>
   );
 };
