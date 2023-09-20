@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection, addDoc } from "firebase/firestore";
 import { Box, Heading } from "@chakra-ui/react";
-// import jsPDF from "jspdf";
 import Button from "./Button";
 import ContractPDF from "./ContractPDF";
 import ContractSections from "./ContractSections";
@@ -100,56 +99,20 @@ const ContractContent: React.FC<ContractContentProps> = ({
     console.log("Values sent to filledContracts successfully!");
   };
 
-  // function processContent(content: string) {
-  //   return content.replace(/{inputFields\[(\d+)\]\.value}/g, (match, index) => {
-  //     const fieldIndex = Number(index);
-  //     if (fieldIndex >= 0 && fieldIndex < fields.length) {
-  //       const fieldValue = fields[fieldIndex].value;
-  //       return fieldValue !== "" ? fieldValue : fields[fieldIndex].label;
-  //     }
-  //     return match;
-  //   });
-  // }
-
-  // const generatePDF = () => {
-  //   const doc = new jsPDF();
-  //   let yPosition = 20;
-
-  //   if (selectedContract) {
-  //     doc.setFontSize(24);
-  //     doc.text(selectedContract.header || "", 10, yPosition);
-  //     yPosition += 10;
-
-  //     doc.setFontSize(16);
-  //     selectedContract.sections.forEach((section) => {
-  //       if (section.title) {
-  //         doc.text(section.title, 10, yPosition);
-  //         yPosition += 10;
-  //       }
-  //       doc.setFontSize(12);
-  //       doc.text(processContent(section.content), 10, yPosition);
-  //       yPosition += 10;
-  //     });
-
-  //     doc.save("meu-arquivo.pdf");
-  //   }
-  // };
-
   return (
     <Box p={4} textAlign="justify">
       <Heading fontSize={["3xl"]} mb={7} textAlign="center">
         {selectedContract?.header}
       </Heading>
-      {selectedContract && (
-        <ContractPDF selectedContract={selectedContract} fields={fields} />
-      )}
       <ContractSections
         sections={selectedContract?.sections || []}
         fields={fields}
         selectedContract={selectedContract}
       />
       <Button onClick={sendValuesToFilledContracts}>Send Values</Button>
-      {/* <Button onClick={generatePDF}>Generate PDF</Button> */}
+      {selectedContract && (
+        <ContractPDF selectedContract={selectedContract} fields={fields} />
+      )}
     </Box>
   );
 };

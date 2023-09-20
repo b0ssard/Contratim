@@ -1,4 +1,6 @@
 import React from "react";
+import jsPDF from "jspdf";
+import Button from "./Button";
 import { Heading } from "@chakra-ui/react";
 import ReactMarkdown from "react-markdown";
 import { Section } from "./utils";
@@ -14,24 +16,46 @@ interface SectionProps {
   } | null;
 }
 
-function processContent(
-  content: string,
-  fields: Array<{ label: string; value: string }>
-) {
-  return content.replace(/{inputFields\[(\d+)\]\.value}/g, (match, index) => {
-    const fieldIndex = Number(index);
-    if (fieldIndex >= 0 && fieldIndex < fields.length) {
-      const fieldValue = fields[fieldIndex].value;
-      return fieldValue !== "" ? fieldValue : fields[fieldIndex].label;
-    }
-    return match;
-  });
-}
-
 const ContractSections: React.FC<SectionProps> = ({
   sections,
   fields,
+  selectedContract,
 }) => {
+  function processContent(content: string) {
+    return content.replace(/{inputFields\[(\d+)\]\.value}/g, (match, index) => {
+      const fieldIndex = Number(index);
+      if (fieldIndex >= 0 && fieldIndex < fields.length) {
+        const fieldValue = fields[fieldIndex].value;
+        return fieldValue !== "" ? fieldValue : fields[fieldIndex].label;
+      }
+      return match;
+    });
+  }
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    let yPosition = 20;
+
+    if (selectedContract) {
+      doc.setFontSize(24);
+      doc.text(selectedContract.header || "", 10, yPosition);
+      yPosition += 10;
+
+      doc.setFontSize(16);
+      selectedContract.sections.forEach((section) => {
+        if (section.title) {
+          doc.text(section.title, 10, yPosition);
+          yPosition += 10;
+        }
+        doc.setFontSize(12);
+        doc.text(processContent(section.content), 10, yPosition);
+        yPosition += 10;
+      });
+
+      doc.save("meu-arquivo.pdf");
+    }
+  };
+
   return (
     <>
       {sections.map((section, index) => (
@@ -41,11 +65,10 @@ const ContractSections: React.FC<SectionProps> = ({
               {section.title}
             </Heading>
           )}
-          <ReactMarkdown>
-            {processContent(section.content, fields)}
-          </ReactMarkdown>
+          <ReactMarkdown>{processContent(section.content)}</ReactMarkdown>
         </React.Fragment>
       ))}
+      <Button onClick={generatePDF}>Generate PDF</Button>
     </>
   );
 };
