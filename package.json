@@ -16,10 +16,12 @@
     "@emotion/styled": "^11.10.8",
     "@react-pdf/renderer": "^3.1.12",
     "dotenv": "^16.3.1",
+    "file-saver": "^2.0.5",
     "firebase": "^9.23.0",
     "firebaseui": "^6.0.2",
     "framer-motion": "^10.12.7",
     "jspdf": "^2.5.1",
+    "markdown-to-jsx": "^7.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
@@ -32,6 +34,7 @@
     "sass": "^1.62.1"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.2.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",

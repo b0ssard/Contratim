@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection, addDoc } from "firebase/firestore";
-import jsPDF from "jspdf";
-import ReactMarkdown from "react-markdown";
 import { Box, Heading } from "@chakra-ui/react";
-import { db } from "./firebase-config";
+// import jsPDF from "jspdf";
 import Button from "./Button";
-import { Section } from "./utils";
 import ContractPDF from "./ContractPDF";
+import ContractSections from "./ContractSections";
+import { db } from "./firebase-config";
+import { Section } from "./utils";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string }>;
@@ -34,6 +34,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
   user,
   contractId,
   contractStatus,
+  userEmail,
 }) => {
   const [selectedContract, setSelectedContract] = useState<ContractData | null>(
     null
@@ -65,7 +66,6 @@ const ContractContent: React.FC<ContractContentProps> = ({
     const userId = user?.id || "Não cadastrado";
     const contractIdValue = contractId || "";
     const contractStatusValue = contractStatus || "";
-    const userEmail = user?.email || "Não cadastrado";
 
     try {
       await addValuesToFilledContracts(
@@ -100,65 +100,56 @@ const ContractContent: React.FC<ContractContentProps> = ({
     console.log("Values sent to filledContracts successfully!");
   };
 
-  function processContent(content: string) {
-    return content.replace(/{inputFields\[(\d+)\]\.value}/g, (match, index) => {
-      const fieldIndex = Number(index);
-      if (fieldIndex >= 0 && fieldIndex < fields.length) {
-        const fieldValue = fields[fieldIndex].value;
-        return fieldValue !== "" ? fieldValue : fields[fieldIndex].label;
-      }
-      return match;
-    });
-  }
+  // function processContent(content: string) {
+  //   return content.replace(/{inputFields\[(\d+)\]\.value}/g, (match, index) => {
+  //     const fieldIndex = Number(index);
+  //     if (fieldIndex >= 0 && fieldIndex < fields.length) {
+  //       const fieldValue = fields[fieldIndex].value;
+  //       return fieldValue !== "" ? fieldValue : fields[fieldIndex].label;
+  //     }
+  //     return match;
+  //   });
+  // }
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    let yPosition = 20;
+  // const generatePDF = () => {
+  //   const doc = new jsPDF();
+  //   let yPosition = 20;
 
-    if (selectedContract) {
-      doc.setFontSize(24);
-      doc.text(selectedContract.header || "", 10, yPosition);
-      yPosition += 10;
+  //   if (selectedContract) {
+  //     doc.setFontSize(24);
+  //     doc.text(selectedContract.header || "", 10, yPosition);
+  //     yPosition += 10;
 
-      doc.setFontSize(16);
-      selectedContract.sections.forEach((section) => {
-        if (section.title) {
-          doc.text(section.title, 10, yPosition);
-          yPosition += 10;
-        }
-        doc.setFontSize(12);
-        doc.text(processContent(section.content), 10, yPosition);
-        yPosition += 10;
-      });
+  //     doc.setFontSize(16);
+  //     selectedContract.sections.forEach((section) => {
+  //       if (section.title) {
+  //         doc.text(section.title, 10, yPosition);
+  //         yPosition += 10;
+  //       }
+  //       doc.setFontSize(12);
+  //       doc.text(processContent(section.content), 10, yPosition);
+  //       yPosition += 10;
+  //     });
 
-      doc.save("meu-arquivo.pdf");
-    }
-  };
-
-  const renderSections = () => {
-    return selectedContract?.sections.map((section, index) => (
-      <React.Fragment key={index}>
-        {section.title && (
-          <Heading as="h2" fontSize="lg" mt={4} textAlign="center">
-            {section.title}
-          </Heading>
-        )}
-        <ReactMarkdown>{processContent(section.content)}</ReactMarkdown>
-      </React.Fragment>
-    ));
-  };
+  //     doc.save("meu-arquivo.pdf");
+  //   }
+  // };
 
   return (
     <Box p={4} textAlign="justify">
       <Heading fontSize={["3xl"]} mb={7} textAlign="center">
         {selectedContract?.header}
       </Heading>
-      {renderSections()}
-      <Button onClick={sendValuesToFilledContracts}>Send Values</Button>
-      <Button onClick={generatePDF}>Generate PDF</Button>
       {selectedContract && (
         <ContractPDF selectedContract={selectedContract} fields={fields} />
       )}
+      <ContractSections
+        sections={selectedContract?.sections || []}
+        fields={fields}
+        selectedContract={selectedContract}
+      />
+      <Button onClick={sendValuesToFilledContracts}>Send Values</Button>
+      {/* <Button onClick={generatePDF}>Generate PDF</Button> */}
     </Box>
   );
 };
