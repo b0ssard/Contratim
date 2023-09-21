@@ -61,7 +61,15 @@ const ContractContent: React.FC<ContractContentProps> = ({
   };
 
   const sendValuesToFilledContracts = async () => {
-    const values = fields.map((field) => field.value);
+    // const values = fields.map((field) => field.value);
+    // let values = {};
+    // fields.forEach((field) => {
+    //   values = {...values, [field.label]: field.value};
+    // })
+    const values = fields.reduce(
+      (result, field) => ({ ...result, [field.label]: field.value }),
+      {}
+    );
     const userId = user?.id || "Não cadastrado";
     const contractIdValue = contractId || "";
     const contractStatusValue = contractStatus || "";
@@ -81,7 +89,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
   };
 
   const addValuesToFilledContracts = async (
-    values: string[],
+    data: object,
     userId: string,
     contractId: string,
     contractStatus: string,
@@ -89,7 +97,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
   ) => {
     const filledContractRef = collection(db, "filledContracts");
     await addDoc(filledContractRef, {
-      values,
+      data,
       timestamp: new Date(),
       userId,
       contractId,
