@@ -10,6 +10,7 @@ import ContractsVenda from "./ContractsVenda";
 import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
+import MyContracts from "./MyContracts";
 
 const App: React.FC = () => {
   return (
@@ -22,6 +23,10 @@ const App: React.FC = () => {
             <Route path="/ContractsAluguel" element={<ContractsAluguel />} />
             <Route path="/ContractsServiços" element={<ContractsServiços />} />
             <Route path="/ContractsVenda" element={<ContractsVenda />} />
+            <Route
+              path="/MyContracts"
+              element={<MyContracts userId="yourUserIdHere" />}
+            />
           </Routes>
           <Footer />
         </div>

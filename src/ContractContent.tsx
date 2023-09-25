@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection, addDoc } from "firebase/firestore";
 import { Box, Heading } from "@chakra-ui/react";
-import Button from "./Button";
+import { db } from "./firebase-config";
 import ContractPDF from "./ContractPDF";
 import ContractSections from "./ContractSections";
-import { db } from "./firebase-config";
+import Button from "./Button";
 import { Section } from "./utils";
 
 interface ContractContentProps {
@@ -61,10 +61,19 @@ const ContractContent: React.FC<ContractContentProps> = ({
   };
 
   const sendValuesToFilledContracts = async () => {
-    const values = fields.map((field) => field.value);
+    // const values = fields.map((field) => field.value);
+    // let values = {};
+    // fields.forEach((field) => {
+    //   values = {...values, [field.label]: field.value};
+    // })
+    const values = fields.reduce(
+      (result, field) => ({ ...result, [field.label]: field.value }),
+      {}
+    );
     const userId = user?.id || "Não cadastrado";
     const contractIdValue = contractId || "";
     const contractStatusValue = contractStatus || "";
+    // const contractType = || "";
 
     try {
       await addValuesToFilledContracts(
@@ -81,7 +90,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
   };
 
   const addValuesToFilledContracts = async (
-    values: string[],
+    data: object,
     userId: string,
     contractId: string,
     contractStatus: string,
@@ -89,7 +98,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
   ) => {
     const filledContractRef = collection(db, "filledContracts");
     await addDoc(filledContractRef, {
-      values,
+      data,
       timestamp: new Date(),
       userId,
       contractId,
