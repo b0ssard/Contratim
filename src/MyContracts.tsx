@@ -8,7 +8,7 @@ import Button from "./Button";
 interface ContractData {
   contractType: string;
   status: string;
-  id: string
+  id: string;
 }
 
 const MyContracts: React.FC = () => {
@@ -29,33 +29,34 @@ const MyContracts: React.FC = () => {
 
       setUserEmail(user.email);
 
-const fetchUserContracts = async () => {
-  try {
-    const filledContractsCollection = collection(db, "filledContracts");
-    const q = query(
-      filledContractsCollection,
-      where("userEmail", "==", user.email)
-    );
-    const querySnapshot = await getDocs(q);
-    const contractsData: ContractData[] = querySnapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        id: doc.id,
-        contractType: data.contractType,
-        status: data.status,
+      const fetchUserContracts = async () => {
+        try {
+          const filledContractsCollection = collection(db, "filledContracts");
+          const q = query(
+            filledContractsCollection,
+            where("userEmail", "==", user.email)
+          );
+          const querySnapshot = await getDocs(q);
+          const contractsData: ContractData[] = querySnapshot.docs.map(
+            (doc) => {
+              const data = doc.data();
+              return {
+                id: doc.id, 
+                contractType: data.contractType,
+                status: data.status,
+              };
+            }
+          );
+
+          setUserContracts(contractsData);
+          setLoading(false);
+        } catch (error) {
+          setError(
+            "Erro ao buscar contratos do usuário: " + (error as Error).message
+          );
+          setLoading(false);
+        }
       };
-    });
-
-    setUserContracts(contractsData);
-    setLoading(false);
-  } catch (error) {
-    setError(
-      "Erro ao buscar contratos do usuário: " + (error as Error).message
-    );
-    setLoading(false);
-  }
-};
-
 
       fetchUserContracts();
     });
@@ -83,6 +84,8 @@ const fetchUserContracts = async () => {
               <strong>Tipo de Contrato:</strong> {contract.contractType}
               <br />
               <strong>Status:</strong> {contract.status}
+              <br />
+              <strong>ID do Contrato:</strong> {contract.id}{" "}
               <Button as={Link} to={`/edit-contract/${contract.id}`}>
                 Editar Contrato
               </Button>

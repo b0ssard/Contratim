@@ -90,7 +90,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
 
       await addDoc(filledContractRef, {
         data,
-        timestamp: new Date(),
+        createdOn: new Date(),
         userId,
         status: contractStatus,
         userEmail,

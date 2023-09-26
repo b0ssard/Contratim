@@ -8,16 +8,18 @@ import { Contract } from "./utils";
 
 const ContractEdit: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [editedContract, setEditedContract] = useState<Contract | null>(null);
+  const [selectedContract, setSelectedContract] = useState<Contract | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchContract = async () => {
       try {
         if (id) {
-          const contractDoc = doc(db, "contracts", id);
+          const contractDoc = doc(db, "filledContracts", id);
           const contractData = await getDoc(contractDoc);
           if (contractData.exists()) {
-            setEditedContract(contractData.data() as Contract);
+            setSelectedContract(contractData.data() as Contract);
           } else {
             alert("Contrato inexistente!");
           }
@@ -33,17 +35,17 @@ const ContractEdit: React.FC = () => {
   return (
     <Grid templateColumns="1fr 1fr" className="custom-container">
       <Box p={[2, 4, 6]}>
-        {editedContract && (
+        {selectedContract && (
           <ContractInputs
-            fields={editedContract.fields.map((field) => ({
+            fields={selectedContract.fields.map((field) => ({
               label: field.label,
               value: field.value,
             }))}
             handleFieldChange={(index, event) => {
-              const updatedFields = [...editedContract.fields];
+              const updatedFields = [...selectedContract.fields];
               updatedFields[index].value = event.target.value;
-              setEditedContract({
-                ...editedContract,
+              setSelectedContract({
+                ...selectedContract,
                 fields: updatedFields,
               });
             }}

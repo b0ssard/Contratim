@@ -15,4 +15,5 @@ export interface Section {
 export interface InputField {
   label: string;
   value: string;
+  id: string
 }

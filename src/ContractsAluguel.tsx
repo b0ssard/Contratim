@@ -46,7 +46,7 @@ const ContractsAluguel: React.FC = () => {
           name: firebaseUser.displayName || "",
           email: firebaseUser.email || "",
         };
-        setUser(userInfo); 
+        setUser(userInfo);
       } else {
         setUser(null);
       }
@@ -66,18 +66,25 @@ const ContractsAluguel: React.FC = () => {
 
   const renderContractContent = () => {
     if (contracts.length > 0) {
+      const formattedFields = fields.map((field) => ({
+        label: field.label,
+        value: field.value,
+        id: field.id, 
+      }));
+
       return (
         <ContractContent
-          fields={fields}
+          fields={formattedFields}
           selectedContractType={selectedContractType}
           user={user}
-          userEmail={user?.email || ""} 
+          userEmail={user?.email || ""}
         />
       );
     }
 
     return null;
   };
+
 
   return (
     <Grid templateColumns="1fr 1fr" className="custom-container">
