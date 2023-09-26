@@ -11,6 +11,7 @@ import AboutUs from "./AboutUs";
 import CTA from "./CTA";
 import Register from "./Register";
 import MyContracts from "./MyContracts";
+import ContractEdit from "./ContractEdit";
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             <Route path="/ContractsServiços" element={<ContractsServiços />} />
             <Route path="/ContractsVenda" element={<ContractsVenda />} />
             <Route path="/MyContracts" element={<MyContracts />} />
+            <Route path="/ContractEdit" element={<ContractEdit/>} />
           </Routes>
           <Footer />
         </div>

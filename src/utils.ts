@@ -4,6 +4,7 @@ export interface Contract {
   sections: Section[];
   inputFields: InputField[];
   id: string;
+  fields: Array<{ label: string; value: string }>;
 }
 
 export interface Section {

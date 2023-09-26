@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { getDocs, collection, query, where } from "firebase/firestore";
-import { db } from "./firebase-config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Link } from "react-router-dom";
+import { db } from "./firebase-config";
+import Button from "./Button";
 
 interface ContractData {
   contractType: string;
   status: string;
+  id: string
 }
 
 const MyContracts: React.FC = () => {
@@ -26,33 +29,33 @@ const MyContracts: React.FC = () => {
 
       setUserEmail(user.email);
 
-      const fetchUserContracts = async () => {
-        try {
-          const filledContractsCollection = collection(db, "filledContracts");
-          const q = query(
-            filledContractsCollection,
-            where("userEmail", "==", user.email)
-          );
-          const querySnapshot = await getDocs(q);
-          const contractsData: ContractData[] = querySnapshot.docs.map(
-            (doc) => {
-              const data = doc.data();
-              return {
-                contractType: data.contractType,
-                status: data.status,
-              };
-            }
-          );
-
-          setUserContracts(contractsData);
-          setLoading(false);
-        } catch (error) {
-          setError(
-            "Erro ao buscar contratos do usuário: " + (error as Error).message
-          );
-          setLoading(false);
-        }
+const fetchUserContracts = async () => {
+  try {
+    const filledContractsCollection = collection(db, "filledContracts");
+    const q = query(
+      filledContractsCollection,
+      where("userEmail", "==", user.email)
+    );
+    const querySnapshot = await getDocs(q);
+    const contractsData: ContractData[] = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        contractType: data.contractType,
+        status: data.status,
       };
+    });
+
+    setUserContracts(contractsData);
+    setLoading(false);
+  } catch (error) {
+    setError(
+      "Erro ao buscar contratos do usuário: " + (error as Error).message
+    );
+    setLoading(false);
+  }
+};
+
 
       fetchUserContracts();
     });
@@ -80,6 +83,9 @@ const MyContracts: React.FC = () => {
               <strong>Tipo de Contrato:</strong> {contract.contractType}
               <br />
               <strong>Status:</strong> {contract.status}
+              <Button as={Link} to={`/edit-contract/${contract.id}`}>
+                Editar Contrato
+              </Button>
             </li>
           ))}
         </ul>
