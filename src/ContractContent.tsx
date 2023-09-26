@@ -77,8 +77,6 @@ const ContractContent: React.FC<ContractContentProps> = ({
     }
   };
 
-  // ...
-
   const addValuesToFilledContracts = async (
     data: object,
     userId: string,

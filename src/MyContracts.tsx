@@ -5,7 +5,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 interface ContractData {
   contractType: string;
-  header: string;
+  status: string;
 }
 
 const MyContracts: React.FC = () => {
@@ -35,8 +35,15 @@ const MyContracts: React.FC = () => {
           );
           const querySnapshot = await getDocs(q);
           const contractsData: ContractData[] = querySnapshot.docs.map(
-            (doc) => doc.data() as ContractData
+            (doc) => {
+              const data = doc.data();
+              return {
+                contractType: data.contractType,
+                status: data.status,
+              };
+            }
           );
+
           setUserContracts(contractsData);
           setLoading(false);
         } catch (error) {
@@ -72,7 +79,7 @@ const MyContracts: React.FC = () => {
             <li key={index}>
               <strong>Tipo de Contrato:</strong> {contract.contractType}
               <br />
-              <strong>Cabeçalho:</strong> {contract.header}
+              <strong>Status:</strong> {contract.status}
             </li>
           ))}
         </ul>
