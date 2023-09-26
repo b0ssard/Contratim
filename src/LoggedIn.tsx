@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import Button from "./Button";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 interface LoggedInContentProps {
   userEmail: string;
@@ -18,7 +18,7 @@ const LoggedInContent: React.FC<LoggedInContentProps> = ({
         Bem vindo, {userEmail}!
       </Text>
       <Button onClick={onSignOut}>Sair</Button>
-      <Button as={Link} to="/MyContracts">
+      <Button marginLeft="5px" as={Link} to="/MyContracts">
         Meus Contratos
       </Button>
     </Flex>

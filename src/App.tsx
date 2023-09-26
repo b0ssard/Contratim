@@ -23,10 +23,7 @@ const App: React.FC = () => {
             <Route path="/ContractsAluguel" element={<ContractsAluguel />} />
             <Route path="/ContractsServiços" element={<ContractsServiços />} />
             <Route path="/ContractsVenda" element={<ContractsVenda />} />
-            <Route
-              path="/MyContracts"
-              element={<MyContracts userId="yourUserIdHere" />}
-            />
+            <Route path="/MyContracts" element={<MyContracts />} />
           </Routes>
           <Footer />
         </div>

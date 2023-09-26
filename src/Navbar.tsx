@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
+import { Link } from "react-router-dom";
 import { auth } from "./firebase-config";
 import Button from "./Button";
 import OpenModal from "./Modal";
@@ -99,7 +100,7 @@ const Navbar: React.FC = () => {
 
   return (
     <Flex className="navbar">
-      <Box className="navbar-logo">CONTRATIM</Box>
+      <Box className="navbar-logo"><Link to="/">CONTRATIM</Link></Box>
       <Box className="navbar-list">
         {user.email !== null ? (
           <LoggedInContent userEmail={user.email} onSignOut={handleSignOut} />
