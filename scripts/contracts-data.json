@@ -42,23 +42,24 @@
         }
       ],
       "inputFields": [
-        { "label": "Nome do Proprietário", "value": "", "id": "proprietario.nome" },
-        { "label": "Endereço do Proprietário", "value": "" },
-        { "label": "Nome do Locatário", "value": "" },
-        { "label": "Endereço do Locatário", "value": "" },
-        { "label": "Endereço do Imóvel", "value": "" },
-        { "label": "Descrição do Imóvel", "value": "" },
-        { "label": "Data de Início", "value": "" },
-        { "label": "Duração do Contrato", "value": "" },
-        { "label": "Valor do Aluguel", "value": "" },
-        { "label": "Meio de Pagamento", "value": "" },
-        { "label": "Informações da Conta Bancária", "value": "" },
-        { "label": "Valor da Caução", "value": "" },
-        { "label": "Prazo de Devolução da Caução", "value": "" },
-        { "label": "Prazo de Aviso Prévio", "value": "" },
-        { "label": "País/Estado", "value": "" },
-        { "label": "Data da Assinatura", "value": "" }
-      ]
+    { "label": "Nome do Proprietário", "value": "", "id": "proprietario.nome" },
+    { "label": "Endereço do Proprietário", "value": "", "id": "proprietario.endereco" },
+    { "label": "Nome do Locatário", "value": "", "id": "locatario.nome" },
+    { "label": "Endereço do Locatário", "value": "", "id": "locatario.endereco" },
+    { "label": "Endereço do Imóvel", "value": "", "id": "imovel.endereco" },
+    { "label": "Descrição do Imóvel", "value": "", "id": "imovel.descricao" },
+    { "label": "Data de Início", "value": "", "id": "contrato.dataInicio" },
+    { "label": "Duração do Contrato", "value": "", "id": "contrato.duracao" },
+    { "label": "Valor do Aluguel", "value": "", "id": "contrato.valorAluguel" },
+    { "label": "Meio de Pagamento", "value": "", "id": "contrato.meioPagamento" },
+    { "label": "Informações da Conta Bancária", "value": "", "id": "contrato.infoContaBancaria" },
+    { "label": "Valor da Caução", "value": "", "id": "contrato.valorCaucao" },
+    { "label": "Prazo de Devolução da Caução", "value": "", "id": "contrato.prazoDevolucaoCaucao" },
+    { "label": "Prazo de Aviso Prévio", "value": "", "id": "contrato.prazoAvisoPrevio" },
+    { "label": "País/Estado", "value": "", "id": "imovel.paisEstado" },
+    { "label": "Data da Assinatura", "value": "", "id": "contrato.dataAssinatura" }
+]
+
     },
     {
   "contractType": "Venda",

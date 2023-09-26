@@ -8,7 +8,7 @@ import Button from "./Button";
 import { Section } from "./utils";
 
 interface ContractContentProps {
-  fields: Array<{ label: string; value: string }>;
+  fields: Array<{ label: string; value: string; id: string }>;
   selectedContractType: string;
   user?: {
     id: string;
@@ -59,9 +59,10 @@ const ContractContent: React.FC<ContractContentProps> = ({
 
   const sendValuesToFilledContracts = async () => {
     const values = fields.reduce(
-      (result, field) => ({ ...result, [field.label]: field.value }),
+      (result, field) => ({ ...result, [field.id]: field.value }),
       {}
     );
+
     const userId = user?.id || "Não cadastrado";
 
     try {
