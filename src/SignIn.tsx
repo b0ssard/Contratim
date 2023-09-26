@@ -10,6 +10,7 @@ import LogInForm from "./LogInForm";
 
 const SignIn: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,8 +28,10 @@ const SignIn: React.FC = () => {
         credentials.password
       );
       console.log("Sign-in successful!");
+      setError(null);
     } catch (error) {
       console.error("Sign-in error:", error);
+      setError("Usuário não cadastrado!");
     }
   };
 
@@ -37,8 +40,10 @@ const SignIn: React.FC = () => {
     try {
       await signInWithPopup(auth, provider);
       console.log("Google sign-in successful!");
+      setError(null); 
     } catch (error) {
       console.error("Google sign-in error:", error);
+      setError("Usuário não cadastrado!");
     }
   };
 
@@ -57,14 +62,17 @@ const SignIn: React.FC = () => {
   }, []);
 
   return (
-    <LogInForm
-      credentials={credentials}
-      handleInputChange={handleInputChange}
-      submitAction={signIn}
-      googleLoginAction={signInWithGoogle}
-      submitButtonText="Entrar"
-      googleButtonText="Entrar com o Google"
-    />
+    <div>
+      {error && <div style={{ color: "red" }}>{error}</div>}{" "}
+      <LogInForm
+        credentials={credentials}
+        handleInputChange={handleInputChange}
+        submitAction={signIn}
+        googleLoginAction={signInWithGoogle}
+        submitButtonText="Entrar"
+        googleButtonText="Entrar com o Google"
+      />
+    </div>
   );
 };
 

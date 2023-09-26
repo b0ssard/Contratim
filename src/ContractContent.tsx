@@ -15,8 +15,7 @@ interface ContractContentProps {
     name: string;
     email: string;
   } | null;
-  contractId?: string | undefined;
-  contractStatus?: string | undefined;
+  contractId?: string;
   userEmail: string;
 }
 
@@ -31,8 +30,6 @@ const ContractContent: React.FC<ContractContentProps> = ({
   fields,
   selectedContractType,
   user,
-  contractId,
-  contractStatus,
   userEmail,
 }) => {
   const [selectedContract, setSelectedContract] = useState<ContractData | null>(
@@ -61,27 +58,18 @@ const ContractContent: React.FC<ContractContentProps> = ({
   };
 
   const sendValuesToFilledContracts = async () => {
-    // const values = fields.map((field) => field.value);
-    // let values = {};
-    // fields.forEach((field) => {
-    //   values = {...values, [field.label]: field.value};
-    // })
     const values = fields.reduce(
       (result, field) => ({ ...result, [field.label]: field.value }),
       {}
     );
     const userId = user?.id || "Não cadastrado";
-    const contractIdValue = contractId || "";
-    const contractStatusValue = contractStatus || "";
-    // const contractType = || "";
 
     try {
       await addValuesToFilledContracts(
         values,
         userId,
-        contractIdValue,
-        contractStatusValue,
-        userEmail
+        userEmail,
+        selectedContractType
       );
       alert("Upload realizado");
     } catch (error) {
@@ -89,23 +77,31 @@ const ContractContent: React.FC<ContractContentProps> = ({
     }
   };
 
+  // ...
+
   const addValuesToFilledContracts = async (
     data: object,
     userId: string,
-    contractId: string,
-    contractStatus: string,
-    userEmail: string
+    userEmail: string,
+    selectedContractType: string,
+    contractStatus = "Não assinado"
   ) => {
-    const filledContractRef = collection(db, "filledContracts");
-    await addDoc(filledContractRef, {
-      data,
-      timestamp: new Date(),
-      userId,
-      contractId,
-      status: contractStatus,
-      userEmail,
-    });
-    console.log("Values sent to filledContracts successfully!");
+    try {
+      const filledContractRef = collection(db, "filledContracts");
+
+      await addDoc(filledContractRef, {
+        data,
+        timestamp: new Date(),
+        userId,
+        status: contractStatus,
+        userEmail,
+        contractType: selectedContractType,
+      });
+
+      console.log("Values sent to filledContracts successfully!");
+    } catch (error) {
+      console.error("Error sending values to filledContracts:", error);
+    }
   };
 
   return (
