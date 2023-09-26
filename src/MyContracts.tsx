@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "./firebase-config";
-import { getAuth, onAuthStateChanged } from "firebase/auth"; // Importe as funções corretas do Firebase Auth
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-// ...
 interface ContractData {
   contractType: string;
   header: string;
@@ -13,22 +12,27 @@ const MyContracts: React.FC = () => {
   const [userContracts, setUserContracts] = useState<ContractData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   useEffect(() => {
-    const auth = getAuth(); // Obtenha a instância de autenticação do Firebase
+    const auth = getAuth();
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
-        // Se o usuário não estiver logado, saia da função
         setLoading(false);
         setError("Você não está logado.");
         return;
       }
 
+      setUserEmail(user.email);
+
       const fetchUserContracts = async () => {
         try {
-          const contractsCollection = collection(db, "contracts");
-          const q = query(contractsCollection, where("userId", "==", user.uid)); // Use user.uid como ID do usuário
+          const filledContractsCollection = collection(db, "filledContracts");
+          const q = query(
+            filledContractsCollection,
+            where("userEmail", "==", user.email)
+          );
           const querySnapshot = await getDocs(q);
           const contractsData: ContractData[] = querySnapshot.docs.map(
             (doc) => doc.data() as ContractData
@@ -46,7 +50,6 @@ const MyContracts: React.FC = () => {
       fetchUserContracts();
     });
 
-    // Certifique-se de cancelar a inscrição quando o componente for desmontado
     return () => unsubscribe();
   }, []);
 
@@ -62,7 +65,7 @@ const MyContracts: React.FC = () => {
     <div>
       <h2>Meus Contratos</h2>
       {userContracts.length === 0 ? (
-        <p>Nenhum contrato encontrado para o usuário.</p>
+        <p>Nenhum contrato encontrado para o usuário {userEmail}.</p>
       ) : (
         <ul>
           {userContracts.map((contract, index) => (
