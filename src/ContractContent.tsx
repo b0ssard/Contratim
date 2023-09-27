@@ -66,12 +66,7 @@ const ContractContent: React.FC<ContractContentProps> = ({
     const userId = user?.id || "Não cadastrado";
 
     try {
-      await addValuesToFilledContracts(
-        values,
-        userId,
-        userEmail,
-        selectedContractType
-      );
+      await addValuesToFilledContracts(values, userId, userEmail);
       alert("Upload realizado");
     } catch (error) {
       console.error("Error sending values to filledContracts:", error);
@@ -82,7 +77,6 @@ const ContractContent: React.FC<ContractContentProps> = ({
     data: object,
     userId: string,
     userEmail: string,
-    selectedContractType: string,
     contractStatus = "Não assinado"
   ) => {
     try {

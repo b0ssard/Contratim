@@ -69,7 +69,7 @@ const ContractsAluguel: React.FC = () => {
       const formattedFields = fields.map((field) => ({
         label: field.label,
         value: field.value,
-        id: field.id, 
+        id: field.id,
       }));
 
       return (
@@ -84,7 +84,6 @@ const ContractsAluguel: React.FC = () => {
 
     return null;
   };
-
 
   return (
     <Grid templateColumns="1fr 1fr" className="custom-container">

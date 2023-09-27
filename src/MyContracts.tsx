@@ -1,9 +1,19 @@
-import { useEffect, useState } from "react";
-import { getDocs, collection, query, where } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { db } from "./firebase-config";
+import { Box, Heading, Text, List, ListItem } from "@chakra-ui/react";
 import Button from "./Button";
+import {
+  getDocs,
+  collection,
+  query,
+  where,
+  DocumentData,
+  QuerySnapshot,
+} from "firebase/firestore";
+import { getAuth, onAuthStateChanged, Auth, User } from "firebase/auth";
+// import { useNavigate } from "react-router-dom";
+
+import { db } from "./firebase-config";
 
 interface ContractData {
   contractType: string;
@@ -16,11 +26,12 @@ const MyContracts: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth: Auth = getAuth();
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
       if (!user) {
         setLoading(false);
         setError("Você não está logado.");
@@ -36,12 +47,12 @@ const MyContracts: React.FC = () => {
             filledContractsCollection,
             where("userEmail", "==", user.email)
           );
-          const querySnapshot = await getDocs(q);
+          const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(q);
           const contractsData: ContractData[] = querySnapshot.docs.map(
             (doc) => {
               const data = doc.data();
               return {
-                id: doc.id, 
+                id: doc.id,
                 contractType: data.contractType,
                 status: data.status,
               };
@@ -73,27 +84,33 @@ const MyContracts: React.FC = () => {
   }
 
   return (
-    <div>
-      <h2>Meus Contratos</h2>
+    <Box p={4} textAlign="justify">
+      <Heading fontSize={["3xl"]} mb={7} textAlign="center">
+        Meus Contratos
+      </Heading>
       {userContracts.length === 0 ? (
-        <p>Nenhum contrato encontrado para o usuário {userEmail}.</p>
+        <Text>Nenhum contrato encontrado para o usuário {userEmail}.</Text>
       ) : (
-        <ul>
+        <List>
           {userContracts.map((contract, index) => (
-            <li key={index}>
+            <ListItem key={index}>
               <strong>Tipo de Contrato:</strong> {contract.contractType}
               <br />
               <strong>Status:</strong> {contract.status}
               <br />
               <strong>ID do Contrato:</strong> {contract.id}{" "}
-              <Button as={Link} to={`/edit-contract/${contract.id}`}>
+              <Button
+                as={Link}
+                to={`/ContractEdit`}
+                // onClick={() => navigate(`/edit-contract/${contract.id}`)}
+              >
                 Editar Contrato
               </Button>
-            </li>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       )}
-    </div>
+    </Box>
   );
 };
 

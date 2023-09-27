@@ -25,7 +25,7 @@ const App: React.FC = () => {
             <Route path="/ContractsServiços" element={<ContractsServiços />} />
             <Route path="/ContractsVenda" element={<ContractsVenda />} />
             <Route path="/MyContracts" element={<MyContracts />} />
-            <Route path="/ContractEdit" element={<ContractEdit/>} />
+            <Route path="/ContractEdit" element={<ContractEdit />} />
           </Routes>
           <Footer />
         </div>
