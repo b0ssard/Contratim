@@ -1,3 +1,5 @@
+// ContractsAluguel.tsx
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Grid } from "@chakra-ui/react";
@@ -62,6 +64,22 @@ const ContractsAluguel: React.FC = () => {
     setFields(updatedFields);
   };
 
+  const handleAddField = () => {
+    const newField: InputField = {
+      id: `field_${fields.length + 1}`,
+      label: `Field ${fields.length + 1}`,
+      value: "",
+    };
+
+    setFields([...fields, newField]);
+  };
+
+  const handleRemoveField = (index: number) => {
+    const updatedFields = [...fields];
+    updatedFields.splice(index, 1);
+    setFields(updatedFields);
+  };
+
   const selectedContractType = "Aluguel";
 
   const renderContractContent = () => {
@@ -88,7 +106,12 @@ const ContractsAluguel: React.FC = () => {
   return (
     <Grid templateColumns="1fr 1fr" className="custom-container">
       <Box p={[2, 4, 6]}>
-        <ContractInputs fields={fields} handleFieldChange={handleFieldChange} />
+        <ContractInputs
+          fields={fields}
+          handleFieldChange={handleFieldChange}
+          handleAddField={handleAddField}
+          handleRemoveField={handleRemoveField}
+        />
       </Box>
 
       <Box p={[2, 4, 6]}>
