@@ -3,20 +3,20 @@ import jsPDF from "jspdf";
 import Button from "./Button";
 import { Heading } from "@chakra-ui/react";
 import ReactMarkdown from "react-markdown";
-import { Section } from "./utils";
+import { Section, InputField } from "./utils";
 
-interface SectionProps {
+interface ContractSectionsProps {
   sections: Section[];
-  fields: Array<{ label: string; value: string }>;
+  fields: InputField[];
   selectedContract: {
     contractType: string;
     header: string;
     sections: Section[];
-    inputFields: Array<{ label: string; value: string }>;
+    inputFields: InputField[];
   } | null;
 }
 
-const ContractSections: React.FC<SectionProps> = ({
+const ContractSections: React.FC<ContractSectionsProps> = ({
   sections,
   fields,
   selectedContract,
