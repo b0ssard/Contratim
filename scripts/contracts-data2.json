@@ -5,62 +5,117 @@
       "header": "CONTRATO DE ALUGUEL",
       "sections": [
         {
+          "id": "section_1",
           "title": null,
-          "content": "Este Contrato de Aluguel (\"Contrato\") é celebrado entre o(s) proprietário(s), **{proprietario.nome.value}**, residente(s) em **{proprietario.endereco.value}**, adiante denominado \"Proprietário\", e o(s) locatário(s), **{locatario.nome.value}**, residente(s) em **{locatario.endereco.value}**, adiante denominado \"Locatário\"."
+          "content": "Este Contrato de Aluguel (\"Contrato\") é celebrado entre o(s) proprietário(s), **{proprietario.nome}**, residente(s) em **{proprietario.endereco}**, adiante denominado \"Proprietário\", e o(s) locatário(s), **{locatario.nome}**, residente(s) em **{locatario.endereco}**, adiante denominado \"Locatário\"."
         },
         {
+          "id": "section_2",
           "title": "1. OBJETO DO CONTRATO",
-          "content": "O Proprietário concorda em alugar a propriedade localizada em **{imovel.endereco.value}** (\"Imóvel\"), que consiste em **{imovel.descricao.value}** para o Locatário, com a finalidade exclusiva de uso residencial."
-          
+          "content": "O Proprietário concorda em alugar a propriedade localizada em **{imovel.endereco}** (\"Imóvel\"), que consiste em **{imovel.descricao}** para o Locatário, com a finalidade exclusiva de uso residencial."
         },
         {
+          "id": "section_3",
           "title": "2. PRAZO DO CONTRATO",
-          "content": "O contrato de aluguel terá início em **{contrato.dataInicio.value}** e terá duração de **{contrato.duracao.value}** meses, a contar da data de início."
+          "content": "O contrato de aluguel terá início em **{contrato.dataInicio}** e terá duração de **{contrato.duracao}** meses, a contar da data de início."
         },
         {
+          "id": "section_4",
           "title": "3. ALUGUEL",
-          "content": "O Locatário concorda em pagar ao Proprietário um aluguel mensal de **{contrato.valorAluguel.value}** até o quinto dia útil de cada mês. O pagamento deverá ser feito por meio de **{contrato.meioPagamento.value}**, na conta bancária do Proprietário com os detalhes a seguir: **{contrato.infoContaBancaria.value}**."
+          "content": "O Locatário concorda em pagar ao Proprietário um aluguel mensal de **{contrato.valorAluguel}** até o quinto dia útil de cada mês. O pagamento deverá ser feito por meio de **{contrato.meioPagamento}**, na conta bancária do Proprietário com os detalhes a seguir: **{contrato.infoContaBancaria}**."
         },
         {
+          "id": "section_5",
           "title": "4. CAUÇÃO",
-          "content": "O Locatário concorda em pagar uma caução no valor de **{contrato.valorCaucao.value}** no ato da assinatura deste contrato. A caução será utilizada para cobrir eventuais danos ou despesas devidas pelo Locatário ao Imóvel durante o período de locação. Caso não haja nenhum dano ou despesa pendente, a caução será devolvida ao Locatário no prazo máximo de **{contrato.prazoDevolucaoCaucao.value}** após o término do contrato."
+          "content": "O Locatário concorda em pagar uma caução no valor de **{contrato.valorCaucao}** no ato da assinatura deste contrato. A caução será utilizada para cobrir eventuais danos ou despesas devidas pelo Locatário ao Imóvel durante o período de locação. Caso não haja nenhum dano ou despesa pendente, a caução será devolvida ao Locatário no prazo máximo de **{contrato.prazoDevolucaoCaucao}** após o término do contrato."
         },
         {
+          "id": "section_6",
           "title": "5. RESPONSABILIDADES DO LOCATÁRIO",
           "content": "O Locatário concorda em:\n- Zelar pelo Imóvel e mantê-lo em bom estado de conservação;\n- Pagar todas as contas e despesas relacionadas ao consumo de água, eletricidade, gás e outros serviços públicos;\n- Informar ao Proprietário imediatamente sobre quaisquer danos ou problemas no Imóvel;\n- Não realizar qualquer modificação estrutural no Imóvel sem o consentimento prévio por escrito do Proprietário;\n- Não sublocar, ceder ou transferir o Imóvel para terceiros sem o consentimento prévio por escrito do Proprietário."
         },
         {
+          "id": "section_7",
           "title": "6. RESPONSABILIDADES DO PROPRIETÁRIO",
           "content": "O Proprietário concorda em:\n- Manter o Imóvel em bom estado de conservação, realizando as devidas manutenções necessárias;\n- Respeitar o direito do Locatário à privacidade e tranquilidade durante o período de locação;\n- Informar ao Locatário sobre qualquer alteração relevante nas condições do Imóvel com antecedência."
         },
         {
+          "id": "section_8",
           "title": "7. RESCISÃO ANTICIPADA",
-          "content": "Em caso de rescisão antecipada deste contrato por qualquer uma das partes, deverá ser fornecido um aviso prévio por escrito com antecedência mínima de **{contrato.prazoAvisoPrevio.value}** dias."
+          "content": "Em caso de rescisão antecipada deste contrato por qualquer uma das partes, deverá ser fornecido um aviso prévio por escrito com antecedência mínima de **{contrato.prazoAvisoPrevio}** dias."
         },
         {
+          "id": "section_9",
           "title": "8. DISPOSIÇÕES GERAIS",
-          "content": "a) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\nc) Este contrato é regido pelas leis do **{imovel.paisEstado.value}**;\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito."
+          "content": "a) Este contrato representa o acordo integral entre as partes e prevalece sobre qualquer acordo verbal ou escrito anterior;\nb) Qualquer modificação a este contrato deverá ser feita por escrito e assinada por ambas as partes;\nc) Este contrato é regido pelas leis do **{imovel.paisEstado}**;\nd) Caso qualquer disposição deste contrato seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito."
         }
       ],
-      "inputFields": [
-    { "label": "Nome do Proprietário", "value": "", "id": "proprietario.nome" },
-    { "label": "Endereço do Proprietário", "value": "", "id": "proprietario.endereco" },
-    { "label": "Nome do Locatário", "value": "", "id": "locatario.nome" },
-    { "label": "Endereço do Locatário", "value": "", "id": "locatario.endereco" },
-    { "label": "Endereço do Imóvel", "value": "", "id": "imovel.endereco" },
-    { "label": "Descrição do Imóvel", "value": "", "id": "imovel.descricao" },
-    { "label": "Data de Início", "value": "", "id": "contrato.dataInicio" },
-    { "label": "Duração do Contrato", "value": "", "id": "contrato.duracao" },
-    { "label": "Valor do Aluguel", "value": "", "id": "contrato.valorAluguel" },
-    { "label": "Meio de Pagamento", "value": "", "id": "contrato.meioPagamento" },
-    { "label": "Informações da Conta Bancária", "value": "", "id": "contrato.infoContaBancaria" },
-    { "label": "Valor da Caução", "value": "", "id": "contrato.valorCaucao" },
-    { "label": "Prazo de Devolução da Caução", "value": "", "id": "contrato.prazoDevolucaoCaucao" },
-    { "label": "Prazo de Aviso Prévio", "value": "", "id": "contrato.prazoAvisoPrevio" },
-    { "label": "País/Estado", "value": "", "id": "imovel.paisEstado" },
-    { "label": "Data da Assinatura", "value": "", "id": "contrato.dataAssinatura" }
-]
-
+      "inputFields": {
+        "proprietario.nome": {
+          "label": "Nome do Proprietário",
+          "value": ""
+        },
+        "proprietario.endereco": {
+          "label": "Endereço do Proprietário",
+          "value": ""
+        },
+        "locatario.nome": {
+          "label": "Nome do Locatário",
+          "value": ""
+        },
+        "locatario.endereco": {
+          "label": "Endereço do Locatário",
+          "value": ""
+        },
+        "imovel.endereco": {
+          "label": "Endereço do Imóvel",
+          "value": ""
+        },
+        "imovel.descricao": {
+          "label": "Descrição do Imóvel",
+          "value": ""
+        },
+        "contrato.dataInicio": {
+          "label": "Data de Início",
+          "value": ""
+        },
+        "contrato.duracao": {
+          "label": "Duração do Contrato",
+          "value": ""
+        },
+        "contrato.valorAluguel": {
+          "label": "Valor do Aluguel",
+          "value": ""
+        },
+        "contrato.meioPagamento": {
+          "label": "Meio de Pagamento",
+          "value": ""
+        },
+        "contrato.infoContaBancaria": {
+          "label": "Informações da Conta Bancária",
+          "value": ""
+        },
+        "contrato.valorCaucao": {
+          "label": "Valor da Caução",
+          "value": ""
+        },
+        "contrato.prazoDevolucaoCaucao": {
+          "label": "Prazo de Devolução da Caução",
+          "value": ""
+        },
+        "contrato.prazoAvisoPrevio": {
+          "label": "Prazo de Aviso Prévio",
+          "value": ""
+        },
+        "imovel.paisEstado": {
+          "label": "País/Estado",
+          "value": ""
+        },
+        "contrato.dataAssinatura": {
+          "label": "Data da Assinatura",
+          "value": ""
+        }
+      }
     },
     {
   "contractType": "Venda",
@@ -157,5 +212,5 @@
     { "label": "País/Estado", "value": "" }
   ]
 }
-]
+] 
 }

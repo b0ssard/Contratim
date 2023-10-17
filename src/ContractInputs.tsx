@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, FormControl, FormLabel, Button } from "@chakra-ui/react";
+import { Input, FormControl, FormLabel} from "@chakra-ui/react";
 
 interface ContractInputsProps {
   fields: Array<{ label: string; value: string }>;
@@ -13,9 +13,7 @@ interface ContractInputsProps {
 
 const ContractInputs: React.FC<ContractInputsProps> = ({
   fields,
-  handleFieldChange,
-  handleAddField,
-  handleRemoveField,
+  handleFieldChange
 }) => {
   return (
     <>
@@ -32,18 +30,8 @@ const ContractInputs: React.FC<ContractInputsProps> = ({
             _focus={{ borderColor: "blue.500" }}
             _placeholder={{ color: "gray.500" }}
           />
-          <Button
-            onClick={() => handleRemoveField(index)}
-            colorScheme="red"
-            mt={2}
-          >
-            Remove
-          </Button>
         </FormControl>
       ))}
-      <Button onClick={handleAddField} colorScheme="green" mt={4}>
-        Add Field
-      </Button>
     </>
   );
 };
