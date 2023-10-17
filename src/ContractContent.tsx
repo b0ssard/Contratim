@@ -5,7 +5,7 @@ import { db } from "./firebase-config";
 import ContractPDF from "./ContractPDF";
 import ContractSections from "./ContractSections";
 import Button from "./Button";
-import { Section } from "./utils";
+import { Section, InputField } from "./utils";
 
 interface ContractContentProps {
   fields: Array<{ label: string; value: string; id: string }>;
@@ -23,8 +23,9 @@ interface ContractData {
   contractType: string;
   header: string;
   sections: Section[];
-  inputFields: Array<{ label: string; value: string }>;
+  inputFields: InputField[];
 }
+
 
 const ContractContent: React.FC<ContractContentProps> = ({
   fields,
