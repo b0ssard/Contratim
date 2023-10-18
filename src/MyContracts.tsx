@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Box, Heading, Text, List, ListItem } from "@chakra-ui/react";
 import Button from "./Button";
 import {
@@ -11,14 +10,13 @@ import {
   QuerySnapshot,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, Auth, User } from "firebase/auth";
-// import { useNavigate } from "react-router-dom";
-
 import { db } from "./firebase-config";
 
 interface ContractData {
   contractType: string;
   status: string;
   id: string;
+  data: string;
 }
 
 const MyContracts: React.FC = () => {
@@ -26,7 +24,9 @@ const MyContracts: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  // const navigate = useNavigate();
+  const [selectedContract, setSelectedContract] = useState<ContractData | null>(
+    null
+  );
 
   useEffect(() => {
     const auth: Auth = getAuth();
@@ -55,6 +55,7 @@ const MyContracts: React.FC = () => {
                 id: doc.id,
                 contractType: data.contractType,
                 status: data.status,
+                data: data.data,
               };
             }
           );
@@ -91,24 +92,52 @@ const MyContracts: React.FC = () => {
       {userContracts.length === 0 ? (
         <Text>Nenhum contrato encontrado para o usuário {userEmail}.</Text>
       ) : (
-        <List>
-          {userContracts.map((contract, index) => (
-            <ListItem key={index}>
-              <strong>Tipo de Contrato:</strong> {contract.contractType}
-              <br />
-              <strong>Status:</strong> {contract.status}
-              <br />
-              <strong>ID do Contrato:</strong> {contract.id}{" "}
-              <Button
-                as={Link}
-                to={`/ContractEdit`}
-                // onClick={() => navigate(`/edit-contract/${contract.id}`)}
-              >
-                Editar Contrato
-              </Button>
-            </ListItem>
-          ))}
-        </List>
+        <div>
+          <List>
+            {userContracts.map((contract, index) => (
+              <ListItem key={index}>
+                <strong>Tipo de Contrato:</strong> {contract.contractType}
+                <br />
+                <strong>Status:</strong> {contract.status}
+                <br />
+                <strong>ID do Contrato:</strong> {contract.id}{" "}
+                <Button onClick={() => setSelectedContract(contract)}>
+                  Ver Detalhes
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+
+          {selectedContract && (
+            <div>
+              <Heading fontSize={["2xl"]} mt={5}>
+                Detalhes do Contrato Selecionado
+              </Heading>
+              <Text>
+                <strong>Tipo de Contrato:</strong>{" "}
+                {selectedContract.contractType}
+                <br />
+                <strong>Status:</strong> {selectedContract.status}
+                <br />
+                <strong>ID do Contrato:</strong> {selectedContract.id}
+                <br />
+                <strong>Detalhes:</strong>
+                <br />
+                {Object.entries(selectedContract.data).map(([key, value]) => (
+                  <React.Fragment key={key}>
+                    {key}:{" "}
+                    {value.trim() === "" ? (
+                      "Não preenchido"
+                    ) : (
+                      <strong>{value}</strong>
+                    )}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </Text>
+            </div>
+          )}
+        </div>
       )}
     </Box>
   );
