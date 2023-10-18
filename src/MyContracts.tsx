@@ -28,6 +28,20 @@ const MyContracts: React.FC = () => {
     null
   );
 
+  const clearInputData = () => {
+    const inputs = document.querySelectorAll(
+      "input[type='text']"
+    ) as NodeListOf<HTMLInputElement>;
+    inputs.forEach((input) => {
+      input.value = "";
+    });
+  };
+
+  const setSelectedContractWithClear = (contract: ContractData | null) => {
+    clearInputData();
+    setSelectedContract(contract);
+  };
+
   useEffect(() => {
     const auth: Auth = getAuth();
 
@@ -101,7 +115,7 @@ const MyContracts: React.FC = () => {
                 <strong>Status:</strong> {contract.status}
                 <br />
                 <strong>ID do Contrato:</strong> {contract.id}{" "}
-                <Button onClick={() => setSelectedContract(contract)}>
+                <Button onClick={() => setSelectedContractWithClear(contract)}>
                   Ver Detalhes
                 </Button>
               </ListItem>
@@ -133,7 +147,7 @@ const MyContracts: React.FC = () => {
                       _focus={{ borderColor: "blue.500" }}
                       _placeholder={{ color: "gray.500" }}
                       type="text"
-                      defaultValue={value}
+                      value={value}
                     />
                     <br />
                   </React.Fragment>
