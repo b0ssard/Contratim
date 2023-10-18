@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, Text, List, ListItem } from "@chakra-ui/react";
+import { Box, Heading, Input, Text, List, ListItem } from "@chakra-ui/react";
 import Button from "./Button";
 import {
   getDocs,
@@ -125,12 +125,16 @@ const MyContracts: React.FC = () => {
                 <br />
                 {Object.entries(selectedContract.data).map(([key, value]) => (
                   <React.Fragment key={key}>
-                    {key}:{" "}
-                    {value.trim() === "" ? (
-                      "Não preenchido"
-                    ) : (
-                      <strong>{value}</strong>
-                    )}
+                    <strong>{key}:</strong>{" "}
+                    <Input
+                      placeholder={value.trim() === "" ? "Não preenchido" : ""}
+                      size="md"
+                      borderRadius="md"
+                      _focus={{ borderColor: "blue.500" }}
+                      _placeholder={{ color: "gray.500" }}
+                      type="text"
+                      defaultValue={value}
+                    />
                     <br />
                   </React.Fragment>
                 ))}
