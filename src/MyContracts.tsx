@@ -10,6 +10,7 @@ import {
   QuerySnapshot,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, Auth, User } from "firebase/auth";
 import { db } from "./firebase-config";
@@ -49,6 +50,20 @@ const MyContracts: React.FC = () => {
       const updatedContract = { ...editedContract };
       updatedContract.data[key] = value;
       setEditedContract(updatedContract);
+    }
+  };
+
+  const handleDeleteContract = async (contractId: string) => {
+    try {
+      const docRef = doc(db, "filledContracts", contractId);
+      await deleteDoc(docRef);
+      const updatedContracts = userContracts.filter(
+        (contract) => contract.id !== contractId
+      );
+      setUserContracts(updatedContracts);
+      console.log("Contrato excluído com sucesso!");
+    } catch (error) {
+      console.error("Erro ao excluir contrato: ", error);
     }
   };
 
@@ -170,6 +185,9 @@ const MyContracts: React.FC = () => {
                 <strong>ID do Contrato:</strong> {contract.id}{" "}
                 <Button onClick={() => setSelectedContractWithClear(contract)}>
                   Ver Detalhes
+                </Button>
+                <Button onClick={() => handleDeleteContract(contract.id)}>
+                  Deletar
                 </Button>
               </ListItem>
             ))}
