@@ -8,6 +8,7 @@
           "id": "section_1",
           "title": null,
           "content": "Este Contrato de Aluguel (\"Contrato\") é celebrado entre o(s) proprietário(s), **{proprietario.nome}**, residente(s) em **{proprietario.endereco}**, adiante denominado \"Proprietário\", e o(s) locatário(s), **{locatario.nome}**, residente(s) em **{locatario.endereco}**, adiante denominado \"Locatário\"."
+          
         },
         {
           "id": "section_2",
