@@ -8,6 +8,8 @@ import {
   where,
   DocumentData,
   QuerySnapshot,
+  updateDoc,
+  doc
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, Auth, User } from "firebase/auth";
 import { db } from "./firebase-config";
@@ -28,6 +30,22 @@ const MyContracts: React.FC = () => {
     null
   );
 
+  const updateContract = async () => {
+    if (editedContract) {
+      try {
+        const docRef = doc(db, "filledContracts", editedContract.id);
+        await updateDoc(docRef, {
+          data: editedContract.data,
+        });
+        console.log("Dados atualizados com sucesso!");
+      } catch (error) {
+        console.error("Erro ao atualizar dados: ", error);
+      }
+    }
+  };
+
+  
+
   const clearInputData = () => {
     const inputs = document.querySelectorAll(
       "input[type='text']"
@@ -39,7 +57,7 @@ const MyContracts: React.FC = () => {
 
   const setSelectedContractWithClear = (contract: ContractData | null) => {
     clearInputData();
-    setEditedContract(contract); // Defina o contrato editado para permitir edições
+    setEditedContract(contract);
   };
 
   const handleInputChange = (key: string, value: string) => {
@@ -160,6 +178,8 @@ const MyContracts: React.FC = () => {
                     <br />
                   </React.Fragment>
                 ))}
+                <Button onClick={updateContract}>Update</Button>
+                <br />
               </Text>
             </div>
           )}
