@@ -16,7 +16,7 @@ interface ContractData {
   contractType: string;
   status: string;
   id: string;
-  data: string;
+  data: { [key: string]: string };
 }
 
 const MyContracts: React.FC = () => {
@@ -24,7 +24,7 @@ const MyContracts: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [selectedContract, setSelectedContract] = useState<ContractData | null>(
+  const [editedContract, setEditedContract] = useState<ContractData | null>(
     null
   );
 
@@ -39,7 +39,15 @@ const MyContracts: React.FC = () => {
 
   const setSelectedContractWithClear = (contract: ContractData | null) => {
     clearInputData();
-    setSelectedContract(contract);
+    setEditedContract(contract); // Defina o contrato editado para permitir edições
+  };
+
+  const handleInputChange = (key: string, value: string) => {
+    if (editedContract) {
+      const updatedContract = { ...editedContract };
+      updatedContract.data[key] = value;
+      setEditedContract(updatedContract);
+    }
   };
 
   useEffect(() => {
@@ -122,22 +130,21 @@ const MyContracts: React.FC = () => {
             ))}
           </List>
 
-          {selectedContract && (
+          {editedContract && (
             <div>
               <Heading fontSize={["2xl"]} mt={5}>
                 Detalhes do Contrato Selecionado
               </Heading>
               <Text>
-                <strong>Tipo de Contrato:</strong>{" "}
-                {selectedContract.contractType}
+                <strong>Tipo de Contrato:</strong> {editedContract.contractType}
                 <br />
-                <strong>Status:</strong> {selectedContract.status}
+                <strong>Status:</strong> {editedContract.status}
                 <br />
-                <strong>ID do Contrato:</strong> {selectedContract.id}
+                <strong>ID do Contrato:</strong> {editedContract.id}
                 <br />
                 <strong>Detalhes:</strong>
                 <br />
-                {Object.entries(selectedContract.data).map(([key, value]) => (
+                {Object.entries(editedContract.data).map(([key, value]) => (
                   <React.Fragment key={key}>
                     <strong>{key}:</strong>{" "}
                     <Input
@@ -148,6 +155,7 @@ const MyContracts: React.FC = () => {
                       _placeholder={{ color: "gray.500" }}
                       type="text"
                       value={value}
+                      onChange={(e) => handleInputChange(key, e.target.value)}
                     />
                     <br />
                   </React.Fragment>
