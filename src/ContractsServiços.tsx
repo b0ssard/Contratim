@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { Box, Heading, Text, Input, Flex, VStack } from "@chakra-ui/react";
 
 type FormData = Record<string, string>;
 
@@ -28,7 +29,7 @@ const ContractsServiços: React.FC = () => {
         id: "proprietario.dados",
         title: null,
         content:
-          '{proprietario.nome}, residente(s) em {proprietario.endereco}, adiante denominado "Proprietário".',
+          '**{proprietario.nome}**, residente(s) em **{proprietario.endereco}**, adiante denominado "Proprietário".',
         inputFields: {
           "proprietario.nome": {
             label: "Nome do Proprietário",
@@ -42,7 +43,7 @@ const ContractsServiços: React.FC = () => {
         id: "locatario.dados",
         title: null,
         content:
-          'e o(s) locatário(s), {locatario.nome}, residente(s) em {locatario.endereco}, adiante denominado "Locatário".',
+          'e o(s) locatário(s), **{locatario.nome}**, residente(s) em **{locatario.endereco}**, adiante denominado "Locatário".',
         inputFields: {
           "locatario.nome": {
             label: "Nome do Locatário",
@@ -81,28 +82,36 @@ const ContractsServiços: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>{contractData.header}</h1>
+    <Box p={4}>
+      <Heading as="h1" size="xl">
+        {contractData.header}
+      </Heading>
       <ReactMarkdown>{replacePlaceholders(contractData.content)}</ReactMarkdown>
 
       {contractData.sections.map((section) => (
-        <div key={section.id}>
-          {section.title && <h2>{section.title}</h2>}
+        <Box key={section.id} mt={4}>
+          {section.title && (
+            <Heading as="h2" size="lg">
+              {section.title}
+            </Heading>
+          )}
           <ReactMarkdown>{replacePlaceholders(section.content)}</ReactMarkdown>
 
-          {Object.keys(section.inputFields).map((inputKey) => (
-            <div key={inputKey}>
-              <label>{section.inputFields[inputKey].label}:</label>
-              <input
-                type="text"
-                value={formData[inputKey]}
-                onChange={(e) => handleInputChange(inputKey, e.target.value)}
-              />
-            </div>
-          ))}
-        </div>
+          <VStack spacing={4}>
+            {Object.keys(section.inputFields).map((inputKey) => (
+              <Flex key={inputKey}>
+                <Text>{section.inputFields[inputKey].label}:</Text>
+                <Input
+                  type="text"
+                  value={formData[inputKey]}
+                  onChange={(e) => handleInputChange(inputKey, e.target.value)}
+                />
+              </Flex>
+            ))}
+          </VStack>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 };
 
