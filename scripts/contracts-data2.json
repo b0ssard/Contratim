@@ -1,45 +1,50 @@
 {
-  "header": "CONTRATO DE ALUGUEL",
-  "content": "Este Contrato de Aluguel é celebrado entre as partes:",
-  "sections": [
+  "contracts2": [
     {
-      "id": "proprietario.dados",
-      "title": null,
-      "content": "**{proprietario.nome}**, residente(s) em **{proprietario.endereco}**",
-      "inputFields": {
-        "proprietario.nome": {
-          "label": "Nome do Proprietário"
+      "contractType": "Aluguel",
+      "header": "CONTRATO DE ALUGUEL",
+      "content": "Este Contrato de Aluguel é celebrado entre as partes:",
+      "sections": [
+        {
+          "id": "proprietario.dados",
+          "title": null,
+          "content": "**{proprietario.nome}**, residente(s) em **{proprietario.endereco}**",
+          "inputFields": {
+            "proprietario.nome": {
+              "label": "Nome do Proprietário"
+            },
+            "proprietario.endereco": {
+              "label": "Endereço do Proprietário"
+            }
+          }
         },
-        "proprietario.endereco": {
-          "label": "Endereço do Proprietário"
-        }
-      }
-    },
-    {
-      "id": "locatario.dados",
-      "title": null,
-      "content": "e o(s) locatário(s), **{locatario.nome}**, residente(s) em **{locatario.endereco}**",
-      "inputFields": {
-        "locatario.nome": {
-          "label": "Nome do Locatário"
+        {
+          "id": "locatario.dados",
+          "title": null,
+          "content": "e o(s) locatário(s), **{locatario.nome}**, residente(s) em **{locatario.endereco}**",
+          "inputFields": {
+            "locatario.nome": {
+              "label": "Nome do Locatário"
+            },
+            "locatario.endereco": {
+              "label": "Endereço do Locatário"
+            }
+          }
         },
-        "locatario.endereco": {
-          "label": "Endereço do Locatário"
+        {
+          "id": "objeto.dados",
+          "title": "OBJETO DO CONTRATO",
+          "content": "O Proprietário concorda em alugar a propriedade **{imovel.descricao}** localizada em **{imovel.endereco}**",
+          "inputFields": {
+            "imovel.descricao": {
+              "label": "Descrição do Imóvel"
+            },
+            "imovel.endereco": {
+              "label": "Endereço do Imóvel"
+            }
+          }
         }
-      }
-    },
-    {
-      "id": "objeto.dados",
-      "title": "1. OBJETO DO CONTRATO",
-      "content": "O Proprietário concorda em alugar a propriedade **{imovel.descricao}** localizada em **{imovel.endereco}**",
-      "inputFields": {
-        "imovel.descricao": {
-          "label": "Descrição do Imóvel"
-        },
-        "imovel.endereco": {
-          "label": "Endereço do Imóvel"
-        }
-      }
+      ]
     }
   ]
 }

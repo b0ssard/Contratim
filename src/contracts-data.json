@@ -30,7 +30,7 @@
         },
         {
             "id": "objeto.dados",
-            "title": "1. OBJETO DO CONTRATO",
+            "title": "OBJETO DO CONTRATO",
             "content": "O Proprietário concorda em alugar a propriedade **{imovel.descricao}** localizada em **{imovel.endereco}**",
             "inputFields": {
                 "imovel.descricao": {
