@@ -18,14 +18,18 @@ const ContractsServiços: React.FC = () => {
     }));
   };
 
+  const newContractData = contractData.contracts2[0]; 
+
   return (
     <Box p={4}>
       <Heading as="h1" size="xl">
-        {contractData.header}
+        {newContractData.header}
       </Heading>
-      <ReactMarkdown>{replacePlaceholders(contractData.content)}</ReactMarkdown>
+      <ReactMarkdown>
+        {replacePlaceholders(newContractData.content)}
+      </ReactMarkdown>
 
-      {contractData.sections.map((section: Section) => (
+      {newContractData.sections.map((section: Section) => (
         <Box key={section.id} mt={4}>
           {section.title && (
             <Heading as="h2" size="lg">
@@ -53,3 +57,4 @@ const ContractsServiços: React.FC = () => {
 };
 
 export default ContractsServiços;
+
