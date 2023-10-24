@@ -40,7 +40,7 @@ const ContractsServiços: React.FC = () => {
                 <Text>{section.inputFields[inputKey]?.label}:</Text>
                 <Input
                   type="text"
-                  value={formData[inputKey]}
+                  value={formData[inputKey] || ""}
                   onChange={(e) => handleInputChange(inputKey, e.target.value)}
                 />
               </Flex>
